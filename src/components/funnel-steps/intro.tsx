@@ -12,8 +12,6 @@ export function Intro({onSubmit, ...rest}: FormStepProps) {
 
   useAnalytics("intro");
 
-  //! VOLVER A VER agregar press enter para submit
-
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>This is only a funnel to show how the steps work</Title>
