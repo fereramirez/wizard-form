@@ -45,11 +45,17 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
 
   const {repeat} = useFunnelStore();
 
-  useAnalytics("optional");
+  useAnalytics(`optional${repeat === "true" ? "_II" : ""}`);
 
-  const optionalValue = watch("optional") as string;
+  const fieldNames = {
+    optional: `optional${repeat === "true" ? "_2" : ""}`,
+    purple: `purple${repeat === "true" ? "_2" : ""}`,
+    blue: `blue${repeat === "true" ? "_2" : ""}`,
+    green: `green${repeat === "true" ? "_2" : ""}`,
+  };
 
-  //! VOLVER A VER como renderizar los opcionales cuando se repite el step
+  const optionalValue = watch(fieldNames.optional) as string;
+
   //! VOLVER A VER al desmontar step opcional mostrar animacion, se podria agregar un wrapper que reciba el condicional option = value que se encargue de la animacion de desmonte?
 
   return (
@@ -61,9 +67,9 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
         className="grid-cols-2 sm:grid-cols-4"
         disabled={isSubmitting || isLoading}
         error={errors.optional?.message}
-        name={`optional${repeat === "true" ? "_2" : ""}`}
+        name={fieldNames.optional}
         options={optionalOptions}
-        question="Please select a color"
+        question={`Please select a ${repeat === "true" ? "second" : ""} color`}
         register={register}
         type="radio"
         watch={watch}
@@ -76,7 +82,7 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
             className="grid-cols-2 sm:grid-cols-4"
             /* disabled={isSubmitting || isLoading} */
             error={errors.purple?.message}
-            name={`purple${repeat === "true" ? "_2" : ""}`}
+            name={fieldNames.purple}
             options={purpleOptions}
             question="You've selected purple. Please select your favorite purple color, you can select multiple"
             register={register}
@@ -93,7 +99,7 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
             className="grid-cols-1 sm:grid-cols-3"
             /* disabled={isSubmitting || isLoading} */
             error={errors.blue?.message}
-            name={`blue${repeat === "true" ? "_2" : ""}`}
+            name={fieldNames.blue}
             options={blueOptions}
             question="You've selected blue. Please select your favorite blue color, you can select multiple"
             register={register}
@@ -110,7 +116,7 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
             className="grid-cols-2"
             /* disabled={isSubmitting || isLoading} */
             error={errors.green?.message}
-            name={`green${repeat === "true" ? "_2" : ""}`}
+            name={fieldNames.green}
             options={greenOptions}
             question="You've selected green. Please select your favorite green color, you can select multiple"
             register={register}
