@@ -75,6 +75,7 @@ export default [
       "react/jsx-no-leaked-render": "off",
       "jsx-a11y/no-static-element-interactions": "off",
       "jsx-a11y/click-events-have-key-events": "off",
+      "react/no-unescaped-entities": "off",
     },
   },
   // TypeScript configuration
@@ -95,6 +96,14 @@ export default [
             args: "after-used",
             ignoreRestSiblings: false,
             argsIgnorePattern: "^_.*?$",
+          },
+        ],
+        "@typescript-eslint/consistent-type-imports": [
+          "warn",
+          {
+            prefer: "type-imports",
+            disallowTypeAnnotations: false,
+            fixStyle: "inline-type-imports",
           },
         ],
       },

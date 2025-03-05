@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light dark;
+  color: CanvasText;
+  background-color: #004300;
+}
+
+@theme {
+  --color-primary-1: #7ebf7e;
+  --color-primary-2: #004300;
+  --color-primary-3: #002000;
+  --color-grey: #848484;
+  --color-destructive: #9a191b;
+  --color-warning: #ffbb00;
+  --color-shadow: #81818133;
+  --color-disabled-bg: #81818133;
+  --color-disabled-text: #545454;
+  --color-disabled-border: #7676764d;
+}
+
+@layer components {
+  .input-general {
+    @apply text-sm w-full px-2 py-1 border-3 border-solid rounded transition-all duration-200 ease-linear motion-reduce:transition-none sm:text-base;
+  }
+
+  .input {
+    @apply text-sm w-full px-2 py-1 border-3 border-solid rounded transition-all duration-200 ease-linear motion-reduce:transition-none sm:text-base;
+    @apply outline-none my-2 placeholder:text-[--grey];
+    @apply hover:border-[--primary-transparent] focus:border-[--primary] focus-visible:border-[--primary-transparent];
+    @apply disabled:cursor-default disabled:bg-[--disabled-bg] disabled:text-[--disabled-text] disabled:border-[--disabled-border];
+    border-color: var(--shadow);
+  }
+
+  .checkbox {
+    @apply text-sm w-full px-2 py-1 border-3 border-solid rounded transition-all duration-200 ease-linear motion-reduce:transition-none sm:text-base;
+    @apply flex justify-center items-center font-normal text-balance text-center cursor-pointer select-none sm:px-8 sm:py-1;
+    @apply bg-white hover:bg-[--primary] hover:text-[--white];
+    border-color: var(--primary);
+  }
+
+  .checkbox-checked {
+    @apply bg-[--primary-darker] text-white;
+    border-color: var(--primary-darker);
+  }
+
+  .checkbox-checked-radio {
+    @apply hover:bg-[--primary-darker] cursor-auto;
+    &:hover {
+      border-color: var(--primary-darker);
+    }
+  }
+
+  .grid-cols-6center-sm5 {
+    @apply grid-cols-6;
+
+    & > label {
+      @apply col-span-2;
+    }
+    & > label:nth-child(4) {
+      @apply col-start-2 col-span-2;
+    }
+
+    @media (min-width: 640px) {
+      @apply grid-cols-5;
+
+      & > label {
+        @apply col-span-1;
+      }
+      & > label:nth-child(4) {
+        @apply col-start-4 col-span-1;
+      }
+    }
+  }
+
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .progress-transform {
+    transform-origin: 0 0;
+    transform: rotate(-90deg) translateX(-8px);
+  }
+}
+
+/* @tailwind utilities;
+@layer utilities {
+  .input-general {
+    @apply text-sm w-full px-2 py-1 border-3 border-solid rounded transition-all duration-200 ease-linear motion-reduce:transition-none sm:text-base;
+  }
+
+  .input {
+    @apply input-general border-color-shadow outline-none my-2 placeholder:text-color-grey hover:border-color-primary focus:border-color-primary-darker focus-visible:border-color-primary-darker focus:hover:border-color-primary-darker disabled:cursor-default disabled:bg-color-bg-disabled disabled:text-color-text-disabled disabled:border-color-border-disabled supports-moz-none:text-[13px] sm:supports-moz-none:text-[15px];
+  }
+
+  .radar-autocomplete-input {
+    @apply input text-ellipsis !pl-10;
+  }
+
+  .checkbox {
+    @apply input-general flex justify-center items-center font-normal text-balance text-center cursor-pointer select-none sm:px-8 sm:py-1 border-color-primary bg-white hover:bg-color-primary hover:border-color-primary hover:text-color-white has-fv:bg-color-primary has-fv:text-white has-fv-hover:bg-color-primary has-fv-hover:border-color-primary has-fv-hover:text-white;
+  }
+
+  .checkbox-checked {
+    @apply bg-color-primary-darker text-white border-color-primary-darker has-fv:bg-color-primary-darker has-fv:border-color-primary-darker;
+  }
+
+  .checkbox-checked-radio {
+    @apply hover:border-color-primary-darker hover:bg-color-primary-darker cursor-auto;
+  }
+
+  .grid-cols-6center-sm5 {
+    @apply grid-cols-6 [&>label]:col-span-2 [&>label:nth-child(4)]:col-start-2 [&>label:nth-child(4)]:col-span-2 sm:grid-cols-5 sm:[&>label]:col-span-1 sm:[&>label:nth-child(4)]:col-start-4 sm:[&>label:nth-child(4)]:col-span-1;
+  }
+
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .progress-transform {
+    transform-origin: 0 0;
+    transform: rotate(-90deg) translateX(-8px);
+  }
+} */

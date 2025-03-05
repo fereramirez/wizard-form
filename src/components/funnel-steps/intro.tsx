@@ -1,0 +1,24 @@
+"use client";
+
+import {useForm} from "react-hook-form";
+
+import {Title} from "@/components/messages/title";
+import {Form, type FormStepProps} from "@/components/funnel/form";
+import {Button} from "@/components/inputs/button";
+import {useAnalytics} from "@/hooks/use-analytics";
+
+export function Intro({onSubmit, ...rest}: FormStepProps) {
+  const {handleSubmit} = useForm();
+
+  useAnalytics("intro");
+
+  //! VOLVER A VER agregar press enter para submit
+
+  return (
+    <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
+      <Title>This is only a funnel to show how the steps work</Title>
+
+      <Button text="START" />
+    </Form>
+  );
+}
