@@ -6,7 +6,7 @@ import {Title} from "@/components/messages/title";
 import {type CheckboxData, CheckboxesBox} from "@/components/inputs/checkbox";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
-import {Paragraph} from "@/components/messages/paragraph";
+import {Question} from "@/components/messages/question";
 import {useAnalytics} from "@/hooks/use-analytics";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 
@@ -48,7 +48,7 @@ export function Repeat({onSubmit, isLoading, ...rest}: FormStepProps) {
           watch={watch}
         />
       ) : (
-        <Paragraph text="You've already repeated the first steps" type="question" />
+        <Question>You've already repeated the first steps</Question>
       )}
 
       <Button isLoading={isSubmitting || isLoading} text="NEXT" />

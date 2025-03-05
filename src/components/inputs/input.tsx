@@ -4,7 +4,7 @@ import {type FieldValues, type UseFormRegister} from "react-hook-form";
 import {BoxWrapper} from "./box-wrapper";
 
 import {InputError} from "@/components/messages/input-error";
-import {Paragraph} from "@/components/messages/paragraph";
+import {Question} from "@/components/messages/question";
 import {cn} from "@/helpers/cn";
 
 export type Validation = {
@@ -72,7 +72,7 @@ export function InputBox({question, register, name, validation, error, ...rest}:
 
   return (
     <BoxWrapper className="flex flex-col gap-2">
-      {question ? <Paragraph text={question} type="question" /> : null}
+      {question ? <Question>{question}</Question> : null}
 
       <Input
         {...rest}

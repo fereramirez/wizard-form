@@ -1,11 +1,10 @@
 import React, {type InputHTMLAttributes} from "react";
 import {type FieldValues, type UseFormRegister, type UseFormWatch} from "react-hook-form";
 
-import {InputError} from "../messages/input-error";
-import {Paragraph} from "../messages/paragraph";
-
 import {BoxWrapper} from "./box-wrapper";
 
+import {InputError} from "@/components/messages/input-error";
+import {Question} from "@/components/messages/question";
 import {cn} from "@/helpers/cn";
 
 export type CheckboxData = {
@@ -110,7 +109,7 @@ export function CheckboxesBox({
 }: CheckboxesBoxProps) {
   return (
     <BoxWrapper fieldset>
-      <Paragraph text={question} type="question" />
+      <Question>{question}</Question>
 
       <div
         className={cn("my-2 grid w-full auto-rows-fr grid-cols-1 gap-3", className)}

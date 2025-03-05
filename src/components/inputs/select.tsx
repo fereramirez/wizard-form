@@ -2,11 +2,10 @@ import React from "react";
 import {type SelectHTMLAttributes} from "react";
 import {type FieldValues, type UseFormRegister} from "react-hook-form";
 
-import {Paragraph} from "../messages/paragraph";
-import {InputError} from "../messages/input-error";
-
 import {BoxWrapper} from "./box-wrapper";
 
+import {Question} from "@/components/messages/question";
+import {InputError} from "@/components/messages/input-error";
 import {cn} from "@/helpers/cn";
 
 type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
@@ -86,7 +85,7 @@ export function SelectBox({
 }: SelectBoxProps) {
   return (
     <BoxWrapper>
-      {question ? <Paragraph text={question} type="question" /> : null}
+      {question ? <Question>{question}</Question> : null}
 
       <Select
         {...rest}
