@@ -41,19 +41,14 @@ export function Input({
   register,
   name,
   validation,
-  error,
   className,
   ...rest
 }: InputProps) {
-  const errorId = `error-for-${name}`;
-
   return (
     <input
       {...rest}
       inputMode={inputMode}
       {...register(name, validation)}
-      aria-describedby={error ? errorId : undefined}
-      aria-invalid={error ? "true" : "false"}
       autoComplete="off"
       className={cn(
         "w-full px-0 py-2 text-base text-white placeholder:text-white/50 focus:outline-none motion-reduce:transition-none sm:text-3xl",
@@ -68,24 +63,29 @@ export function Input({
 
 export function InputBox({question, register, name, validation, error, ...rest}: InputProps) {
   const inputId = `input-${name}`;
-  const errorId = `error-for-${name}`;
+  const errorId = error ? `error-for-${name}` : undefined;
+  const questionId = question ? `question-${name}` : undefined;
 
   return (
     <BoxWrapper className="flex flex-col gap-2">
-      {question ? <Question>{question}</Question> : null}
+      {question ? (
+        <Question asLabel htmlFor={inputId} id={questionId}>
+          {question}
+        </Question>
+      ) : null}
 
       <Input
         {...rest}
-        aria-describedby={error ? errorId : undefined}
+        aria-describedby={errorId}
         aria-invalid={error ? "true" : "false"}
-        aria-labelledby={question ? `label-${name}` : undefined}
+        aria-labelledby={questionId}
         id={inputId}
         name={name}
         register={register}
         validation={validation}
       />
 
-      <InputError error={error} />
+      <InputError error={error} id={errorId} />
     </BoxWrapper>
   );
 }
