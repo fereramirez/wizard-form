@@ -8,6 +8,7 @@ import {InputBox, type Validation} from "@/components/inputs/input";
 import {Button} from "@/components/inputs/button";
 import {useAnalytics} from "@/hooks/use-analytics";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
+import {useFocus} from "@/hooks/use-focus";
 
 const nameValidation: Validation = {
   required: {
@@ -38,12 +39,12 @@ export function Name({onSubmit, isLoading = false, ...rest}: FormStepProps) {
 
   const {repeat} = useFunnelStore();
 
-  /* useFocus(setFocus, "name"); */
+  useFocus(setFocus, "name");
   useAnalytics("name");
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
-      <Title>Please enter your name to start</Title>
+      <Title>Please enter your name to {repeat === "true" ? "continue" : "start"}</Title>
 
       <InputBox
         aria-label="Name"
