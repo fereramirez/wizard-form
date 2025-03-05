@@ -10,7 +10,6 @@ type WaitStepProps = {
 };
 
 export function WaitForPromise({inOutAnimation}: WaitStepProps) {
-  //! VOLVER A VER si esto aparece cuando la data ya esta lista
   return (
     <InOutAnimationWrapper inOutAnimation={inOutAnimation}>
       <div className="flex grow flex-col items-center justify-evenly gap-8">
