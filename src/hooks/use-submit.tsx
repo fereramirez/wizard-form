@@ -46,7 +46,7 @@ export function useSubmit() {
   const {isNotAllowed, allowToContinue} = useFunctionGate();
 
   const handleNextStep = useCallback(
-    (toStep?: number | "next", shouldWait?: boolean) => {
+    (toStep?: number | "next", showLoading?: boolean) => {
       if (toStep === undefined || toStep === "next") {
         setRealStepIndex();
         setUserStepIndex();
@@ -55,7 +55,7 @@ export function useSubmit() {
         setUserStepIndex(toStep);
       }
 
-      if (shouldWait) setIsLoading(false);
+      if (showLoading) setIsLoading(false);
 
       allowToContinue();
     },
@@ -72,21 +72,21 @@ export function useSubmit() {
     [setRealStepIndex],
   );
 
-  async function handleSubmit( //! VOLVER A VER si se estan usando todos los argumentos
+  async function handleSubmit(
     callbackStart: () => Promise<void> | void,
-    shouldWait?: boolean,
+    showLoading?: boolean,
     toStep?: number | "next",
     skipAnimation?: boolean,
   ) {
     if (isNotAllowed()) return;
-    if (shouldWait) setIsLoading(true);
+    if (showLoading) setIsLoading(true);
 
     await callbackStart();
 
     if (skipAnimation) {
-      handleNextStep(toStep, shouldWait);
+      handleNextStep(toStep, showLoading);
     } else {
-      triggerInOutAnimation(() => handleNextStep(toStep, shouldWait));
+      triggerInOutAnimation(() => handleNextStep(toStep, showLoading));
     }
   }
 
