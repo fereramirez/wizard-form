@@ -3,7 +3,7 @@ import {Title} from "../messages/title";
 import {Countdown} from "@/components/messages/countdown";
 import Spinner from "@/assets/spinner.svg";
 import {InOutAnimationWrapper} from "@/components/wrappers/in-out-animation-wrapper";
-import {type InOutAnimationState} from "@/hooks/use-inout-animation";
+import {type InOutAnimationState} from "@/hooks/use-animate";
 
 type WaitStepProps = {
   inOutAnimation: InOutAnimationState;

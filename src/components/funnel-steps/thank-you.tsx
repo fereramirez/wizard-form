@@ -2,7 +2,7 @@
 
 import {useAnalytics} from "@/hooks/use-analytics";
 import {InOutAnimationWrapper} from "@/components/wrappers/in-out-animation-wrapper";
-import {type InOutAnimationState} from "@/hooks/use-inout-animation";
+import {type InOutAnimationState} from "@/hooks/use-animate";
 import {Title} from "@/components/messages/title";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 

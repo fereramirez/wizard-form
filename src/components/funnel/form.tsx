@@ -3,7 +3,7 @@ import {type FieldValues, type SubmitHandler} from "react-hook-form";
 
 import {cn} from "@/helpers/cn";
 import {InOutAnimationWrapper} from "@/components/wrappers/in-out-animation-wrapper";
-import {type InOutAnimationState} from "@/hooks/use-inout-animation";
+import {type InOutAnimationState} from "@/hooks/use-animate";
 
 type FormProps = FormHTMLAttributes<HTMLFormElement> & {
   children: React.ReactNode;

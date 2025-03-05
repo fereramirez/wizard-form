@@ -7,7 +7,7 @@ import {useTimer} from "./use-timer";
 import {fakeApi, type RandomValueResponse} from "@/helpers/fake-api";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {STEP_INDEXES} from "@/components/funnel/current-step";
-import {useInoutAnimation} from "@/hooks/use-inout-animation";
+import {useInoutAnimation} from "@/hooks/use-animate";
 
 function useFunctionGate() {
   const [allowed, setAllowed] = useState<boolean>(true);
@@ -205,13 +205,3 @@ export function useSubmit() {
     submitLastQuestion,
   };
 }
-
-/*
-Este es mi codigo actualizado. Hay dos pares de funciones que deberian tener el mismo comportamiento pero no lo tienen.
-
-1. El primer par es `submitWaitForPromise` y `submitWaitForPromiseNew`.
-Lo que hace `submitWaitForPromise` originalmente es pasar al siguiente step (un step auxiliar que solo muestra un loader) y esperar en ese step a que se resuelva la promesa `randomValuePromise`. En cambio lo que hace  `submitWaitForPromiseNew` es quedarse en el step actual hasta que se resuelva la promesa `randomValuePromise`, cuando la promesa se resuelve se saltea el siguiente step (el que muestra un loader). Quiero replicar el comportamiento original de `submitWaitForPromise` pero utilizando las funciones auxiliares.
-
-2. El segundo par es `submitLastQuestionOld` y `submitLastQuestion`.
-Lo que hace `submitLastQuestion` originalmente es esperar a que se resuelva la promesa `randomValuePromise` y luego pasar al siguiente step. En cambio lo que hace  `submitLastQuestionNew` es quedarse en el step actual hasta que se resuelva la promesa `randomValuePromise`, cuando la promesa se resuelve se pasa al siguiente step. Quiero replicar el comportamiento original de `submitLastQuestion` pero utilizando las funciones auxiliares.
-*/

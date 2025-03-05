@@ -3,7 +3,7 @@
 import React from "react";
 
 import {cn} from "@/helpers/cn";
-import {useAnimateHeight} from "@/hooks/use-animate-height";
+import {useAnimateHeight} from "@/hooks/use-animate";
 
 type DivAnimatedHeightProps = {
   isOpen: boolean;

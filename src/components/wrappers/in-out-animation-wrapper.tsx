@@ -1,5 +1,5 @@
 import {cn} from "@/helpers/cn";
-import {type InOutAnimationState, IN_OUT_ANIMATION_STATE} from "@/hooks/use-inout-animation";
+import {type InOutAnimationState, IN_OUT_ANIMATION_STATE} from "@/hooks/use-animate";
 
 type InOutAnimationWrapperProps = {
   children: React.ReactNode;
