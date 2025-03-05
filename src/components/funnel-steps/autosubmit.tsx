@@ -34,7 +34,7 @@ export function Autosubmit({onSubmit, isLoading, ...rest}: FormStepProps) {
 
       <CheckboxesBox
         checkBoxesClassName="p-2"
-        className="grid-cols-2"
+        className="grid-cols-2 sm:grid-cols-4"
         disabled={isSubmitting || isLoading}
         error={undefined}
         name="autosubmit"
