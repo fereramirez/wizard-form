@@ -1,8 +1,14 @@
 import {useEffect} from "react";
 import {type FieldValues, type UseFormSetFocus} from "react-hook-form";
 
-export function useFocus(setFocus: UseFormSetFocus<FieldValues>, inputName: string) {
+export function useFocus(
+  setFocus: UseFormSetFocus<FieldValues>,
+  inputName: string,
+  delay?: number,
+) {
   useEffect(() => {
-    setFocus(inputName);
-  }, [setFocus, inputName]);
+    setTimeout(() => {
+      setFocus(inputName);
+    }, delay);
+  }, [setFocus, inputName, delay]);
 }

@@ -39,7 +39,8 @@ export function Name({onSubmit, isLoading = false, ...rest}: FormStepProps) {
 
   const {repeat} = useFunnelStore();
 
-  useFocus(setFocus, "name");
+  //! VOLVER A VER DELAY ANIMACION
+  useFocus(setFocus, "name", 500);
   useAnalytics("name");
 
   return (
