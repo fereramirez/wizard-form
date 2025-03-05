@@ -1,7 +1,5 @@
 import {Inter} from "next/font/google";
 
-import {Paragraph} from "./paragraph";
-
 import Warn from "@/assets/warn.svg";
 import {cn} from "@/helpers/cn";
 
