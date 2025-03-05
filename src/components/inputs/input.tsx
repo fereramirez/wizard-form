@@ -45,11 +45,14 @@ export function Input({
   className,
   ...rest
 }: InputProps) {
+  const errorId = `error-for-${name}`;
+
   return (
     <input
       {...rest}
       inputMode={inputMode}
       {...register(name, validation)}
+      aria-describedby={error ? errorId : undefined}
       aria-invalid={error ? "true" : "false"}
       autoComplete="off"
       className={cn(
@@ -64,14 +67,19 @@ export function Input({
 }
 
 export function InputBox({question, register, name, validation, error, ...rest}: InputProps) {
-  //! VOLVER A VER agregar los aria necesarios
+  const inputId = `input-${name}`;
+  const errorId = `error-for-${name}`;
+
   return (
     <BoxWrapper className="flex flex-col gap-2">
       {question ? <Paragraph text={question} type="question" /> : null}
 
       <Input
         {...rest}
+        aria-describedby={error ? errorId : undefined}
         aria-invalid={error ? "true" : "false"}
+        aria-labelledby={question ? `label-${name}` : undefined}
+        id={inputId}
         name={name}
         register={register}
         validation={validation}
