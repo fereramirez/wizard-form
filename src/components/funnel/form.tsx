@@ -21,10 +21,7 @@ export function Form({children, className, inOutAnimation, ...rest}: FormProps) 
   return (
     <InOutAnimationWrapper inOutAnimation={inOutAnimation}>
       <form
-        className={cn(
-          "flex min-h-full w-full grow flex-col justify-around gap-10 transition-all duration-500",
-          className,
-        )}
+        className={cn("flex min-h-full w-full grow flex-col justify-around gap-10", className)}
         {...rest}
       >
         {children}
