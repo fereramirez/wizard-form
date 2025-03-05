@@ -58,8 +58,11 @@ export function Checkbox({
 
   const checked = checkedCheckbox || checkedRadio;
 
+  const inputId = `${name}-${value}`;
+
   return (
     <label
+      aria-disabled={disabled ? "true" : undefined}
       className={cn(
         "balance flex cursor-pointer items-center justify-center rounded-xs border-2 text-center text-base font-bold transition-all duration-200 ease-linear select-none sm:text-lg",
         "checkbox",
@@ -74,15 +77,20 @@ export function Checkbox({
           "pointer-events-none opacity-50": disabled,
         },
       )}
+      htmlFor={inputId}
     >
       <input
+        id={inputId}
+        role={type === "checkbox" ? "checkbox" : "radio"}
         {...register(name, {
           required: {
             value: required,
             message: required ? "Select an option" : "",
           },
         })}
-        aria-label={label}
+        aria-checked={checked}
+        aria-disabled={disabled ? "true" : undefined}
+        aria-required={required ? "true" : undefined}
         className="sr-only"
         disabled={disabled}
         type={type}
@@ -107,13 +115,27 @@ export function CheckboxesBox({
   required,
   error,
 }: CheckboxesBoxProps) {
+  const groupId = `group-${name}`;
+  const errorId = error ? `error-for-${name}` : undefined;
+  const questionId = `question-${name}`;
+
   return (
     <BoxWrapper fieldset>
-      <Question>{question}</Question>
+      <Question id={questionId}>{question}</Question>
+
+      {required ? (
+        <span className="sr-only" id={`sr-required-${name}`}>
+          This field is required
+        </span>
+      ) : null}
 
       <div
+        aria-describedby={errorId}
+        aria-labelledby={questionId}
         className={cn("my-2 grid w-full auto-rows-fr grid-cols-1 gap-3", className)}
         data-testid="checkboxes-grid"
+        id={groupId}
+        role="group"
       >
         {options.map((option) => (
           <Checkbox
@@ -131,7 +153,7 @@ export function CheckboxesBox({
         ))}
       </div>
 
-      <InputError error={error} />
+      <InputError error={error} id={errorId} />
     </BoxWrapper>
   );
 }
