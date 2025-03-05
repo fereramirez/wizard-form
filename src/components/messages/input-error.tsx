@@ -11,9 +11,10 @@ const inter = Inter({
 type InputErrorProps = {
   error: unknown; //!type: string | undefined
   className?: string;
+  id?: string;
 };
 
-export function InputError({error, className}: InputErrorProps) {
+export function InputError({error, className, id}: InputErrorProps) {
   return (
     <>
       {error ? (
@@ -26,7 +27,7 @@ export function InputError({error, className}: InputErrorProps) {
             inter.className,
             className,
           )}
-          id={`error-for-${error instanceof Error ? "input" : error}`}
+          id={id}
           role="alert"
         >
           <Warn aria-hidden="true" className="size-6" fill="currentColor" />
