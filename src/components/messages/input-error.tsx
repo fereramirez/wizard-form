@@ -20,6 +20,7 @@ export function InputError({error, className}: InputErrorProps) {
     <>
       {error ? (
         <div
+          aria-live="polite"
           className={cn(
             "flex w-fit items-center gap-2 rounded-xs px-2 py-1 text-sm",
             "bg-destructive text-white/80",
@@ -27,13 +28,17 @@ export function InputError({error, className}: InputErrorProps) {
             inter.className,
             className,
           )}
+          id={`error-for-${error instanceof Error ? "input" : error}`}
+          role="alert"
         >
-          <Warn className="size-6" fill="currentColor" />
+          <Warn aria-hidden="true" className="size-6" fill="currentColor" />
 
           <span>{error as string}</span>
         </div>
       ) : (
-        <Paragraph className="h-8" text="hidden placeholder" type="hidden-error" />
+        <p aria-hidden="true" className="invisible h-8" data-testid="hidden-error">
+          hidden
+        </p>
       )}
     </>
   );
