@@ -27,6 +27,7 @@ type HiddenDataAction = Prettify<
 type HiddenData = Prettify<UnionToIntersection<HiddenDataAction>>;
 
 type FunnelForms = {
+  //! VOLVER A VER actualizar el type de FunnelState
   // step 1
   autosubmit: [string] | null;
   autosubmit_2: [string] | null;
