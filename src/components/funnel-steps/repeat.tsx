@@ -9,13 +9,14 @@ import {Button} from "@/components/inputs/button";
 import {Question} from "@/components/messages/question";
 import {useAnalytics} from "@/hooks/use-analytics";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
+import {IN_OUT_ANIMATION_STATE} from "@/hooks/use-animate";
 
 const autosubmitOptions: CheckboxData[] = [
   {value: "true", label: "Yes"},
   {value: "false", label: "No"},
 ];
 
-export function Repeat({onSubmit, isLoading, ...rest}: FormStepProps) {
+export function Repeat({onSubmit, isLoading, inOutAnimation, ...rest}: FormStepProps) {
   const {
     register,
     handleSubmit,
@@ -28,12 +29,16 @@ export function Repeat({onSubmit, isLoading, ...rest}: FormStepProps) {
   useAnalytics("repeat");
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
+    <Form inOutAnimation={inOutAnimation} onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
         In case we need to collect info for other individual we can repeat previous steps
       </Title>
 
-      {repeat === "false" ? (
+      {repeat === "true" &&
+      (inOutAnimation === IN_OUT_ANIMATION_STATE.ENTERING ||
+        inOutAnimation === IN_OUT_ANIMATION_STATE.NORMAL) ? (
+        <Question>You've already repeated the first steps</Question>
+      ) : (
         <CheckboxesBox
           checkBoxesClassName="p-2"
           className="grid-cols-2"
@@ -45,8 +50,6 @@ export function Repeat({onSubmit, isLoading, ...rest}: FormStepProps) {
           register={register}
           watch={watch}
         />
-      ) : (
-        <Question>You've already repeated the first steps</Question>
       )}
 
       <Button isLoading={isSubmitting || isLoading} text="NEXT" />
