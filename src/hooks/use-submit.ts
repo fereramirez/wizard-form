@@ -7,7 +7,7 @@ import {useTimer} from "./use-timer";
 import {fakeApi, type RandomValueResponse} from "@/helpers/fake-api";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {STEP_INDEXES} from "@/components/funnel/current-step";
-import {useInoutAnimation} from "@/hooks/use-animate";
+import {useAnimationStore} from "@/contexts/use-animation-store";
 
 function useFunctionGate() {
   const [allowedToPass, setAllowedToPass] = useState<boolean>(true);
@@ -43,7 +43,7 @@ export function useSubmit() {
   } = useFunnelStore();
 
   const {startTimer, stopAndGetElapsedTime} = useTimer();
-  const {triggerInOutAnimation, inOutAnimation} = useInoutAnimation();
+  const {triggerInOutAnimation, inOutAnimation} = useAnimationStore();
   const {oneTimePass, allowNextPass, notAllowedToPass} = useFunctionGate();
 
   const handleNextStep = useCallback(

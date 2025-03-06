@@ -1,21 +1,18 @@
 import {cn} from "@/helpers/cn";
 import {
-  type InOutAnimationState,
   ANIMATION_TIMES,
   IN_OUT_ANIMATION_STATE,
-} from "@/hooks/use-animate";
+  useAnimationStore,
+} from "@/contexts/use-animation-store";
 
 type InOutAnimationWrapperProps = {
   children: React.ReactNode;
-  inOutAnimation: InOutAnimationState;
   className?: string;
 };
 
-export function InOutAnimationWrapper({
-  children,
-  inOutAnimation,
-  className,
-}: InOutAnimationWrapperProps) {
+export function InOutAnimationWrapper({children, className}: InOutAnimationWrapperProps) {
+  const {inOutAnimation} = useAnimationStore();
+
   const transitionDuration = `${ANIMATION_TIMES.DURATION + ANIMATION_TIMES.DELAY}ms`;
 
   return (

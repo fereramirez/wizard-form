@@ -9,7 +9,7 @@ import {Button} from "@/components/inputs/button";
 import {useAnalytics} from "@/hooks/use-analytics";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {useFocus} from "@/hooks/use-focus";
-import {ANIMATION_TIMES} from "@/hooks/use-animate";
+import {ANIMATION_TIMES} from "@/contexts/use-animation-store";
 
 const nameValidation: Validation = {
   required: {

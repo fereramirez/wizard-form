@@ -2,21 +2,16 @@
 
 import {useAnalytics} from "@/hooks/use-analytics";
 import {InOutAnimationWrapper} from "@/components/wrappers/in-out-animation-wrapper";
-import {type InOutAnimationState} from "@/hooks/use-animate";
 import {Title} from "@/components/messages/title";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 
-type ThankYouProps = {
-  inOutAnimation: InOutAnimationState;
-};
-
-export function ThankYouAds({inOutAnimation}: ThankYouProps) {
+export function ThankYouAds() {
   const {randomValue} = useFunnelStore();
 
   useAnalytics("tyAds");
 
   return (
-    <InOutAnimationWrapper inOutAnimation={inOutAnimation}>
+    <InOutAnimationWrapper>
       <div
         className="relative flex w-full grow flex-col items-center justify-evenly gap-8"
         data-testid="thankyou"
@@ -50,13 +45,13 @@ export function ThankYouAds({inOutAnimation}: ThankYouProps) {
   );
 }
 
-export function ThankYou({inOutAnimation}: ThankYouProps) {
+export function ThankYou() {
   const {randomValue} = useFunnelStore();
 
   useAnalytics("ty");
 
   return (
-    <InOutAnimationWrapper inOutAnimation={inOutAnimation}>
+    <InOutAnimationWrapper>
       <div
         className="relative flex w-full grow flex-col items-center justify-evenly"
         data-testid="thankyou"

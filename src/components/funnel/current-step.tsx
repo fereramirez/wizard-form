@@ -22,7 +22,6 @@ export function CurrentStep() {
     startTimer,
     isLoading,
     notAllowedToPass,
-    inOutAnimation,
     submitQuestion,
     submitBack,
     submitFetchAndWait,
@@ -36,96 +35,42 @@ export function CurrentStep() {
   //! VOLVER A VER agregar steps adicionales
 
   const stepsArray = [
-    <Intro
-      key="0"
-      disabled={notAllowedToPass}
-      inOutAnimation={inOutAnimation} //! VOLVER A VER se podria crear un contexto para la animacion y llamarla directamente en el componente Form
-      onSubmit={submitQuestion}
-    />,
-    <Name
-      key="1"
-      disabled={notAllowedToPass}
-      inOutAnimation={inOutAnimation}
-      onChange={startTimer}
-      onSubmit={submitQuestion}
-    />,
+    <Intro key="0" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <Name key="1" disabled={notAllowedToPass} onChange={startTimer} onSubmit={submitQuestion} />,
     <Back
       key="2"
       disabled={notAllowedToPass}
-      inOutAnimation={inOutAnimation}
       secondaryOnSubmit={submitBack}
       onSubmit={submitQuestion}
     />,
-    <Optional
-      key="3"
-      disabled={notAllowedToPass}
-      inOutAnimation={inOutAnimation}
-      onSubmit={submitQuestion}
-    />,
-    <Repeat
-      key="4"
-      disabled={notAllowedToPass}
-      inOutAnimation={inOutAnimation}
-      onSubmit={submitRepeat}
-    />,
-    <StorePromise
-      key="5"
-      disabled={notAllowedToPass}
-      inOutAnimation={inOutAnimation}
-      onSubmit={submitStorePromise}
-    />,
-    <Autosubmit
-      key="6"
-      disabled={notAllowedToPass}
-      inOutAnimation={inOutAnimation}
-      onSubmit={submitQuestion}
-    />,
+    <Optional key="3" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <Repeat key="4" disabled={notAllowedToPass} onSubmit={submitRepeat} />,
+    <StorePromise key="5" disabled={notAllowedToPass} onSubmit={submitStorePromise} />,
+    <Autosubmit key="6" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <AutosubmitFetchAndWait
       key="7"
       disabled={notAllowedToPass || isLoading}
-      inOutAnimation={inOutAnimation}
       onSubmit={submitFetchAndWait}
     />,
     <AutosubmitShowFetchedData
       key="8"
       disabled={notAllowedToPass}
-      inOutAnimation={inOutAnimation}
       onSubmit={submitWaitForPromise}
     />,
-    <WaitForPromise key="9" inOutAnimation={inOutAnimation} />,
-    <Name
-      key="10"
-      disabled={notAllowedToPass}
-      inOutAnimation={inOutAnimation}
-      onSubmit={submitLastQuestion}
-    />,
-    <WaitStep key="11" inOutAnimation={inOutAnimation} />,
-    <ThankYouAds key="12" inOutAnimation={inOutAnimation} />,
-    <ThankYou key="13" inOutAnimation={inOutAnimation} />,
-    <Restart
-      key="14"
-      disabled={notAllowedToPass}
-      inOutAnimation={inOutAnimation}
-      onSubmit={submitRestart}
-    />,
+    <WaitForPromise key="9" />,
+    <Name key="10" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />,
+    <WaitStep key="11" />,
+    <ThankYouAds key="12" />,
+    <ThankYou key="13" />,
+    <Restart key="14" disabled={notAllowedToPass} onSubmit={submitRestart} />,
   ];
 
   const stepsArrayTest = [
-    <Intro
-      key="0"
-      disabled={notAllowedToPass || isLoading}
-      inOutAnimation={inOutAnimation}
-      onSubmit={submitQuestion}
-    />,
-    <Restart
-      key="1"
-      disabled={notAllowedToPass || isLoading}
-      inOutAnimation={inOutAnimation}
-      onSubmit={submitRestart}
-    />,
+    <Intro key="0" disabled={notAllowedToPass || isLoading} onSubmit={submitQuestion} />,
+    <Restart key="1" disabled={notAllowedToPass || isLoading} onSubmit={submitRestart} />,
   ];
 
-  return stepsArrayTest[realStepIndex];
+  return stepsArray[realStepIndex];
 }
 
 export const STEP_INDEXES = {

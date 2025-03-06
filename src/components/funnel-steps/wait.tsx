@@ -3,15 +3,10 @@ import {Title} from "../messages/title";
 import {Countdown} from "@/components/messages/countdown";
 import Spinner from "@/assets/spinner.svg";
 import {InOutAnimationWrapper} from "@/components/wrappers/in-out-animation-wrapper";
-import {type InOutAnimationState} from "@/hooks/use-animate";
 
-type WaitStepProps = {
-  inOutAnimation: InOutAnimationState;
-};
-
-export function WaitForPromise({inOutAnimation}: WaitStepProps) {
+export function WaitForPromise() {
   return (
-    <InOutAnimationWrapper inOutAnimation={inOutAnimation}>
+    <InOutAnimationWrapper>
       <div className="flex grow flex-col items-center justify-evenly gap-8">
         <Title>
           Remember for the data we would use in the last step? If you see this step, it means that
@@ -26,9 +21,9 @@ export function WaitForPromise({inOutAnimation}: WaitStepProps) {
   );
 }
 
-export function WaitStep({inOutAnimation}: WaitStepProps) {
+export function WaitStep() {
   return (
-    <InOutAnimationWrapper inOutAnimation={inOutAnimation}>
+    <InOutAnimationWrapper>
       <div className="flex grow flex-col items-center justify-evenly gap-8">
         <Title>This step is used to wait for data to be ready if needed</Title>
 
