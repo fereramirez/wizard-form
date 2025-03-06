@@ -30,6 +30,7 @@ const nameValidation: Validation = {
 };
 
 export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
+  //! VOLVER A VER agregar types a forms
   const {
     register,
     handleSubmit,

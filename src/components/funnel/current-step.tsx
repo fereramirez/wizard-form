@@ -38,6 +38,9 @@ export function CurrentStep() {
 
   /* <Button disabled={isSubmitting || disabled} isLoading={isLoading} text="NEXT" /> */
 
+  //! VOLVER A VER agregar boton de restart al final del funnel (es mejor poner un link a home?). Mostrar data collected
+  //! VOLVER A VER avisar en algun step que se va a tomar el user_agent?
+
   const stepsArray = [
     <Intro
       key="0"
@@ -128,7 +131,7 @@ export function CurrentStep() {
     />,
   ];
 
-  return stepsArrayTest[realStepIndex];
+  return stepsArray[realStepIndex];
 }
 
 export const STEP_INDEXES = {
