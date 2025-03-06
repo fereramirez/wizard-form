@@ -36,7 +36,7 @@ export function CurrentStep() {
 
   //! VOLVER A VER cambiar el step Name repetido del final por un step con dos questions: 1.checkbox 2.radio 3.button con isLoading
 
-  /* <Button disabled={isSubmitting || disabled} isLoading={isLoading} text="NEXT" /> */
+  /* <Button disabled={disabled} isLoading={isLoading} text="NEXT" /> */
 
   //! VOLVER A VER agregar boton de restart al final del funnel (es mejor poner un link a home?). Mostrar data collected
   //! VOLVER A VER avisar en algun step que se va a tomar el user_agent?
@@ -111,27 +111,15 @@ export function CurrentStep() {
   ];
 
   const stepsArrayTest = [
-    <Intro
-      key="0"
+    <Optional
+      key="2"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       onSubmit={submitQuestion}
     />,
-    <Repeat
-      key="3"
-      disabled={notAllowedToPass || isLoading}
-      inOutAnimation={inOutAnimation}
-      onSubmit={submitRepeat}
-    />,
-    <Name
-      key="9"
-      disabled={notAllowedToPass || isLoading}
-      inOutAnimation={inOutAnimation}
-      onSubmit={submitLastQuestion}
-    />,
   ];
 
-  return stepsArray[realStepIndex];
+  return stepsArrayTest[realStepIndex];
 }
 
 export const STEP_INDEXES = {

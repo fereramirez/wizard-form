@@ -8,10 +8,7 @@ import {Button} from "@/components/inputs/button";
 import {useAnalytics} from "@/hooks/use-analytics";
 
 export function Intro({onSubmit, disabled, ...rest}: FormStepProps) {
-  const {
-    handleSubmit,
-    formState: {isSubmitting},
-  } = useForm();
+  const {handleSubmit} = useForm();
 
   useAnalytics("intro");
 
@@ -19,7 +16,7 @@ export function Intro({onSubmit, disabled, ...rest}: FormStepProps) {
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>This is only a funnel to show how the steps work</Title>
 
-      <Button disabled={isSubmitting || disabled} text="START" />
+      <Button disabled={disabled} text="START" />
     </Form>
   );
 }

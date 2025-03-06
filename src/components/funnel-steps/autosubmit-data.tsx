@@ -10,12 +10,7 @@ import {useAnalytics} from "@/hooks/use-analytics";
 import {Title} from "@/components/messages/title";
 
 export function AutosubmitShowFetchedData({onSubmit, disabled, ...rest}: FormStepProps) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: {isSubmitting},
-  } = useForm();
+  const {register, handleSubmit, watch} = useForm();
 
   const {fakeApiData} = useFunnelStore();
 
@@ -31,7 +26,7 @@ export function AutosubmitShowFetchedData({onSubmit, disabled, ...rest}: FormSte
       <CheckboxesBox
         checkBoxesClassName="p-2"
         className="grid-cols-4 sm:grid-cols-2"
-        disabled={isSubmitting || disabled}
+        disabled={disabled}
         error={undefined}
         name="autosubmit"
         options={fakeApiData}

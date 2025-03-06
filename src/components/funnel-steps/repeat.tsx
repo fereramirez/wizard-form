@@ -21,7 +21,7 @@ export function Repeat({onSubmit, inOutAnimation, disabled, ...rest}: FormStepPr
     register,
     handleSubmit,
     watch,
-    formState: {isSubmitting, errors},
+    formState: {errors},
   } = useForm();
 
   const {repeat} = useFunnelStore();
@@ -41,7 +41,7 @@ export function Repeat({onSubmit, inOutAnimation, disabled, ...rest}: FormStepPr
         <CheckboxesBox
           checkBoxesClassName="p-2"
           className="grid-cols-2"
-          disabled={isSubmitting || disabled}
+          disabled={disabled}
           error={errors.repeat?.message}
           name="repeat"
           options={autosubmitOptions}
@@ -51,7 +51,7 @@ export function Repeat({onSubmit, inOutAnimation, disabled, ...rest}: FormStepPr
         />
       )}
 
-      <Button disabled={isSubmitting || disabled} text="NEXT" />
+      <Button disabled={disabled} text="NEXT" />
     </Form>
   );
 }

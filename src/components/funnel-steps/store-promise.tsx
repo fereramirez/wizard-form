@@ -15,12 +15,7 @@ const storePromiseOptions: CheckboxData[] = [
 ];
 
 export function StorePromise({onSubmit, disabled, ...rest}: FormStepProps) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: {isSubmitting},
-  } = useForm();
+  const {register, handleSubmit, watch} = useForm();
 
   useAnalytics("store_promise");
 
@@ -35,7 +30,7 @@ export function StorePromise({onSubmit, disabled, ...rest}: FormStepProps) {
       <CheckboxesBox
         checkBoxesClassName="p-2"
         className="grid-cols-3"
-        disabled={isSubmitting || disabled}
+        disabled={disabled}
         error={undefined}
         name="store_promise"
         options={storePromiseOptions}
@@ -44,7 +39,7 @@ export function StorePromise({onSubmit, disabled, ...rest}: FormStepProps) {
         watch={watch}
       />
 
-      <Button disabled={isSubmitting || disabled} text="NEXT" />
+      <Button disabled={disabled} text="NEXT" />
     </Form>
   );
 }

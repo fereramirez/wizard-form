@@ -34,7 +34,7 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
   const {
     register,
     handleSubmit,
-    formState: {errors, isSubmitting},
+    formState: {errors},
     setFocus,
   } = useForm();
 
@@ -73,7 +73,7 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
         </p>
       ) : null} */}
 
-      <Button disabled={isSubmitting || disabled} text="NEXT" />
+      <Button disabled={disabled} text="NEXT" />
     </Form>
   );
 }

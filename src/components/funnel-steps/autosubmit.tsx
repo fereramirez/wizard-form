@@ -16,12 +16,7 @@ const autosubmitOptions: CheckboxData[] = [
 ];
 
 export function Autosubmit({onSubmit, disabled, ...rest}: FormStepProps) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: {isSubmitting},
-  } = useForm();
+  const {register, handleSubmit, watch} = useForm();
 
   useAnalytics("autosubmit");
   useAutosubmit(watch, () => handleSubmit(onSubmit));
@@ -35,7 +30,7 @@ export function Autosubmit({onSubmit, disabled, ...rest}: FormStepProps) {
       <CheckboxesBox
         checkBoxesClassName="p-2"
         className="grid-cols-2 sm:grid-cols-4"
-        disabled={isSubmitting || disabled}
+        disabled={disabled}
         error={undefined}
         name="autosubmit"
         options={autosubmitOptions}

@@ -16,12 +16,7 @@ const autosubmitFetchOptions: CheckboxData[] = [
 ];
 
 export function AutosubmitFetchAndWait({onSubmit, disabled, ...rest}: FormStepProps) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: {isSubmitting},
-  } = useForm();
+  const {register, handleSubmit, watch} = useForm();
 
   useAnalytics("autosubmit_fetch");
   useAutosubmit(watch, () => handleSubmit(onSubmit));
@@ -36,7 +31,7 @@ export function AutosubmitFetchAndWait({onSubmit, disabled, ...rest}: FormStepPr
       <CheckboxesBox
         checkBoxesClassName="p-2"
         className="grid-cols-2 sm:grid-cols-4"
-        disabled={isSubmitting || disabled}
+        disabled={disabled}
         error={undefined}
         name="autosubmit_fetch"
         options={autosubmitFetchOptions}
