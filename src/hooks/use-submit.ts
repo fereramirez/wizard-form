@@ -10,21 +10,21 @@ import {STEP_INDEXES} from "@/components/funnel/current-step";
 import {useInoutAnimation} from "@/hooks/use-animate";
 
 function useFunctionGate() {
-  const [allowed, setAllowed] = useState<boolean>(true);
+  const [allowedToPass, setAllowedToPass] = useState<boolean>(true);
 
-  const isNotAllowed = useCallback(() => {
-    if (!allowed) return true;
+  const oneTimePass = useCallback(() => {
+    if (!allowedToPass) return true;
 
-    setAllowed(false);
+    setAllowedToPass(false);
 
     return false;
-  }, [allowed]);
+  }, [allowedToPass]);
 
-  const allowToContinue = useCallback(() => {
-    setAllowed(true);
+  const allowNextPass = useCallback(() => {
+    setAllowedToPass(true);
   }, []);
 
-  return {isNotAllowed, allowToContinue};
+  return {oneTimePass, allowNextPass, notAllowedToPass: !allowedToPass};
 }
 
 export function useSubmit() {
@@ -43,7 +43,7 @@ export function useSubmit() {
 
   const {startTimer, stopAndGetElapsedTime} = useTimer();
   const {triggerInOutAnimation, inOutAnimation} = useInoutAnimation();
-  const {isNotAllowed, allowToContinue} = useFunctionGate();
+  const {oneTimePass, allowNextPass, notAllowedToPass} = useFunctionGate();
 
   const handleNextStep = useCallback(
     (toStep?: number | "next", showLoading?: boolean) => {
@@ -57,9 +57,9 @@ export function useSubmit() {
 
       if (showLoading) setIsLoading(false);
 
-      allowToContinue();
+      allowNextPass();
     },
-    [allowToContinue, setRealStepIndex, setUserStepIndex],
+    [allowNextPass, setRealStepIndex, setUserStepIndex],
   );
 
   const handleRealStepOnly = useCallback(
@@ -78,7 +78,7 @@ export function useSubmit() {
     toStep?: number | "next",
     skipAnimation?: boolean,
   ) {
-    if (isNotAllowed()) return;
+    if (!oneTimePass()) return;
     if (showLoading) setIsLoading(true);
 
     await callback();
@@ -114,7 +114,7 @@ export function useSubmit() {
           setFunnelData(dataUpdated);
         },
         false,
-        1,
+        0,
       );
     } else {
       handleSubmit(() => {
@@ -207,6 +207,7 @@ export function useSubmit() {
   return {
     startTimer,
     isLoading,
+    notAllowedToPass,
     inOutAnimation,
     submitQuestion,
     submitBack,
