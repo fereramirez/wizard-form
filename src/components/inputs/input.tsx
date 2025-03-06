@@ -42,6 +42,7 @@ export function Input({
   name,
   validation,
   className,
+  disabled,
   ...rest
 }: InputProps) {
   return (
@@ -54,6 +55,7 @@ export function Input({
         "w-full px-0 py-2 text-base text-white placeholder:text-white/50 focus:outline-none motion-reduce:transition-none sm:text-3xl",
         "bottom-shadow",
         className,
+        disabled ? "pointer-events-none opacity-50" : "",
       )}
       type="text"
       onPaste={(e) => e.preventDefault()}
