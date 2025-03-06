@@ -38,6 +38,13 @@ export const IN_OUT_ANIMATION_STATE = {
   NORMAL: "normal",
 } as const;
 
+export const ANIMATION_TIMES = {
+  DELAY: 50,
+  DURATION: 450,
+} as const;
+
+export const ANIMATION_DURATION = 450;
+
 export type InOutAnimationState =
   (typeof IN_OUT_ANIMATION_STATE)[keyof typeof IN_OUT_ANIMATION_STATE];
 
@@ -58,8 +65,8 @@ export function useInoutAnimation() {
         // After enter animation starts, transition to normal state
         setTimeout(() => {
           setInOutAnimation(IN_OUT_ANIMATION_STATE.NORMAL);
-        }, 50); // Start enter animation quickly
-      }, 450); // Wait for exit animation to almost complete
+        }, ANIMATION_TIMES.DELAY); // Start enter animation quickly
+      }, ANIMATION_TIMES.DURATION); // Wait for exit animation to almost complete
     },
     [setInOutAnimation],
   );

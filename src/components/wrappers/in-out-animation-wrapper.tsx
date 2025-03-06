@@ -1,5 +1,9 @@
 import {cn} from "@/helpers/cn";
-import {type InOutAnimationState, IN_OUT_ANIMATION_STATE} from "@/hooks/use-animate";
+import {
+  type InOutAnimationState,
+  ANIMATION_TIMES,
+  IN_OUT_ANIMATION_STATE,
+} from "@/hooks/use-animate";
 
 type InOutAnimationWrapperProps = {
   children: React.ReactNode;
@@ -12,10 +16,13 @@ export function InOutAnimationWrapper({
   inOutAnimation,
   className,
 }: InOutAnimationWrapperProps) {
+  const transitionDuration = `${ANIMATION_TIMES.DURATION + ANIMATION_TIMES.DELAY}ms`;
+
   return (
     <section
       className={cn(
-        "flex size-full grow flex-col transition-all duration-500",
+        "flex size-full grow flex-col",
+        "transition-transform",
         className,
         inOutAnimation === IN_OUT_ANIMATION_STATE.ENTERING
           ? "translate-y-full" // opacity-0"
@@ -23,6 +30,7 @@ export function InOutAnimationWrapper({
             ? "-translate-y-full" // opacity-0"
             : "translate-y-0", // opacity-100
       )}
+      style={{transitionDuration}}
     >
       {children}
     </section>

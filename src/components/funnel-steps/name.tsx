@@ -9,7 +9,7 @@ import {Button} from "@/components/inputs/button";
 import {useAnalytics} from "@/hooks/use-analytics";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {useFocus} from "@/hooks/use-focus";
-
+import {ANIMATION_TIMES} from "@/hooks/use-animate";
 const nameValidation: Validation = {
   required: {
     value: true,
@@ -39,8 +39,7 @@ export function Name({onSubmit, isLoading = false, ...rest}: FormStepProps) {
 
   const {repeat} = useFunnelStore();
 
-  //! VOLVER A VER DELAY ANIMACION
-  useFocus(setFocus, "name", 500);
+  useFocus(setFocus, "name", ANIMATION_TIMES.DELAY + ANIMATION_TIMES.DURATION);
   useAnalytics("name");
 
   return (
