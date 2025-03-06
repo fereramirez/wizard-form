@@ -35,11 +35,6 @@ export function CurrentStep() {
 
   //! VOLVER A VER agregar steps adicionales
 
-  //! VOLVER A VER cambiar el step Name repetido del final por un step con dos questions: 1.checkbox 2.radio 3.button con isLoading
-  /* <Button disabled={disabled} isLoading={isLoading} text="NEXT" /> */
-
-  //! VOLVER A VER avisar en algun step que se va a tomar el user_agent?
-
   const stepsArray = [
     <Intro
       key="0"
