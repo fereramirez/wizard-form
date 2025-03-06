@@ -73,7 +73,7 @@ export function useSubmit() {
   );
 
   async function handleSubmit(
-    callbackStart: () => Promise<void> | void,
+    callback: () => Promise<void> | void,
     showLoading?: boolean,
     toStep?: number | "next",
     skipAnimation?: boolean,
@@ -81,7 +81,7 @@ export function useSubmit() {
     if (isNotAllowed()) return;
     if (showLoading) setIsLoading(true);
 
-    await callbackStart();
+    await callback();
 
     if (skipAnimation) {
       handleNextStep(toStep, showLoading);
@@ -94,6 +94,17 @@ export function useSubmit() {
     handleSubmit(() => {
       setFunnelData(dataUpdated);
     });
+  }
+
+  function submitBack() {
+    handleSubmit(
+      () => {
+        //! VOLVER A VER setFunnelData no es type safe, se puede pasar cualquier cosa
+        setFunnelData({back: true});
+      },
+      false,
+      -1,
+    );
   }
 
   function submitRepeat(dataUpdated: FieldValues) {
@@ -198,6 +209,7 @@ export function useSubmit() {
     isLoading,
     inOutAnimation,
     submitQuestion,
+    submitBack,
     submitFetchAndWait,
     submitRepeat,
     submitStorePromise,

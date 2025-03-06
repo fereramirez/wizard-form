@@ -17,6 +17,8 @@ type FunnelStore = {
 const FunnelContext = createContext<FunnelStore | null>(null);
 
 const INITIAL_FUNNEL_STATE: FunnelState = {
+  //! VOLVER A VER actualizar el type de FunnelState
+
   // step 1
   autosubmit: null,
   autosubmit_2: null,
@@ -60,7 +62,12 @@ function FunnelReducer(state: FunnelState, action: FunnelAction): FunnelState {
       if (state.realStepIndex < STEP_INDEXES.LAST_REAL) {
         return {
           ...state,
-          realStepIndex: payload === 0 || payload ? payload : state.realStepIndex + 1,
+          realStepIndex:
+            payload === undefined
+              ? state.realStepIndex + 1
+              : payload >= 0
+                ? payload
+                : state.realStepIndex + payload,
         };
       }
 
@@ -71,7 +78,12 @@ function FunnelReducer(state: FunnelState, action: FunnelAction): FunnelState {
       if (state.userStepIndex < STEP_INDEXES.LAST_USER) {
         return {
           ...state,
-          userStepIndex: payload === 0 || payload ? payload : state.userStepIndex + 1,
+          userStepIndex:
+            payload === undefined
+              ? state.userStepIndex + 1
+              : payload >= 0
+                ? payload
+                : state.userStepIndex + payload,
         };
       }
 

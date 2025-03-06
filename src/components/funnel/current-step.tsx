@@ -13,6 +13,7 @@ import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {useSubmit} from "@/hooks/use-submit";
 import {Autosubmit} from "@/components/funnel-steps/autosubmit";
 import {WaitForPromise, WaitStep} from "@/components/funnel-steps/wait";
+import {Back} from "@/components/funnel-steps/back";
 
 export function CurrentStep() {
   const {realStepIndex} = useFunnelStore();
@@ -22,6 +23,7 @@ export function CurrentStep() {
     isLoading,
     inOutAnimation,
     submitQuestion,
+    submitBack,
     submitFetchAndWait,
     submitRepeat,
     submitStorePromise,
@@ -31,7 +33,6 @@ export function CurrentStep() {
 
   //! VOLVER A VER agregar steps adicionales
   //! VOLVER A VER pedir el lastname y renderizar el firstname
-  //! VOLVER A VER agregar step que permita retroceder
   //! VOLVER A VER agregar step que cambie su contenido dependiendo de respuesta de step anterior
 
   const stepsArray = [
@@ -43,6 +44,7 @@ export function CurrentStep() {
       onChange={startTimer}
       onSubmit={submitQuestion}
     />,
+    <Back key="2" inOutAnimation={inOutAnimation} onSubmit={submitBack} />,
     <Optional
       key="2"
       inOutAnimation={inOutAnimation}
