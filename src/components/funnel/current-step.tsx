@@ -42,7 +42,12 @@ export function CurrentStep() {
       onChange={startTimer}
       onSubmit={submitQuestion}
     />,
-    <Back key="2" inOutAnimation={inOutAnimation} onSubmit={submitBack} />,
+    <Back
+      key="2"
+      inOutAnimation={inOutAnimation}
+      secondaryOnSubmit={submitBack}
+      onSubmit={submitQuestion}
+    />,
     <Optional
       key="2"
       inOutAnimation={inOutAnimation}

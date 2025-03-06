@@ -13,6 +13,7 @@ type FormProps = FormHTMLAttributes<HTMLFormElement> & {
 
 export type FormStepProps = FormHTMLAttributes<HTMLFormElement> & {
   onSubmit: SubmitHandler<FieldValues>;
+  secondaryOnSubmit?: SubmitHandler<FieldValues>;
   isLoading?: boolean;
   inOutAnimation: InOutAnimationState;
 };
