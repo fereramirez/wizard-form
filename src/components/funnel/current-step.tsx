@@ -38,45 +38,45 @@ export function CurrentStep() {
   const stepsArray = [
     <Intro
       key="0"
-      disabled={notAllowedToPass || isLoading}
-      inOutAnimation={inOutAnimation}
+      disabled={notAllowedToPass}
+      inOutAnimation={inOutAnimation} //! VOLVER A VER se podria crear un contexto para la animacion y llamarla directamente en el componente Form
       onSubmit={submitQuestion}
     />,
     <Name
       key="1"
-      disabled={notAllowedToPass || isLoading}
+      disabled={notAllowedToPass}
       inOutAnimation={inOutAnimation}
       onChange={startTimer}
       onSubmit={submitQuestion}
     />,
     <Back
       key="2"
-      disabled={notAllowedToPass || isLoading}
+      disabled={notAllowedToPass}
       inOutAnimation={inOutAnimation}
       secondaryOnSubmit={submitBack}
       onSubmit={submitQuestion}
     />,
     <Optional
       key="3"
-      disabled={notAllowedToPass || isLoading}
+      disabled={notAllowedToPass}
       inOutAnimation={inOutAnimation}
       onSubmit={submitQuestion}
     />,
     <Repeat
       key="4"
-      disabled={notAllowedToPass || isLoading}
+      disabled={notAllowedToPass}
       inOutAnimation={inOutAnimation}
       onSubmit={submitRepeat}
     />,
     <StorePromise
       key="5"
-      disabled={notAllowedToPass || isLoading}
+      disabled={notAllowedToPass}
       inOutAnimation={inOutAnimation}
       onSubmit={submitStorePromise}
     />,
     <Autosubmit
       key="6"
-      disabled={notAllowedToPass || isLoading}
+      disabled={notAllowedToPass}
       inOutAnimation={inOutAnimation}
       onSubmit={submitQuestion}
     />,
@@ -88,14 +88,14 @@ export function CurrentStep() {
     />,
     <AutosubmitShowFetchedData
       key="8"
-      disabled={notAllowedToPass || isLoading}
+      disabled={notAllowedToPass}
       inOutAnimation={inOutAnimation}
       onSubmit={submitWaitForPromise}
     />,
     <WaitForPromise key="9" inOutAnimation={inOutAnimation} />,
     <Name
       key="10"
-      disabled={notAllowedToPass || isLoading}
+      disabled={notAllowedToPass}
       inOutAnimation={inOutAnimation}
       onSubmit={submitLastQuestion}
     />,
@@ -104,7 +104,7 @@ export function CurrentStep() {
     <ThankYou key="13" inOutAnimation={inOutAnimation} />,
     <Restart
       key="14"
-      disabled={notAllowedToPass || isLoading}
+      disabled={notAllowedToPass}
       inOutAnimation={inOutAnimation}
       onSubmit={submitRestart}
     />,
