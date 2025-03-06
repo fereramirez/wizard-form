@@ -176,6 +176,8 @@ export function useSubmit() {
 
         console.log(`You took ${fillTime} seconds to complete the funnel`);
 
+        //! VOLVER A VER antes de mostrar dataToDispatch resetear values de optionals que no fueron seleccionados
+
         console.log(dataToDispatch);
 
         await fakeApi.getFakeApiData(7 * 1000);
