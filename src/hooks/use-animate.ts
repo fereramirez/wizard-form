@@ -43,8 +43,6 @@ export const ANIMATION_TIMES = {
   DURATION: 450,
 } as const;
 
-export const ANIMATION_DURATION = 450;
-
 export type InOutAnimationState =
   (typeof IN_OUT_ANIMATION_STATE)[keyof typeof IN_OUT_ANIMATION_STATE];
 
