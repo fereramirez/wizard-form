@@ -67,16 +67,17 @@ type FunnelForms = {
   // wait for promise,
 
   // Hidden data
-  userAgent: string | null;
-  randomValue: number;
-  fakeApiData: CheckboxData[];
   realStepIndex: number;
   userStepIndex: number;
+  fakeApiData: CheckboxData[];
+  randomValue: number;
+  fillTime: number;
+  userAgent: string | null;
 
   // Query params
   queryParams: string;
-  utm_source: string | undefined;
-  affiliate_id: string | undefined;
+  utm_source?: string;
+  affiliate_id?: string;
 };
 
 type FunnelState = FunnelForms & HiddenData;
@@ -136,11 +137,12 @@ const INITIAL_FUNNEL_STATE: FunnelState = {
   // wait for promise,
 
   // Hidden data
-  userAgent: null,
-  randomValue: 0,
-  fakeApiData: [],
   realStepIndex: 0,
   userStepIndex: 0,
+  fakeApiData: [],
+  randomValue: 0,
+  fillTime: 0,
+  userAgent: null,
 
   // Query params
   queryParams: "",

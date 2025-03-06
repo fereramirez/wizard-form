@@ -173,6 +173,8 @@ export function useSubmit() {
         const dataToDispatch = {
           ...funnelState,
           ...dataUpdated,
+          fillTime,
+          userAgent: navigator.userAgent,
         };
 
         console.log(`You took ${fillTime} seconds to complete the funnel`);
