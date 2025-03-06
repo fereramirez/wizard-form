@@ -2,7 +2,7 @@
 
 import {Intro} from "../funnel-steps/intro";
 
-import {AutosubmitShowFetchedData} from "@/components/funnel-steps/autosubmit-data";
+import {AutosubmitShowFetchedData} from "@/components/funnel-steps/autosubmit-show";
 import {AutosubmitFetchAndWait} from "@/components/funnel-steps/autosubmit-fetch";
 import {Name} from "@/components/funnel-steps/name";
 import {ThankYouAds, ThankYou} from "@/components/funnel-steps/thank-you";
@@ -14,6 +14,7 @@ import {useSubmit} from "@/hooks/use-submit";
 import {Autosubmit} from "@/components/funnel-steps/autosubmit";
 import {WaitForPromise, WaitStep} from "@/components/funnel-steps/wait";
 import {Back} from "@/components/funnel-steps/back";
+import {Restart} from "@/components/funnel-steps/restart";
 
 export function CurrentStep() {
   const {realStepIndex} = useFunnelStore();
@@ -30,6 +31,7 @@ export function CurrentStep() {
     submitStorePromise,
     submitWaitForPromise,
     submitLastQuestion,
+    submitRestart,
   } = useSubmit();
 
   //! VOLVER A VER agregar steps adicionales
@@ -38,8 +40,9 @@ export function CurrentStep() {
 
   /* <Button disabled={disabled} isLoading={isLoading} text="NEXT" /> */
 
-  //! VOLVER A VER agregar boton de restart al final del funnel (es mejor poner un link a home?). Mostrar data collected
   //! VOLVER A VER avisar en algun step que se va a tomar el user_agent?
+
+  //! VOLVER A VER en el primer step agregar un Link que agregue params a la url. Si las params existen renderizar Intro normalmente
 
   const stepsArray = [
     <Intro
@@ -63,59 +66,71 @@ export function CurrentStep() {
       onSubmit={submitQuestion}
     />,
     <Optional
-      key="2"
+      key="3"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       onSubmit={submitQuestion}
     />,
     <Repeat
-      key="3"
+      key="4"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       onSubmit={submitRepeat}
     />,
     <StorePromise
-      key="4"
+      key="5"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       onSubmit={submitStorePromise}
     />,
     <Autosubmit
-      key="5"
+      key="6"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       onSubmit={submitQuestion}
     />,
     <AutosubmitFetchAndWait
-      key="6"
+      key="7"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       onSubmit={submitFetchAndWait}
     />,
     <AutosubmitShowFetchedData
-      key="7"
+      key="8"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       onSubmit={submitWaitForPromise}
     />,
-    <WaitForPromise key="8" inOutAnimation={inOutAnimation} />,
+    <WaitForPromise key="9" inOutAnimation={inOutAnimation} />,
     <Name
-      key="9"
+      key="10"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       onSubmit={submitLastQuestion}
     />,
-    <WaitStep key="10" inOutAnimation={inOutAnimation} />,
-    <ThankYouAds key="11" inOutAnimation={inOutAnimation} />,
-    <ThankYou key="12" inOutAnimation={inOutAnimation} />,
+    <WaitStep key="11" inOutAnimation={inOutAnimation} />,
+    <ThankYouAds key="12" inOutAnimation={inOutAnimation} />,
+    <ThankYou key="13" inOutAnimation={inOutAnimation} />,
+    <Restart
+      key="14"
+      disabled={notAllowedToPass || isLoading}
+      inOutAnimation={inOutAnimation}
+      onSubmit={submitRestart}
+    />,
   ];
 
   const stepsArrayTest = [
-    <Optional
-      key="2"
+    <Intro
+      key="0"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       onSubmit={submitQuestion}
+    />,
+    <Restart
+      key="1"
+      disabled={notAllowedToPass || isLoading}
+      inOutAnimation={inOutAnimation}
+      onSubmit={submitRestart}
     />,
   ];
 
