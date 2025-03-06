@@ -36,7 +36,7 @@ type FunnelForms = {
   name_2: string | null;
 
   // step 2
-  // back
+  back: boolean;
 
   // step 3
   optional: string | null;
@@ -105,7 +105,7 @@ const INITIAL_FUNNEL_STATE: FunnelState = {
   name_2: null,
 
   // step 2
-  // back
+  back: false,
 
   // step 3
   optional: null,
