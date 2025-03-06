@@ -1,8 +1,48 @@
 import {createContext, useContext, useReducer, type ReactNode} from "react";
 import {type FieldValues} from "react-hook-form";
 
+import {type Prettify, type UnionToIntersection} from "@/types/utility-types";
 import {type StepValue, STEP_INDEXES} from "@/components/funnel/current-step";
-import {type FunnelState, type HiddenDataAction} from "@/types/funnel";
+import {type CheckboxData} from "@/components/inputs/checkbox";
+
+type UrlParams = {
+  utm_source?: string;
+  affiliate_id?: string;
+};
+
+type StepsHiddenData = {
+  userStepIndex: number;
+  realStepIndex: number;
+};
+
+type HiddenDataAction = Prettify<
+  | {userAgent: string | null}
+  | {queryParams: string}
+  | UrlParams
+  | StepsHiddenData
+  | {randomValue: number}
+  | {fakeApiData: CheckboxData[]}
+>;
+
+type HiddenData = Prettify<UnionToIntersection<HiddenDataAction>>;
+
+type FunnelForms = {
+  // step 1
+  autosubmit: [string] | null;
+  autosubmit_2: [string] | null;
+
+  // step 2
+  autosubmit_fetch: [string] | null;
+  autosubmit_fetch_2: [string] | null;
+
+  // step 3
+  repeat: "true" | "false";
+
+  // step 4
+  name: string | null;
+};
+
+type FunnelState = FunnelForms & HiddenData;
 
 type StepValue = number;
 
