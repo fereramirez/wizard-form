@@ -49,6 +49,7 @@ export function Checkbox({
   required = true,
   className,
 }: CheckboxProps) {
+  //! VOLVER A VER cambiar a controlled?
   const checkedRadio = type === "radio" && watch(name) === value;
 
   const checkedCheckbox =
