@@ -39,7 +39,12 @@ export function CurrentStep() {
   /* <Button disabled={isSubmitting || disabled} isLoading={isLoading} text="NEXT" /> */
 
   const stepsArray = [
-    <Intro key="0" inOutAnimation={inOutAnimation} onSubmit={submitQuestion} />,
+    <Intro
+      key="0"
+      disabled={notAllowedToPass || isLoading}
+      inOutAnimation={inOutAnimation}
+      onSubmit={submitQuestion}
+    />,
     <Name
       key="1"
       disabled={notAllowedToPass || isLoading}
@@ -103,17 +108,27 @@ export function CurrentStep() {
   ];
 
   const stepsArrayTest = [
-    <Intro key="0" inOutAnimation={inOutAnimation} onSubmit={submitQuestion} />,
-    <Back
-      key="2"
+    <Intro
+      key="0"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
-      secondaryOnSubmit={submitBack}
       onSubmit={submitQuestion}
+    />,
+    <Repeat
+      key="3"
+      disabled={notAllowedToPass || isLoading}
+      inOutAnimation={inOutAnimation}
+      onSubmit={submitRepeat}
+    />,
+    <Name
+      key="9"
+      disabled={notAllowedToPass || isLoading}
+      inOutAnimation={inOutAnimation}
+      onSubmit={submitLastQuestion}
     />,
   ];
 
-  return stepsArray[realStepIndex];
+  return stepsArrayTest[realStepIndex];
 }
 
 export const STEP_INDEXES = {
