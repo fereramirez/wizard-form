@@ -1,3 +1,71 @@
+.checkbox {
+  background-color: white;
+  color: black;
+  border-color: black;
+
+  &:hover {
+    background-color: var(--color-primary-1);
+  }
+
+  &:has(:focus-visible) {
+    background-color: var(--color-primary-1);
+
+    &:hover {
+      background-color: var(--color-primary-1);
+    }
+  }
+
+  @media (min-width: 640px) {
+    padding: 4px 32px;
+  }
+}
+
+.checkbox-checked {
+  background-color: var(--color-primary-3);
+  color: white;
+  border-color: white;
+
+  &:hover {
+    background-color: var(--color-primary-1);
+    color: black;
+    border-color: black;
+  }
+
+  &:has(:focus-visible) {
+    background-color: var(--color-primary-1);
+    color: black;
+    border-color: black;
+
+
+    &:hover {
+      background-color: var(--color-primary-1);
+      color: black;
+      border-color: black;
+    }
+  }
+}
+
+.radio-checked {
+  &:hover {
+    background-color: var(--color-primary-3);
+    color: white;
+    border-color: white;
+  }
+
+  &:has(:focus-visible) {
+    background-color: var(--color-primary-3);
+    color: white;
+    border-color: white;
+
+    &:hover {
+      background-color: var(--color-primary-3);
+      color: white;
+      border-color: white;
+    }
+  }
+}
+
+
 .bottom-shadow {
   transition: box-shadow 0.1s ease-out;
   box-shadow: rgba(251, 241, 223, 0.3) 0px 1px;
@@ -19,4 +87,3 @@
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }
-
