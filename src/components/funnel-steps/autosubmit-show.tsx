@@ -28,7 +28,7 @@ export function AutosubmitShowFetchedData({onSubmit, disabled, ...rest}: FormSte
         className="grid-cols-4 sm:grid-cols-2"
         disabled={disabled}
         error={undefined}
-        name="autosubmit"
+        name="autosubmitShow"
         options={fakeApiData}
         question="Please select an option"
         register={register}
