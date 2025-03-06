@@ -15,7 +15,7 @@ const autosubmitOptions: CheckboxData[] = [
   {value: "option4", label: "Option 4"},
 ];
 
-export function Autosubmit({onSubmit, isLoading, ...rest}: FormStepProps) {
+export function Autosubmit({onSubmit, disabled, ...rest}: FormStepProps) {
   const {
     register,
     handleSubmit,
@@ -35,7 +35,7 @@ export function Autosubmit({onSubmit, isLoading, ...rest}: FormStepProps) {
       <CheckboxesBox
         checkBoxesClassName="p-2"
         className="grid-cols-2 sm:grid-cols-4"
-        disabled={isSubmitting || isLoading}
+        disabled={isSubmitting || disabled}
         error={undefined}
         name="autosubmit"
         options={autosubmitOptions}

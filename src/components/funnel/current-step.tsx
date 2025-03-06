@@ -21,6 +21,7 @@ export function CurrentStep() {
   const {
     startTimer,
     isLoading,
+    notAllowedToPass,
     inOutAnimation,
     submitQuestion,
     submitBack,
@@ -33,62 +34,68 @@ export function CurrentStep() {
 
   //! VOLVER A VER agregar steps adicionales
 
+  //! VOLVER A VER cambiar el step Name repetido del final por un step con dos questions: 1.checkbox 2.radio 3.button con isLoading
+
+  /* <Button disabled={isSubmitting || disabled} isLoading={isLoading} text="NEXT" /> */
+
   const stepsArray = [
     <Intro key="0" inOutAnimation={inOutAnimation} onSubmit={submitQuestion} />,
     <Name
       key="1"
+      disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
       onChange={startTimer}
       onSubmit={submitQuestion}
     />,
     <Back
       key="2"
+      disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       secondaryOnSubmit={submitBack}
       onSubmit={submitQuestion}
     />,
     <Optional
       key="2"
+      disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
       onSubmit={submitQuestion}
     />,
     <Repeat
       key="3"
+      disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
       onSubmit={submitRepeat}
     />,
     <StorePromise
       key="4"
+      disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
       onSubmit={submitStorePromise}
     />,
     <Autosubmit
       key="5"
+      disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
       onSubmit={submitQuestion}
     />,
     <AutosubmitFetchAndWait
       key="6"
+      disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
       isLoading={isLoading}
       onSubmit={submitFetchAndWait}
     />,
     <AutosubmitShowFetchedData
       key="7"
+      disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
       onSubmit={submitWaitForPromise}
     />,
     <WaitForPromise key="8" inOutAnimation={inOutAnimation} />,
     <Name
       key="9"
+      disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
       onSubmit={submitLastQuestion}
     />,
     <WaitStep key="10" inOutAnimation={inOutAnimation} />,

@@ -7,8 +7,11 @@ import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
 import {useAnalytics} from "@/hooks/use-analytics";
 
-export function Back({onSubmit, secondaryOnSubmit, ...rest}: FormStepProps) {
-  const {handleSubmit} = useForm();
+export function Back({onSubmit, secondaryOnSubmit, disabled, ...rest}: FormStepProps) {
+  const {
+    handleSubmit,
+    formState: {isSubmitting},
+  } = useForm();
 
   useAnalytics("back");
 
@@ -17,8 +20,13 @@ export function Back({onSubmit, secondaryOnSubmit, ...rest}: FormStepProps) {
       <Title>In this step you can go back to the previous step</Title>
 
       <div className="flex gap-10">
-        <Button text="BACK" type="button" onClick={secondaryOnSubmit} />
-        <Button text="NEXT" />
+        <Button
+          disabled={isSubmitting || disabled}
+          text="BACK"
+          type="button"
+          onClick={secondaryOnSubmit}
+        />
+        <Button disabled={isSubmitting || disabled} text="NEXT" />
       </div>
     </Form>
   );

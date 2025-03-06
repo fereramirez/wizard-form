@@ -29,7 +29,7 @@ const nameValidation: Validation = {
   },
 };
 
-export function Name({onSubmit, isLoading = false, ...rest}: FormStepProps) {
+export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
   const {
     register,
     handleSubmit,
@@ -54,6 +54,7 @@ export function Name({onSubmit, isLoading = false, ...rest}: FormStepProps) {
 
       <InputBox
         aria-label="Name"
+        disabled={disabled}
         error={errors.name?.message}
         name={`name${repeat === "true" ? "_2" : ""}`}
         placeholder="Fernando"
@@ -69,7 +70,7 @@ export function Name({onSubmit, isLoading = false, ...rest}: FormStepProps) {
         </p>
       ) : null} */}
 
-      <Button isLoading={isSubmitting || isLoading} text="NEXT" />
+      <Button disabled={isSubmitting || disabled} text="NEXT" />
     </Form>
   );
 }

@@ -35,12 +35,12 @@ const greenOptions: CheckboxData[] = [
   {value: "#00FF00", label: "Lime"},
 ];
 
-export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
+export function Optional({onSubmit, disabled, ...rest}: FormStepProps) {
   const {
     register,
     handleSubmit,
     watch,
-    formState: {errors, isSubmitting},
+    formState: {errors, isSubmitting}, //! VOLVER A VER es necesario isSubmitting?
   } = useForm();
 
   const {repeat} = useFunnelStore();
@@ -58,6 +58,8 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
 
   //! VOLVER A VER al desmontar step opcional mostrar animacion, se podria agregar un wrapper que reciba el condicional option = value que se encargue de la animacion de desmonte?
 
+  //! VOLVER A VER disabled en opcionales
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>Based on the option you chose you can see additional questions</Title>
@@ -65,7 +67,7 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
       <CheckboxesBox
         checkBoxesClassName="p-2"
         className="grid-cols-2 sm:grid-cols-4"
-        disabled={isSubmitting || isLoading}
+        disabled={isSubmitting || disabled}
         error={errors.optional?.message}
         name={fieldNames.optional}
         options={optionalOptions}
@@ -80,7 +82,7 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
           <CheckboxesBox
             checkBoxesClassName="p-2"
             className="grid-cols-2 sm:grid-cols-4"
-            /* disabled={isSubmitting || isLoading} */
+            /* disabled={isSubmitting || disabled} */
             error={errors.purple?.message}
             name={fieldNames.purple}
             options={purpleOptions}
@@ -97,7 +99,7 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
           <CheckboxesBox
             checkBoxesClassName="p-2"
             className="grid-cols-1 sm:grid-cols-3"
-            /* disabled={isSubmitting || isLoading} */
+            /* disabled={isSubmitting || disabled} */
             error={errors.blue?.message}
             name={fieldNames.blue}
             options={blueOptions}
@@ -114,7 +116,7 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
           <CheckboxesBox
             checkBoxesClassName="p-2"
             className="grid-cols-2"
-            /* disabled={isSubmitting || isLoading} */
+            /* disabled={isSubmitting || disabled} */
             error={errors.green?.message}
             name={fieldNames.green}
             options={greenOptions}
@@ -126,7 +128,7 @@ export function Optional({onSubmit, isLoading, ...rest}: FormStepProps) {
         </DivAnimatedHeight>
       ) : null}
 
-      <Button isLoading={isSubmitting || isLoading} text="NEXT" />
+      <Button disabled={isSubmitting || disabled} text="NEXT" />
     </Form>
   );
 }

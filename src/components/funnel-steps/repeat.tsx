@@ -16,7 +16,7 @@ const autosubmitOptions: CheckboxData[] = [
   {value: "false", label: "No"},
 ];
 
-export function Repeat({onSubmit, isLoading, inOutAnimation, ...rest}: FormStepProps) {
+export function Repeat({onSubmit, inOutAnimation, disabled, ...rest}: FormStepProps) {
   const {
     register,
     handleSubmit,
@@ -27,6 +27,8 @@ export function Repeat({onSubmit, isLoading, inOutAnimation, ...rest}: FormStepP
   const {repeat} = useFunnelStore();
 
   useAnalytics("repeat");
+
+  //! VOLVER A VER hay un error en el renderizado condicional cuando la animacion se va?
 
   return (
     <Form inOutAnimation={inOutAnimation} onSubmit={handleSubmit(onSubmit)} {...rest}>
@@ -42,7 +44,7 @@ export function Repeat({onSubmit, isLoading, inOutAnimation, ...rest}: FormStepP
         <CheckboxesBox
           checkBoxesClassName="p-2"
           className="grid-cols-2"
-          disabled={isSubmitting || isLoading}
+          disabled={isSubmitting || disabled}
           error={undefined}
           name="repeat"
           options={autosubmitOptions}
@@ -52,7 +54,7 @@ export function Repeat({onSubmit, isLoading, inOutAnimation, ...rest}: FormStepP
         />
       )}
 
-      <Button isLoading={isSubmitting || isLoading} text="NEXT" />
+      <Button disabled={isSubmitting || disabled} text="NEXT" />
     </Form>
   );
 }

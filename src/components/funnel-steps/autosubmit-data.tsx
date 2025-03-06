@@ -9,7 +9,7 @@ import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {useAnalytics} from "@/hooks/use-analytics";
 import {Title} from "@/components/messages/title";
 
-export function AutosubmitShowFetchedData({onSubmit, isLoading, ...rest}: FormStepProps) {
+export function AutosubmitShowFetchedData({onSubmit, disabled, ...rest}: FormStepProps) {
   const {
     register,
     handleSubmit,
@@ -31,7 +31,7 @@ export function AutosubmitShowFetchedData({onSubmit, isLoading, ...rest}: FormSt
       <CheckboxesBox
         checkBoxesClassName="p-2"
         className="grid-cols-4 sm:grid-cols-2"
-        disabled={isSubmitting || isLoading}
+        disabled={isSubmitting || disabled}
         error={undefined}
         name="autosubmit"
         options={fakeApiData}

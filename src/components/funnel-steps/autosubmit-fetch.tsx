@@ -15,7 +15,7 @@ const autosubmitFetchOptions: CheckboxData[] = [
   {value: "option4", label: "Option 4"},
 ];
 
-export function AutosubmitFetchAndWait({onSubmit, isLoading, ...rest}: FormStepProps) {
+export function AutosubmitFetchAndWait({onSubmit, disabled, ...rest}: FormStepProps) {
   const {
     register,
     handleSubmit,
@@ -36,7 +36,7 @@ export function AutosubmitFetchAndWait({onSubmit, isLoading, ...rest}: FormStepP
       <CheckboxesBox
         checkBoxesClassName="p-2"
         className="grid-cols-2 sm:grid-cols-4"
-        disabled={isSubmitting || isLoading}
+        disabled={isSubmitting || disabled}
         error={undefined}
         name="autosubmit_fetch"
         options={autosubmitFetchOptions}

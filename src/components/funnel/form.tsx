@@ -5,16 +5,17 @@ import {cn} from "@/helpers/cn";
 import {InOutAnimationWrapper} from "@/components/wrappers/in-out-animation-wrapper";
 import {type InOutAnimationState} from "@/hooks/use-animate";
 
-type FormProps = FormHTMLAttributes<HTMLFormElement> & {
-  children: React.ReactNode;
-  className?: string;
-  inOutAnimation: InOutAnimationState;
-};
-
 export type FormStepProps = FormHTMLAttributes<HTMLFormElement> & {
   onSubmit: SubmitHandler<FieldValues>;
   secondaryOnSubmit?: SubmitHandler<FieldValues>;
   isLoading?: boolean;
+  inOutAnimation: InOutAnimationState;
+  disabled?: boolean;
+};
+
+type FormProps = FormHTMLAttributes<HTMLFormElement> & {
+  children: React.ReactNode;
+  className?: string;
   inOutAnimation: InOutAnimationState;
 };
 

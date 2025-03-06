@@ -14,7 +14,7 @@ const storePromiseOptions: CheckboxData[] = [
   {value: "false", label: "False"},
 ];
 
-export function StorePromise({onSubmit, isLoading, ...rest}: FormStepProps) {
+export function StorePromise({onSubmit, disabled, ...rest}: FormStepProps) {
   const {
     register,
     handleSubmit,
@@ -35,7 +35,7 @@ export function StorePromise({onSubmit, isLoading, ...rest}: FormStepProps) {
       <CheckboxesBox
         checkBoxesClassName="p-2"
         className="grid-cols-3"
-        disabled={isSubmitting || isLoading}
+        disabled={isSubmitting || disabled}
         error={undefined}
         name="store_promise"
         options={storePromiseOptions}
@@ -44,7 +44,7 @@ export function StorePromise({onSubmit, isLoading, ...rest}: FormStepProps) {
         watch={watch}
       />
 
-      <Button isLoading={isSubmitting || isLoading} text="NEXT" />
+      <Button disabled={isSubmitting || disabled} text="NEXT" />
     </Form>
   );
 }
