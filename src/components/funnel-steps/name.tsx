@@ -45,8 +45,11 @@ export function Name({onSubmit, isLoading = false, ...rest}: FormStepProps) {
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
-        {repeat ? `We can show content based on previous answers ${name}.` : ""}
-        Please enter your name to {repeat === "true" ? "continue" : "start"}
+        {back === true && repeat === "false"
+          ? `We can show content based on previous answers ${name}. `
+          : ""}
+        Please enter your name {back === true ? "again" : ""} to{" "}
+        {repeat === "true" ? "continue" : "start"}
       </Title>
 
       <InputBox
