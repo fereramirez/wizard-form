@@ -10,6 +10,7 @@ import {useAnalytics} from "@/hooks/use-analytics";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {useFocus} from "@/hooks/use-focus";
 import {ANIMATION_TIMES} from "@/hooks/use-animate";
+
 const nameValidation: Validation = {
   required: {
     value: true,

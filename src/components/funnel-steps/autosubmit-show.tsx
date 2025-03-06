@@ -14,7 +14,7 @@ export function AutosubmitShowFetchedData({onSubmit, disabled, ...rest}: FormSte
 
   const {fakeApiData} = useFunnelStore();
 
-  useAnalytics("autosubmit");
+  useAnalytics("autosubmitShow");
   useAutosubmit(watch, () => handleSubmit(onSubmit));
 
   return (

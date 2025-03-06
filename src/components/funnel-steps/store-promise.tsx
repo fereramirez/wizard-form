@@ -17,7 +17,7 @@ const storePromiseOptions: CheckboxData[] = [
 export function StorePromise({onSubmit, disabled, ...rest}: FormStepProps) {
   const {register, handleSubmit, watch} = useForm();
 
-  useAnalytics("store_promise");
+  useAnalytics("storePromise");
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>

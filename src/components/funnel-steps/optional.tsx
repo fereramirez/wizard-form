@@ -48,10 +48,10 @@ export function Optional({onSubmit, disabled, ...rest}: FormStepProps) {
   useAnalytics(`optional${repeat === "true" ? "_II" : ""}`);
 
   const fieldNames = {
-    optional: `optional${repeat === "true" ? "_2" : ""}`,
-    purple: `purple${repeat === "true" ? "_2" : ""}`,
-    blue: `blue${repeat === "true" ? "_2" : ""}`,
-    green: `green${repeat === "true" ? "_2" : ""}`,
+    optional: `optional${repeat === "true" ? "_II" : ""}`,
+    purple: `purple${repeat === "true" ? "_II" : ""}`,
+    blue: `blue${repeat === "true" ? "_II" : ""}`,
+    green: `green${repeat === "true" ? "_II" : ""}`,
   };
 
   const optionalValue = watch(fieldNames.optional) as string;

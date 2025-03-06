@@ -18,7 +18,7 @@ const autosubmitFetchOptions: CheckboxData[] = [
 export function AutosubmitFetchAndWait({onSubmit, disabled, ...rest}: FormStepProps) {
   const {register, handleSubmit, watch} = useForm();
 
-  useAnalytics("autosubmit_fetch");
+  useAnalytics("autosubmitFetch");
   useAutosubmit(watch, () => handleSubmit(onSubmit));
 
   return (

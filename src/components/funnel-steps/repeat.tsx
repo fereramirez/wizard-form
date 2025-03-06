@@ -9,7 +9,6 @@ import {Button} from "@/components/inputs/button";
 import {Question} from "@/components/messages/question";
 import {useAnalytics} from "@/hooks/use-analytics";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
-import {IN_OUT_ANIMATION_STATE} from "@/hooks/use-animate";
 
 const autosubmitOptions: CheckboxData[] = [
   {value: "true", label: "Yes"},

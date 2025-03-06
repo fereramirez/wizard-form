@@ -13,7 +13,7 @@ type ThankYouProps = {
 export function ThankYouAds({inOutAnimation}: ThankYouProps) {
   const {randomValue} = useFunnelStore();
 
-  useAnalytics("typage_ads");
+  useAnalytics("tyAds");
 
   return (
     <InOutAnimationWrapper inOutAnimation={inOutAnimation}>
@@ -53,7 +53,7 @@ export function ThankYouAds({inOutAnimation}: ThankYouProps) {
 export function ThankYou({inOutAnimation}: ThankYouProps) {
   const {randomValue} = useFunnelStore();
 
-  useAnalytics("typage");
+  useAnalytics("ty");
 
   return (
     <InOutAnimationWrapper inOutAnimation={inOutAnimation}>
