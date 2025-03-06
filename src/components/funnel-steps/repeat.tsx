@@ -28,18 +28,19 @@ export function Repeat({onSubmit, inOutAnimation, disabled, ...rest}: FormStepPr
 
   useAnalytics("repeat");
 
-  //! VOLVER A VER hay un error en el renderizado condicional cuando la animacion se va?
+  //! VOLVER A VER en la segunda repeticion hay un error en el renderizado condicional cuando la animacion se va. Cuando se está yendo se renderiza CheckboxesBox (deberia renderizarse Question en todo momento)
 
   return (
     <Form inOutAnimation={inOutAnimation} onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
-        In case we need to collect info for other individual we can repeat previous steps
+        In case we need to collect info for other individual we can repeat previous steps{" "}
+        {repeat === "true" ? "*" : ""}
       </Title>
 
       {repeat === "true" &&
       (inOutAnimation === IN_OUT_ANIMATION_STATE.ENTERING ||
         inOutAnimation === IN_OUT_ANIMATION_STATE.NORMAL) ? (
-        <Question>You've already repeated the first steps</Question>
+        <Question>*You've already repeated the first steps</Question>
       ) : (
         <CheckboxesBox
           checkBoxesClassName="p-2"
