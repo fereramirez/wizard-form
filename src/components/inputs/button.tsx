@@ -15,18 +15,26 @@ export function Button({
   type = "submit",
   isLoading = false,
   className,
+  disabled,
   ...rest
 }: ButtonProps) {
   return (
     <button
       {...rest}
+      aria-disabled={disabled}
       className={cn(
-        "hover:bg-color-primary disabled:bg-color-primary-darker flex min-h-10 w-full cursor-pointer items-center justify-center rounded-xs border-none bg-white text-base font-bold text-black transition-all duration-200 ease-linear outline-none hover:bg-black hover:text-white focus-visible:bg-black focus-visible:text-white disabled:cursor-auto motion-reduce:transition-none sm:min-h-14 sm:text-2xl",
+        "hover:bg-color-primary flex min-h-12 w-full cursor-pointer items-center justify-center rounded-xs border-none bg-white py-2 text-base font-bold text-black transition-all duration-200 ease-linear outline-none hover:bg-black hover:text-white focus-visible:bg-black focus-visible:text-white motion-reduce:transition-none sm:min-h-14 sm:text-2xl",
         className,
+        disabled ? "pointer-events-none opacity-50" : "",
       )}
+      disabled={disabled}
       type={type}
     >
-      {isLoading ? <Spinner className="h-10 w-auto text-white" data-testid="spinner" /> : text}
+      {isLoading ? (
+        <Spinner className="h-8 w-auto animate-spin" data-testid="spinner" fill="currentColor" />
+      ) : (
+        text
+      )}
     </button>
   );
 }
