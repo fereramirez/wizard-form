@@ -27,8 +27,6 @@ export function Repeat({onSubmit, isLoading, ...rest}: FormStepProps) {
 
   useAnalytics("repeat");
 
-  //! VOLVER A VER permitir repetir tres veces, en la tercera repeticion saltear step
-
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
