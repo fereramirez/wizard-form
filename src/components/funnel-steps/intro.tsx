@@ -1,6 +1,7 @@
 "use client";
 
 import {useForm} from "react-hook-form";
+import {useSearchParams} from "next/navigation";
 
 import {Title} from "@/components/messages/title";
 import {Form, type FormStepProps} from "@/components/funnel/form";
@@ -10,11 +11,33 @@ import {useAnalytics} from "@/hooks/use-analytics";
 export function Intro({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
 
+  const searchParams = useSearchParams();
+
   useAnalytics("intro");
 
+  const utmSource = searchParams.get("utm_source");
+  const affiliateId = searchParams.get("affiliate_id");
+
+  //! VOLVER A VER mas adelante appendear los params a un link externo y que se abra en una nueva pestaña, explicar que asi se puede trackear el source
+
+  if (!utmSource || !affiliateId)
+    return (
+      <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
+        <Title>
+          Before starting let's add some query params to the url, we will use them later
+        </Title>
+
+        <Button
+          disabled={disabled}
+          href="/?utm_source=THIS-IS-A-SOURCE&affiliate_id=THIS-IS-AN-AFFILIATE-ID"
+          text="ADD QUERY PARAMS"
+        />
+      </Form>
+    );
+
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
-      <Title>This is only a funnel to show how the steps work</Title>
+    <Form className="fade-in" onSubmit={handleSubmit(onSubmit)} {...rest}>
+      <Title>This is a funnel to show how the steps work</Title>
 
       <Button disabled={disabled} text="START" />
     </Form>

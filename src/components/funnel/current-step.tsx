@@ -1,19 +1,18 @@
 "use client";
 
-import {Intro} from "../funnel-steps/intro";
-
-import {AutosubmitShowFetchedData} from "@/components/funnel-steps/autosubmit-show";
-import {AutosubmitFetchAndWait} from "@/components/funnel-steps/autosubmit-fetch";
-import {Name} from "@/components/funnel-steps/name";
-import {ThankYouAds, ThankYou} from "@/components/funnel-steps/thank-you";
-import {Repeat} from "@/components/funnel-steps/repeat";
-import {Optional} from "@/components/funnel-steps/optional";
-import {StorePromise} from "@/components/funnel-steps/store-promise";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {useSubmit} from "@/hooks/use-submit";
-import {Autosubmit} from "@/components/funnel-steps/autosubmit";
-import {WaitForPromise, WaitStep} from "@/components/funnel-steps/wait";
+import {Intro} from "@/components/funnel-steps/intro";
+import {Name} from "@/components/funnel-steps/name";
 import {Back} from "@/components/funnel-steps/back";
+import {Optional} from "@/components/funnel-steps/optional";
+import {Repeat} from "@/components/funnel-steps/repeat";
+import {StorePromise} from "@/components/funnel-steps/store-promise";
+import {Autosubmit} from "@/components/funnel-steps/autosubmit";
+import {AutosubmitFetchAndWait} from "@/components/funnel-steps/autosubmit-fetch";
+import {AutosubmitShowFetchedData} from "@/components/funnel-steps/autosubmit-show";
+import {WaitForPromise, WaitStep} from "@/components/funnel-steps/wait";
+import {ThankYouAds, ThankYou} from "@/components/funnel-steps/thank-you";
 import {Restart} from "@/components/funnel-steps/restart";
 
 export function CurrentStep() {
@@ -37,12 +36,9 @@ export function CurrentStep() {
   //! VOLVER A VER agregar steps adicionales
 
   //! VOLVER A VER cambiar el step Name repetido del final por un step con dos questions: 1.checkbox 2.radio 3.button con isLoading
-
   /* <Button disabled={disabled} isLoading={isLoading} text="NEXT" /> */
 
   //! VOLVER A VER avisar en algun step que se va a tomar el user_agent?
-
-  //! VOLVER A VER en el primer step agregar un Link que agregue params a la url. Si las params existen renderizar Intro normalmente
 
   const stepsArray = [
     <Intro
