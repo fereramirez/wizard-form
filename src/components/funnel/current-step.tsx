@@ -82,7 +82,6 @@ export function CurrentStep() {
       key="6"
       disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
       onSubmit={submitFetchAndWait}
     />,
     <AutosubmitShowFetchedData
@@ -104,35 +103,14 @@ export function CurrentStep() {
   ];
 
   const stepsArrayTest = [
-    <WaitStep key="10" inOutAnimation={inOutAnimation} />,
-    <StorePromise
-      key="4"
+    <Intro key="0" inOutAnimation={inOutAnimation} onSubmit={submitQuestion} />,
+    <Back
+      key="2"
+      disabled={notAllowedToPass || isLoading}
       inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
-      onSubmit={submitStorePromise}
+      secondaryOnSubmit={submitBack}
+      onSubmit={submitQuestion}
     />,
-    <AutosubmitFetchAndWait
-      key="6"
-      inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
-      onSubmit={submitFetchAndWait}
-    />,
-
-    <AutosubmitShowFetchedData
-      key="7"
-      inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
-      onSubmit={submitWaitForPromise}
-    />,
-    <WaitForPromise key="8" inOutAnimation={inOutAnimation} />,
-    <Name
-      key="9"
-      inOutAnimation={inOutAnimation}
-      isLoading={isLoading}
-      onSubmit={submitLastQuestion}
-    />,
-    <ThankYouAds key="11" inOutAnimation={inOutAnimation} />,
-    <ThankYou key="12" inOutAnimation={inOutAnimation} />,
   ];
 
   return stepsArray[realStepIndex];
