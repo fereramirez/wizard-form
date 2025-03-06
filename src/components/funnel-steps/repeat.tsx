@@ -15,7 +15,7 @@ const autosubmitOptions: CheckboxData[] = [
   {value: "false", label: "No"},
 ];
 
-export function Repeat({onSubmit, inOutAnimation, disabled, ...rest}: FormStepProps) {
+export function Repeat({onSubmit, disabled, ...rest}: FormStepProps) {
   const {
     register,
     handleSubmit,
@@ -28,7 +28,7 @@ export function Repeat({onSubmit, inOutAnimation, disabled, ...rest}: FormStepPr
   useAnalytics("repeat");
 
   return (
-    <Form inOutAnimation={inOutAnimation} onSubmit={handleSubmit(onSubmit)} {...rest}>
+    <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
         In case we need to collect info for other individual we can repeat previous steps{" "}
         {repeat === "true" ? "*" : ""}
