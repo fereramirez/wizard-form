@@ -21,14 +21,12 @@ export function Repeat({onSubmit, inOutAnimation, disabled, ...rest}: FormStepPr
     register,
     handleSubmit,
     watch,
-    formState: {isSubmitting},
+    formState: {isSubmitting, errors},
   } = useForm();
 
   const {repeat} = useFunnelStore();
 
   useAnalytics("repeat");
-
-  //! VOLVER A VER en la segunda repeticion hay un error en el renderizado condicional cuando la animacion se va. Cuando se está yendo se renderiza CheckboxesBox (deberia renderizarse Question en todo momento)
 
   return (
     <Form inOutAnimation={inOutAnimation} onSubmit={handleSubmit(onSubmit)} {...rest}>
@@ -37,16 +35,14 @@ export function Repeat({onSubmit, inOutAnimation, disabled, ...rest}: FormStepPr
         {repeat === "true" ? "*" : ""}
       </Title>
 
-      {repeat === "true" &&
-      (inOutAnimation === IN_OUT_ANIMATION_STATE.ENTERING ||
-        inOutAnimation === IN_OUT_ANIMATION_STATE.NORMAL) ? (
+      {repeat === "true" ? (
         <Question>*You've already repeated the first steps</Question>
       ) : (
         <CheckboxesBox
           checkBoxesClassName="p-2"
           className="grid-cols-2"
           disabled={isSubmitting || disabled}
-          error={undefined}
+          error={errors.repeat?.message}
           name="repeat"
           options={autosubmitOptions}
           question="Repeat first steps?"

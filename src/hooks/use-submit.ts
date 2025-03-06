@@ -81,12 +81,16 @@ export function useSubmit() {
     if (!oneTimePass()) return;
     if (showLoading) setIsLoading(true);
 
-    await callback();
-
     if (skipAnimation) {
       handleNextStep(toStep, showLoading);
+
+      await callback();
     } else {
-      triggerInOutAnimation(() => handleNextStep(toStep, showLoading));
+      triggerInOutAnimation(async () => {
+        handleNextStep(toStep, showLoading);
+
+        await callback();
+      });
     }
   }
 
