@@ -37,14 +37,17 @@ export function Name({onSubmit, isLoading = false, ...rest}: FormStepProps) {
     setFocus,
   } = useForm();
 
-  const {repeat} = useFunnelStore();
+  const {name, repeat, back} = useFunnelStore();
 
   useFocus(setFocus, "name", ANIMATION_TIMES.DELAY + ANIMATION_TIMES.DURATION);
   useAnalytics("name");
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
-      <Title>Please enter your name to {repeat === "true" ? "continue" : "start"}</Title>
+      <Title>
+        {repeat ? `We can show content based on previous answers ${name}.` : ""}
+        Please enter your name to {repeat === "true" ? "continue" : "start"}
+      </Title>
 
       <InputBox
         aria-label="Name"
@@ -55,6 +58,13 @@ export function Name({onSubmit, isLoading = false, ...rest}: FormStepProps) {
         register={register}
         validation={nameValidation}
       />
+
+      {/* {repeat ? ( //! VOLVER A VER agregar funcionalidad para saltear paso
+        <p>
+          We can jump steps. The next step should be the one with the Back button, we are going to
+          jump that step
+        </p>
+      ) : null} */}
 
       <Button isLoading={isSubmitting || isLoading} text="NEXT" />
     </Form>
