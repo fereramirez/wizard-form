@@ -42,6 +42,8 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
   useFocus(setFocus, "name", ANIMATION_TIMES.DELAY + ANIMATION_TIMES.DURATION);
   useAnalytics("name");
 
+  //! VOLVER A VER agregar otro titulo para el caso de que se repita el paso
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
