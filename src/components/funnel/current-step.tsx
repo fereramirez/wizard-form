@@ -32,8 +32,6 @@ export function CurrentStep() {
   } = useSubmit();
 
   //! VOLVER A VER agregar steps adicionales
-  //! VOLVER A VER pedir el lastname y renderizar el firstname
-  //! VOLVER A VER agregar step que cambie su contenido dependiendo de respuesta de step anterior
 
   const stepsArray = [
     <Intro key="0" inOutAnimation={inOutAnimation} onSubmit={submitQuestion} />,
