@@ -13,11 +13,11 @@ function useFunctionGate() {
   const [allowedToPass, setAllowedToPass] = useState<boolean>(true);
 
   const oneTimePass = useCallback(() => {
-    if (!allowedToPass) return true;
+    if (!allowedToPass) return false;
 
     setAllowedToPass(false);
 
-    return false;
+    return true;
   }, [allowedToPass]);
 
   const allowNextPass = useCallback(() => {
@@ -91,35 +91,20 @@ export function useSubmit() {
   }
 
   function submitQuestion(dataUpdated: FieldValues) {
-    handleSubmit(() => {
-      setFunnelData(dataUpdated);
-    });
+    handleSubmit(() => setFunnelData(dataUpdated));
   }
 
   function submitBack() {
-    handleSubmit(
-      () => {
-        //! VOLVER A VER setFunnelData no es type safe, se puede pasar cualquier cosa
-        setFunnelData({back: true});
-      },
-      false,
-      -1,
-    );
+    //! VOLVER A VER setFunnelData no es type safe, se puede pasar cualquier cosa
+    handleSubmit(() => setFunnelData({back: true}), false, -1);
   }
 
   function submitRepeat(dataUpdated: FieldValues) {
+    //! VOLVER A VER dataUpdated no es type safe
     if (dataUpdated?.repeat === "true") {
-      handleSubmit(
-        () => {
-          setFunnelData(dataUpdated);
-        },
-        false,
-        0,
-      );
+      handleSubmit(() => setFunnelData(dataUpdated), false, 1);
     } else {
-      handleSubmit(() => {
-        setFunnelData(dataUpdated);
-      });
+      handleSubmit(() => setFunnelData(dataUpdated));
     }
   }
 
@@ -154,9 +139,7 @@ export function useSubmit() {
   }
 
   function submitWaitForPromise(dataUpdated: FieldValues) {
-    handleSubmit(() => {
-      setFunnelData(dataUpdated);
-    });
+    handleSubmit(() => setFunnelData(dataUpdated));
 
     (async () => {
       try {
@@ -176,9 +159,7 @@ export function useSubmit() {
   }
 
   function submitLastQuestion(dataUpdated: FieldValues) {
-    handleSubmit(() => {
-      setFunnelData(dataUpdated);
-    });
+    handleSubmit(() => setFunnelData(dataUpdated));
 
     (async () => {
       try {
