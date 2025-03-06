@@ -167,6 +167,7 @@ export function useSubmit() {
     handleSubmit(() => setFunnelData(dataUpdated));
 
     (async () => {
+      //! VOLVER A VER si esto se puede poner dentro de un handleSubmit
       try {
         const fillTime = stopAndGetElapsedTime();
 
@@ -175,11 +176,12 @@ export function useSubmit() {
           ...dataUpdated,
           fillTime,
           userAgent: navigator.userAgent,
+          purple: funnelState.optional === "purple" ? dataUpdated.purple : null,
+          blue: funnelState.optional === "blue" ? dataUpdated.blue : null,
+          green: funnelState.optional === "green" ? dataUpdated.green : null,
         };
 
         console.log(`You took ${fillTime} seconds to complete the funnel`);
-
-        //! VOLVER A VER antes de mostrar dataToDispatch resetear values de optionals que no fueron seleccionados
 
         console.log(dataToDispatch);
 
