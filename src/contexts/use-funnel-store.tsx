@@ -1,11 +1,11 @@
 import {createContext, useContext, useReducer, type ReactNode} from "react";
 import {type FieldValues} from "react-hook-form";
 
-import {type Prettify, type UnionToIntersection} from "@/types/utility-types";
-import {type StepValue, STEP_INDEXES} from "@/components/funnel/current-step";
+import {STEP_INDEXES} from "@/components/funnel/current-step";
 import {type CheckboxData} from "@/components/inputs/checkbox";
+import {type UnionToIntersection, type Prettify} from "@/types/utilility-types";
 
-type UrlParams = {
+type SourceParams = {
   utm_source?: string;
   affiliate_id?: string;
 };
@@ -18,7 +18,7 @@ type StepsHiddenData = {
 type HiddenDataAction = Prettify<
   | {userAgent: string | null}
   | {queryParams: string}
-  | UrlParams
+  | SourceParams
   | StepsHiddenData
   | {randomValue: number}
   | {fakeApiData: CheckboxData[]}
@@ -28,24 +28,60 @@ type HiddenData = Prettify<UnionToIntersection<HiddenDataAction>>;
 
 type FunnelForms = {
   //! VOLVER A VER actualizar el type de FunnelState
+  // step 0
+  // intro
+
   // step 1
-  autosubmit: [string] | null;
-  autosubmit_2: [string] | null;
+  name: string | null;
+  name_2: string | null;
 
   // step 2
-  autosubmit_fetch: [string] | null;
-  autosubmit_fetch_2: [string] | null;
+  // back
 
   // step 3
-  repeat: "true" | "false";
+  optional: string | null;
+  purple: string | null;
+  blue: string | null;
+  green: string | null;
+  optional_2: string | null;
+  purple_2: string | null;
+  blue_2: string | null;
+  green_2: string | null;
 
   // step 4
-  name: string | null;
+  repeat: "true" | "false";
+
+  // step 5
+  storePromise: string | null;
+
+  // step 6
+  autosubmit: [string] | null;
+
+  // step 7
+  autosubmitFetch: [string] | null;
+
+  // step 8
+  autosubmitShow: [string] | null;
+
+  // step 9
+  // wait for promise,
+
+  // Hidden data
+  userAgent: string | null;
+  randomValue: number;
+  fakeApiData: CheckboxData[];
+  realStepIndex: number;
+  userStepIndex: number;
+
+  // Query params
+  queryParams: string;
+  utm_source: string | undefined;
+  affiliate_id: string | undefined;
 };
 
 type FunnelState = FunnelForms & HiddenData;
 
-type StepValue = number;
+type StepValue = number; //! VOLVER A VER agregar type de step
 
 type FunnelStore = {
   funnelState: FunnelState;
@@ -53,6 +89,7 @@ type FunnelStore = {
   setHiddenData: (data: HiddenDataAction) => void;
   setRealStepIndex: (step?: StepValue) => void;
   setUserStepIndex: (step?: StepValue) => void;
+  resetFunnel: () => void;
 };
 
 const FunnelContext = createContext<FunnelStore | null>(null);
@@ -60,34 +97,63 @@ const FunnelContext = createContext<FunnelStore | null>(null);
 const INITIAL_FUNNEL_STATE: FunnelState = {
   //! VOLVER A VER actualizar el type de FunnelState
 
+  // step 0
+  // intro
+
   // step 1
-  autosubmit: null,
-  autosubmit_2: null,
+  name: null,
+  name_2: null,
 
   // step 2
-  autosubmit_fetch: null,
-  autosubmit_fetch_2: null,
+  // back
 
   // step 3
-  repeat: "false",
+  optional: null,
+  purple: null,
+  blue: null,
+  green: null,
+  optional_2: null,
+  purple_2: null,
+  blue_2: null,
+  green_2: null,
 
   // step 4
-  name: null,
+  repeat: "false",
 
-  /* HiddenData */
+  // step 5
+  storePromise: null,
+
+  // step 6
+  autosubmit: null,
+
+  // step 7
+  autosubmitFetch: null,
+
+  // step 8
+  autosubmitShow: null,
+
+  // step 9
+  // wait for promise,
+
+  // Hidden data
   userAgent: null,
-  queryParams: "",
   randomValue: 0,
   fakeApiData: [],
   realStepIndex: 0,
   userStepIndex: 0,
+
+  // Query params
+  queryParams: "",
+  utm_source: undefined,
+  affiliate_id: undefined,
 };
 
 type FunnelAction =
   | {type: "setFunnelData"; payload: FieldValues}
   | {type: "setHiddenData"; payload: HiddenDataAction}
   | {type: "setRealStepIndex"; payload?: StepValue}
-  | {type: "setUserStepIndex"; payload?: StepValue};
+  | {type: "setUserStepIndex"; payload?: StepValue}
+  | {type: "resetFunnel"; payload?: undefined};
 
 function FunnelReducer(state: FunnelState, action: FunnelAction): FunnelState {
   const {type, payload} = action;
@@ -131,6 +197,9 @@ function FunnelReducer(state: FunnelState, action: FunnelAction): FunnelState {
       return state;
     }
 
+    case "resetFunnel":
+      return INITIAL_FUNNEL_STATE;
+
     default:
       return state;
   }
@@ -144,6 +213,7 @@ export function FunnelStoreProvider({children}: {children: ReactNode}) {
     setHiddenData: (data: HiddenDataAction) => dispatch({type: "setHiddenData", payload: data}),
     setRealStepIndex: (step?: StepValue) => dispatch({type: "setRealStepIndex", payload: step}),
     setUserStepIndex: (step?: StepValue) => dispatch({type: "setUserStepIndex", payload: step}),
+    resetFunnel: () => dispatch({type: "resetFunnel"}),
   };
 
   return (

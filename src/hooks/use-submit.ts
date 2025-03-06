@@ -39,6 +39,7 @@ export function useSubmit() {
     setRealStepIndex,
     setUserStepIndex,
     randomValue,
+    resetFunnel,
   } = useFunnelStore();
 
   const {startTimer, stopAndGetElapsedTime} = useTimer();
@@ -191,6 +192,10 @@ export function useSubmit() {
     })();
   }
 
+  function submitRestart() {
+    handleSubmit(() => resetFunnel());
+  }
+
   return {
     startTimer,
     isLoading,
@@ -203,5 +208,6 @@ export function useSubmit() {
     submitStorePromise,
     submitWaitForPromise,
     submitLastQuestion,
+    submitRestart,
   };
 }
