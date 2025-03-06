@@ -32,7 +32,7 @@ export function StorePromise({onSubmit, disabled, ...rest}: FormStepProps) {
         className="grid-cols-3"
         disabled={disabled}
         error={undefined}
-        name="store_promise"
+        name="storePromise"
         options={storePromiseOptions}
         question="Do you want to wait for the data?"
         register={register}

@@ -33,7 +33,7 @@ export function AutosubmitFetchAndWait({onSubmit, disabled, ...rest}: FormStepPr
         className="grid-cols-2 sm:grid-cols-4"
         disabled={disabled}
         error={undefined}
-        name="autosubmit_fetch"
+        name="autosubmitFetch"
         options={autosubmitFetchOptions}
         question="Please select an option"
         register={register}
