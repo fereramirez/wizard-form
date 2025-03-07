@@ -6,21 +6,16 @@ import {type CheckboxData} from "@/components/inputs/checkbox";
 import {type UnionToIntersection, type Prettify} from "@/types/utilility-types";
 
 type SourceParams = {
-  utm_source?: string;
-  affiliate_id?: string;
-};
-
-type StepsHiddenData = {
-  userStepIndex: number;
-  realStepIndex: number;
+  utmSource?: string | null;
+  affiliateId?: string | null;
 };
 
 type HiddenDataAction = Prettify<
   | {userAgent: string | null}
   | {queryParams: string}
   | SourceParams
-  | StepsHiddenData
   | {randomValue: number}
+  | {fillTime: number}
   | {fakeApiData: CheckboxData[]}
 >;
 
@@ -28,6 +23,11 @@ type HiddenData = Prettify<UnionToIntersection<HiddenDataAction>>;
 
 type FunnelForms = {
   //! VOLVER A VER actualizar el type de FunnelState
+
+  // Steps
+  realStepIndex: number;
+  userStepIndex: number;
+
   // step 0
   // intro
 
@@ -65,19 +65,6 @@ type FunnelForms = {
 
   // step 9
   // wait for promise,
-
-  // Hidden data
-  realStepIndex: number;
-  userStepIndex: number;
-  fakeApiData: CheckboxData[];
-  randomValue: number;
-  fillTime: number;
-  userAgent: string | null;
-
-  // Query params
-  queryParams: string;
-  utm_source?: string;
-  affiliate_id?: string;
 };
 
 type FunnelState = FunnelForms & HiddenData;
@@ -97,6 +84,9 @@ const FunnelContext = createContext<FunnelStore | null>(null);
 
 const INITIAL_FUNNEL_STATE: FunnelState = {
   //! VOLVER A VER actualizar el type de FunnelState
+  // Steps
+  realStepIndex: 0,
+  userStepIndex: 0,
 
   // step 0
   // intro
@@ -137,8 +127,6 @@ const INITIAL_FUNNEL_STATE: FunnelState = {
   // wait for promise,
 
   // Hidden data
-  realStepIndex: 0,
-  userStepIndex: 0,
   fakeApiData: [],
   randomValue: 0,
   fillTime: 0,
@@ -146,8 +134,8 @@ const INITIAL_FUNNEL_STATE: FunnelState = {
 
   // Query params
   queryParams: "",
-  utm_source: undefined,
-  affiliate_id: undefined,
+  utmSource: null,
+  affiliateId: null,
 };
 
 export type StepPayload = undefined | number | `+${number}` | `-${number}`;
@@ -231,10 +219,8 @@ export function FunnelStoreProvider({children}: {children: ReactNode}) {
   const actions = {
     setFunnelData: (data: FieldValues) => dispatch({type: "setFunnelData", payload: data}),
     setHiddenData: (data: HiddenDataAction) => dispatch({type: "setHiddenData", payload: data}),
-    setRealStepIndex: (step?: StepPayload) =>
-      dispatch({type: "setRealStepIndex", payload: step}),
-    setUserStepIndex: (step?: StepPayload) =>
-      dispatch({type: "setUserStepIndex", payload: step}),
+    setRealStepIndex: (step?: StepPayload) => dispatch({type: "setRealStepIndex", payload: step}),
+    setUserStepIndex: (step?: StepPayload) => dispatch({type: "setUserStepIndex", payload: step}),
     resetFunnel: () => dispatch({type: "resetFunnel"}),
   };
 
