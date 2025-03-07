@@ -48,7 +48,7 @@ export function useSubmit() {
   );
 
   const handleRealStepOnly = useCallback(
-    (toStep?: number) => {
+    (toStep?: RealStepPayload) => {
       return () => {
         if (toStep !== undefined) setRealStepIndex(toStep);
         else setRealStepIndex();
@@ -62,24 +62,28 @@ export function useSubmit() {
     callbackAfterAnimation?: (() => Promise<void> | void) | null,
     showLoading?: boolean,
     toStep?: RealStepPayload,
-    skipAnimation?: boolean,
+    notUserStep?: boolean,
   ) {
     if (!oneTimePass()) return;
     if (showLoading) setIsLoading(true);
 
     if (callbackBeforeAnimation) await callbackBeforeAnimation();
 
-    if (skipAnimation) {
-      handleNextStep(toStep, showLoading);
+    triggerInOutAnimation(async () => {
+      if (toStep === undefined) {
+        setRealStepIndex();
+        if (!notUserStep) setUserStepIndex();
+      } else {
+        setRealStepIndex(toStep);
+        if (!notUserStep) setUserStepIndex(toStep);
+      }
+
+      if (showLoading) setIsLoading(false);
+
+      allowNextPass();
 
       if (callbackAfterAnimation) await callbackAfterAnimation();
-    } else {
-      triggerInOutAnimation(async () => {
-        handleNextStep(toStep, showLoading);
-
-        if (callbackAfterAnimation) await callbackAfterAnimation();
-      });
-    }
+    });
   }
 
   function submitQuestion(dataUpdated: FieldValues) {
@@ -108,7 +112,7 @@ export function useSubmit() {
     handleSubmit(
       () => {
         try {
-          const promise = fakeApi.getRandomValue(1 * 1000);
+          const promise = fakeApi.getRandomValue(1 * 1000); //! VOLVER A VER cambiar a 60*1000
 
           setRandomValuePromise(promise);
         } catch (error) {
@@ -174,33 +178,35 @@ export function useSubmit() {
   async function submitLastQuestion(dataUpdated: FieldValues) {
     handleSubmit(null, () => setFunnelData(dataUpdated));
 
-    await handleSubmit(async () => {
-      try {
-        const fillTime = stopAndGetElapsedTime();
+    await handleSubmit(
+      async () => {
+        try {
+          const fillTime = stopAndGetElapsedTime();
 
-        const dataToDispatch = {
-          ...funnelState,
-          ...dataUpdated,
-          fillTime,
-          userAgent: navigator.userAgent,
-          purple: funnelState.optional === "purple" ? dataUpdated.purple : null,
-          blue: funnelState.optional === "blue" ? dataUpdated.blue : null,
-          green: funnelState.optional === "green" ? dataUpdated.green : null,
-        };
+          const dataToDispatch = {
+            ...funnelState,
+            ...dataUpdated,
+            fillTime,
+            userAgent: navigator.userAgent,
+            purple: funnelState.optional === "purple" ? dataUpdated.purple : null,
+            blue: funnelState.optional === "blue" ? dataUpdated.blue : null,
+            green: funnelState.optional === "green" ? dataUpdated.green : null,
+          };
 
-        console.log(`You took ${fillTime} seconds to complete the funnel`);
+          console.log(`You took ${fillTime} seconds to complete the funnel`);
 
-        console.log(dataToDispatch);
+          console.log(dataToDispatch);
 
-        await fakeApi.getFakeApiData(COUNT_DOWN_TIME * 1000);
-      } finally {
-        triggerInOutAnimation(() => {
-          if (randomValue > 5) setRealStepIndex(STEP_INDEXES.TYADS);
-          else setRealStepIndex(STEP_INDEXES.TY);
-          setIsLoading(false);
-        });
-      }
-    });
+          await fakeApi.getFakeApiData(COUNT_DOWN_TIME * 1000);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      null,
+      false,
+      randomValue > 5 ? STEP_INDEXES.TYADS : STEP_INDEXES.TY,
+      true,
+    );
   }
 
   function submitRestart() {

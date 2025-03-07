@@ -67,7 +67,7 @@ export function CurrentStep() {
       onSubmit={submitWaitForPromise}
     />,
     <WaitForPromise key="10" />,
-    <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />,
+    <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />, //! VOLVER A VER cambiar este step
     <WaitStep key="12" />,
     <ThankYouAds key="13" />,
     <ThankYou key="14" />,
@@ -75,32 +75,23 @@ export function CurrentStep() {
   ];
 
   const stepsArrayTest = [
-    <ButtonLoader
-      key="6"
-      disabled={notAllowedToPass}
-      isLoading={isLoading}
-      onSubmit={submitWaitFakeRequest}
-    />,
-    <AutosubmitFetchAndWait
-      key="8"
-      disabled={notAllowedToPass || isLoading}
-      onSubmit={submitFetchWaitData}
-    />,
-    <AutosubmitShowFetchedData
-      key="9"
-      disabled={notAllowedToPass}
-      onSubmit={submitWaitForPromise}
-    />,
+    <StorePromise key="5" disabled={notAllowedToPass} onSubmit={submitStorePromise} />,
+    <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />, //! VOLVER A VER cambiar este step
+    <WaitStep key="12" />,
+    <ThankYouAds key="13" />,
+    <ThankYou key="14" />,
+    <Restart key="15" disabled={notAllowedToPass} onSubmit={submitRestart} />,
   ];
 
-  return stepsArrayTest[realStepIndex];
+  return stepsArray[realStepIndex];
 }
 
 export const STEP_INDEXES = {
-  NAME: 9,
-  LAST_USER: 9,
-  TYADS: 11,
-  LAST_REAL: 12,
+  NAME: 11,
+  LAST_USER: 12,
+  TYADS: 13,
+  TY: 14,
+  LAST_REAL: 15,
 } as const;
 
 const STEPS = {
