@@ -27,15 +27,5 @@ export function useHiddenData() {
       blue: optional === "blue" ? blue : null,
       green: optional === "green" ? green : null,
     });
-  }, [
-    setHiddenData,
-    setFunnelData,
-    optional,
-    purple,
-    blue,
-    green,
-    affiliateId,
-    utmSource,
-    queryParams,
-  ]);
+  }, []);
 }
