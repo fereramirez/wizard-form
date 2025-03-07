@@ -12,6 +12,7 @@ export function Back({onSubmit, secondaryOnSubmit, disabled, ...rest}: FormStepP
 
   useAnalytics("back");
 
+  //! VOLVER A VER agregar ghost variant para el back button
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>In this step you can go back to the previous step</Title>
@@ -20,6 +21,7 @@ export function Back({onSubmit, secondaryOnSubmit, disabled, ...rest}: FormStepP
         <Button disabled={disabled} type="button" onClick={secondaryOnSubmit}>
           BACK
         </Button>
+
         <Button disabled={disabled}>NEXT</Button>
       </div>
     </Form>
