@@ -17,7 +17,7 @@ import {ThankYouAds, ThankYou} from "@/components/funnel-steps/thank-you";
 import {Restart} from "@/components/funnel-steps/restart";
 
 export function CurrentStep() {
-  const {realStepIndex} = useFunnelStore();
+  const {realStepIndex, repeat} = useFunnelStore();
 
   const {
     startTimer,
@@ -35,9 +35,16 @@ export function CurrentStep() {
     submitRestart,
   } = useSubmit();
 
+  const isRepeating = repeat === "true";
+
+  //! VOLVER A VER cambiar starTimer para que funcione
   const stepsArray = [
-    <Intro key="0" disabled={notAllowedToPass} onSubmit={(data) => submitQuestion(data)} />,
-    <Name key="1" disabled={notAllowedToPass} onChange={startTimer} onSubmit={submitJump} />,
+    <Intro key="0" disabled={notAllowedToPass} onChange={startTimer} onSubmit={submitQuestion} />,
+    <Name
+      key="1"
+      disabled={notAllowedToPass}
+      onSubmit={(data) => submitJump(data, isRepeating ? "+2" : "+1")}
+    />,
     <Back
       key="2"
       disabled={notAllowedToPass}
@@ -67,21 +74,26 @@ export function CurrentStep() {
     <WaitForPromise key="10" />,
     <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />, //! VOLVER A VER cambiar este step
     <WaitStep key="12" />,
-    <ThankYouAds key="13" />,
-    <ThankYou key="14" />,
+    <ThankYouAds
+      key="13"
+      disabled={notAllowedToPass}
+      onSubmit={(data) => submitJump(data, "+2")}
+    />,
+    <ThankYou key="14" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <Restart key="15" disabled={notAllowedToPass} onSubmit={submitRestart} />,
   ];
 
   const stepsArrayTest = [
-    <StorePromise key="5" disabled={notAllowedToPass} onSubmit={submitStorePromise} />,
-    <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />, //! VOLVER A VER cambiar este step
-    <WaitStep key="12" />,
-    <ThankYouAds key="13" />,
-    <ThankYou key="14" />,
+    <ThankYouAds
+      key="13"
+      disabled={notAllowedToPass}
+      onSubmit={(data) => submitJump(data, "+2")}
+    />,
+    <ThankYou key="14" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <Restart key="15" disabled={notAllowedToPass} onSubmit={submitRestart} />,
   ];
 
-  return stepsArray[realStepIndex];
+  return stepsArrayTest[realStepIndex];
 }
 
 export const STEP_INDEXES = {
