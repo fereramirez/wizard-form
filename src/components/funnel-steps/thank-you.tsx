@@ -4,7 +4,6 @@ import {useForm} from "react-hook-form";
 
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {useAnalytics} from "@/hooks/use-analytics";
-import {InOutAnimationWrapper} from "@/components/wrappers/in-out-animation-wrapper";
 import {Title} from "@/components/messages/title";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import Github from "@/assets/github.svg";
@@ -18,13 +17,17 @@ export function ThankYouAds({onSubmit, disabled, ...rest}: FormStepProps) {
   useAnalytics("tyAds");
 
   //! VOLVER A VER agregar ghost variant para el link de github
+  //! VOLVER A VER arreglar el hover de github
+  //! VOLVER A VER el repositorio debe abrirse en otra pestaña
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
         You received the number <strong className="text-primary-1">{randomValue}</strong> from a
-        API, based on that number the repository link is shown. If you go through the funnel again
-        probably you won't see it (50% of the time).
+        API, based on that number the repository link is shown
       </Title>
+
+      <p>If you go through the funnel again probably you won't see it (50% of the time)</p>
 
       <div className="flex gap-10">
         <Button
@@ -32,7 +35,7 @@ export function ThankYouAds({onSubmit, disabled, ...rest}: FormStepProps) {
           disabled={disabled}
           href="https://github.com/fereramirez/wizard-form"
         >
-          <Github />
+          <Github fill="currentColor" />
 
           <span>REPOSITORY</span>
         </Button>
@@ -54,9 +57,10 @@ export function ThankYou({onSubmit, disabled, ...rest}: FormStepProps) {
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
         You received the number <strong className="text-primary-1">{randomValue}</strong> from a
-        API, based on that number the repository link is not shown. If you go through the funnel
-        again probably you will see it (50% of the time).
+        API, based on that number the repository link is not shown
       </Title>
+
+      <p>If you go through the funnel again probably you will see it (50% of the time)</p>
 
       <Button disabled={disabled}>NEXT</Button>
     </Form>
