@@ -48,7 +48,12 @@ export function CurrentStep() {
     <Optional key="3" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <Repeat key="4" disabled={notAllowedToPass} onSubmit={submitRepeat} />,
     <StorePromise key="5" disabled={notAllowedToPass} onSubmit={submitStorePromise} />,
-    <ButtonLoader key="6" disabled={notAllowedToPass} onSubmit={submitFetchAndWait} />,
+    <ButtonLoader
+      key="6"
+      disabled={notAllowedToPass}
+      isLoading={isLoading}
+      onSubmit={submitFetchAndWait}
+    />,
     <Autosubmit key="7" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <AutosubmitFetchAndWait
       key="8"
@@ -69,11 +74,25 @@ export function CurrentStep() {
   ];
 
   const stepsArrayTest = [
-    <Intro key="0" disabled={notAllowedToPass || isLoading} onSubmit={submitQuestion} />,
-    <Restart key="1" disabled={notAllowedToPass || isLoading} onSubmit={submitRestart} />,
+    <ButtonLoader
+      key="6"
+      disabled={notAllowedToPass}
+      isLoading={isLoading}
+      onSubmit={submitFetchAndWait}
+    />,
+    <AutosubmitFetchAndWait
+      key="8"
+      disabled={notAllowedToPass || isLoading}
+      onSubmit={submitFetchAndWait}
+    />,
+    <AutosubmitShowFetchedData
+      key="9"
+      disabled={notAllowedToPass}
+      onSubmit={submitWaitForPromise}
+    />,
   ];
 
-  return stepsArray[realStepIndex];
+  return stepsArrayTest[realStepIndex];
 }
 
 export const STEP_INDEXES = {
