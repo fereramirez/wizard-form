@@ -57,7 +57,8 @@ export function useSubmit() {
   );
 
   async function handleSubmit(
-    callback: () => Promise<void> | void,
+    callbackBeforeAnimation: (() => Promise<void> | void) | null,
+    callbackAfterAnimation?: (() => Promise<void> | void) | null,
     showLoading?: boolean,
     toStep?: RealStepPayload,
     skipAnimation?: boolean,
@@ -65,92 +66,97 @@ export function useSubmit() {
     if (!oneTimePass()) return;
     if (showLoading) setIsLoading(true);
 
+    if (callbackBeforeAnimation) await callbackBeforeAnimation();
+
     if (skipAnimation) {
       handleNextStep(toStep, showLoading);
 
-      await callback();
+      if (callbackAfterAnimation) await callbackAfterAnimation();
     } else {
       triggerInOutAnimation(async () => {
         handleNextStep(toStep, showLoading);
 
-        await callback();
+        if (callbackAfterAnimation) await callbackAfterAnimation();
       });
     }
   }
 
   function submitQuestion(dataUpdated: FieldValues) {
-    handleSubmit(() => setFunnelData(dataUpdated), false);
+    handleSubmit(null, () => setFunnelData(dataUpdated));
   }
 
   function submitJump(dataUpdated: FieldValues, toStep?: number) {
     console.log("dataUpdated", dataUpdated);
     console.log("toStep", toStep);
 
-    handleSubmit(() => setFunnelData(dataUpdated), false, toStep);
+    handleSubmit(null, () => setFunnelData(dataUpdated), false, toStep);
   }
 
   function submitBack() {
     //! VOLVER A VER setFunnelData no es type safe, se puede pasar cualquier cosa
-    handleSubmit(() => setFunnelData({back: true}), false, "-1");
+    handleSubmit(null, () => setFunnelData({back: true}), false, "-1");
   }
 
   function submitRepeat(dataUpdated: FieldValues) {
     //! VOLVER A VER dataUpdated no es type safe
     if (dataUpdated?.repeat === "true") {
-      handleSubmit(() => setFunnelData(dataUpdated), false, 1);
+      handleSubmit(null, () => setFunnelData(dataUpdated), false, 1);
     } else {
-      handleSubmit(() => setFunnelData(dataUpdated));
+      handleSubmit(null, () => setFunnelData(dataUpdated));
     }
   }
 
   function submitStorePromise(dataUpdated: FieldValues) {
-    handleSubmit(() => {
-      try {
-        setFunnelData(dataUpdated);
+    handleSubmit(
+      () => {
+        try {
+          const promise = fakeApi.getRandomValue(60 * 1000);
 
-        const promise = fakeApi.getRandomValue(60 * 1000);
-
-        setRandomValuePromise(promise);
-      } catch (error) {
-        console.log(error);
-      }
-    });
+          setRandomValuePromise(promise);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      () => setFunnelData(dataUpdated),
+    );
   }
 
   function submitWaitFakeRequest(dataUpdated: FieldValues) {
-    handleSubmit(async () => {
-      try {
-        setFunnelData(dataUpdated);
-
-        await fakeApi.getFakeApiData(2 * 1000);
-      } catch (error) {
-        console.log(error);
-
-        setHiddenData({fakeApiData: []});
-      }
-    }, true);
+    handleSubmit(
+      async () => {
+        try {
+          await fakeApi.getFakeApiData(2 * 1000);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      () => setFunnelData(dataUpdated),
+      true,
+    );
   }
 
   function submitFetchWaitData(dataUpdated: FieldValues) {
-    handleSubmit(async () => {
-      try {
-        setFunnelData(dataUpdated);
+    handleSubmit(
+      async () => {
+        try {
+          const {data} = await fakeApi.getFakeApiData(2 * 1000);
 
-        const {data} = await fakeApi.getFakeApiData(2 * 1000);
+          console.log("data", data);
 
-        console.log("data", data);
+          setHiddenData({fakeApiData: data});
+        } catch (error) {
+          console.log(error);
 
-        setHiddenData({fakeApiData: data});
-      } catch (error) {
-        console.log(error);
-
-        setHiddenData({fakeApiData: []});
-      }
-    }, true);
+          setHiddenData({fakeApiData: []});
+        }
+      },
+      () => setFunnelData(dataUpdated),
+      true,
+    );
   }
 
   function submitWaitForPromise(dataUpdated: FieldValues) {
-    handleSubmit(() => setFunnelData(dataUpdated));
+    handleSubmit(null, () => setFunnelData(dataUpdated));
 
     (async () => {
       try {
@@ -170,7 +176,7 @@ export function useSubmit() {
   }
 
   function submitLastQuestion(dataUpdated: FieldValues) {
-    handleSubmit(() => setFunnelData(dataUpdated));
+    handleSubmit(null, () => setFunnelData(dataUpdated));
 
     (async () => {
       //! VOLVER A VER si esto se puede poner dentro de un handleSubmit
@@ -203,7 +209,7 @@ export function useSubmit() {
   }
 
   function submitRestart() {
-    handleSubmit(() => resetFunnel());
+    handleSubmit(null, () => resetFunnel());
   }
 
   return {
