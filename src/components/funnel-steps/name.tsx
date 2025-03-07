@@ -44,7 +44,7 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
   useFocus(setFocus, "name", ANIMATION_TIMES.DELAY + ANIMATION_TIMES.DURATION);
   useAnalytics("name");
 
-  //! VOLVER A VER agregar otro titulo para el caso de que se repita el paso
+  //! VOLVER A VER agregar otro titulo para el caso de que se repita el paso, como por ejemplo: selecciona un segundo color, selecciona un segundo nombre, etc.
 
   const isRepeating = repeat === "true";
   const inputName = `name${isRepeating ? "_2" : ""}`;
@@ -73,7 +73,7 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
         validation={nameValidation}
       />
 
-      {isRepeating ? ( //! VOLVER A VER agregar funcionalidad para saltear paso
+      {isRepeating ? (
         <p>
           We can jump steps. The next step should be the one with the Back button, we are going to
           jump that step

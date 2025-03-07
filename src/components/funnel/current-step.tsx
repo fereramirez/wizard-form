@@ -35,8 +35,6 @@ export function CurrentStep() {
     submitRestart,
   } = useSubmit();
 
-  //! VOLVER A VER agregar steps adicionales
-
   const stepsArray = [
     <Intro key="0" disabled={notAllowedToPass} onSubmit={(data) => submitQuestion(data)} />,
     <Name key="1" disabled={notAllowedToPass} onChange={startTimer} onSubmit={submitJump} />,

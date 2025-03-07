@@ -12,8 +12,6 @@ export function ProgressBar({lastStepIndex}: ProgressBarProps) {
   const {userStepIndex} = useFunnelStore();
   const progressRef = useRef<HTMLDivElement>(null);
 
-  //! VOLVER A VER que el lastStepIndex no sea el ultimo step, sino el ultimo step que tiene preguntas y que este bien calculado
-
   //! VOLVER A VER al modificar la cantidad de steps (por ejemplo en repeat) no retroceder el progreso y seguir aumentando
 
   useEffect(() => {
