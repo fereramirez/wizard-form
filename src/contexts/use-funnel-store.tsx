@@ -82,14 +82,14 @@ type FunnelForms = {
 
 type FunnelState = FunnelForms & HiddenData;
 
-type StepValue = number; //! VOLVER A VER agregar type de step, ahora se usa RealStepPayload, deberia concordar con los stepNumber asignados en current-step
+type StepValue = number; //! VOLVER A VER agregar type de step, ahora se usa StepPayload, deberia concordar con los stepNumber asignados en current-step
 
 type FunnelStore = {
   funnelState: FunnelState;
   setFunnelData: (data: FieldValues) => void;
   setHiddenData: (data: HiddenDataAction) => void;
-  setRealStepIndex: (step?: RealStepPayload) => void;
-  setUserStepIndex: (step?: RealStepPayload) => void;
+  setRealStepIndex: (step?: StepPayload) => void;
+  setUserStepIndex: (step?: StepPayload) => void;
   resetFunnel: () => void;
 };
 
@@ -150,13 +150,13 @@ const INITIAL_FUNNEL_STATE: FunnelState = {
   affiliate_id: undefined,
 };
 
-export type RealStepPayload = undefined | number | `+${number}` | `-${number}`;
+export type StepPayload = undefined | number | `+${number}` | `-${number}`;
 
 type FunnelAction =
   | {type: "setFunnelData"; payload: FieldValues}
   | {type: "setHiddenData"; payload: HiddenDataAction}
-  | {type: "setRealStepIndex"; payload?: RealStepPayload}
-  | {type: "setUserStepIndex"; payload?: RealStepPayload}
+  | {type: "setRealStepIndex"; payload?: StepPayload}
+  | {type: "setUserStepIndex"; payload?: StepPayload}
   | {type: "resetFunnel"; payload?: undefined};
 
 function FunnelReducer(state: FunnelState, action: FunnelAction): FunnelState {
@@ -231,9 +231,9 @@ export function FunnelStoreProvider({children}: {children: ReactNode}) {
   const actions = {
     setFunnelData: (data: FieldValues) => dispatch({type: "setFunnelData", payload: data}),
     setHiddenData: (data: HiddenDataAction) => dispatch({type: "setHiddenData", payload: data}),
-    setRealStepIndex: (step?: RealStepPayload) =>
+    setRealStepIndex: (step?: StepPayload) =>
       dispatch({type: "setRealStepIndex", payload: step}),
-    setUserStepIndex: (step?: RealStepPayload) =>
+    setUserStepIndex: (step?: StepPayload) =>
       dispatch({type: "setUserStepIndex", payload: step}),
     resetFunnel: () => dispatch({type: "resetFunnel"}),
   };

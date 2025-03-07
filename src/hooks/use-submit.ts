@@ -6,7 +6,7 @@ import {useTimer} from "./use-timer";
 import {useFunctionGate} from "./use-function-gate";
 
 import {fakeApi, type RandomValueResponse} from "@/helpers/fake-api";
-import {type RealStepPayload, useFunnelStore} from "@/contexts/use-funnel-store";
+import {type StepPayload, useFunnelStore} from "@/contexts/use-funnel-store";
 import {STEP_INDEXES} from "@/components/funnel/current-step";
 import {useAnimationStore} from "@/contexts/use-animation-store";
 import {COUNT_DOWN_TIME} from "@/components/funnel-steps/wait";
@@ -31,7 +31,7 @@ export function useSubmit() {
   const {oneTimePass, allowNextPass, notAllowedToPass} = useFunctionGate();
 
   const handleNextStep = useCallback(
-    (toStep?: RealStepPayload, showLoading?: boolean) => {
+    (toStep?: StepPayload, showLoading?: boolean) => {
       if (toStep === undefined) {
         setRealStepIndex();
         setUserStepIndex();
@@ -48,7 +48,7 @@ export function useSubmit() {
   );
 
   const handleRealStepOnly = useCallback(
-    (toStep?: RealStepPayload) => {
+    (toStep?: StepPayload) => {
       return () => {
         if (toStep !== undefined) setRealStepIndex(toStep);
         else setRealStepIndex();
@@ -61,7 +61,7 @@ export function useSubmit() {
     callbackBeforeAnimation: (() => Promise<void> | void) | null,
     callbackAfterAnimation?: (() => Promise<void> | void) | null,
     showLoading?: boolean,
-    toStep?: RealStepPayload,
+    toStep?: StepPayload,
     notUserStep?: boolean,
   ) {
     if (!oneTimePass()) return;
@@ -90,7 +90,7 @@ export function useSubmit() {
     handleSubmit(null, () => setFunnelData(dataUpdated));
   }
 
-  function submitJump(dataUpdated: FieldValues, toStep?: number) {
+  function submitJump(dataUpdated: FieldValues, toStep?: StepPayload) {
     handleSubmit(null, () => setFunnelData(dataUpdated), false, toStep);
   }
 
