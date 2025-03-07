@@ -11,7 +11,7 @@ import {useFunnelStore} from "@/contexts/use-funnel-store";
 export function Restart({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
 
-  const {funnelState} = useFunnelStore();
+  const {funnelState, fillTime} = useFunnelStore();
 
   console.log(funnelState);
 
@@ -21,7 +21,9 @@ export function Restart({onSubmit, disabled, ...rest}: FormStepProps) {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
-      <Title>This is all the data collected from the user</Title>
+      <Title>
+        You took {fillTime} seconds to complete the funnel. This is all the data collected
+      </Title>
 
       <pre>{JSON.stringify(funnelState, null, 2)}</pre>
 

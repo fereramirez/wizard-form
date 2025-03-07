@@ -183,15 +183,7 @@ export function useSubmit() {
         try {
           const fillTime = stopAndGetElapsedTime();
 
-          const dataToDispatch = {
-            ...funnelState,
-            ...dataUpdated,
-            fillTime,
-          };
-
-          console.log(`You took ${fillTime} seconds to complete the funnel`);
-
-          console.log(dataToDispatch);
+          setHiddenData({fillTime});
 
           await fakeApi.getFakeApiData(COUNT_DOWN_TIME * 1000);
         } catch (error) {
