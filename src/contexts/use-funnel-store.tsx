@@ -82,14 +82,14 @@ type FunnelForms = {
 
 type FunnelState = FunnelForms & HiddenData;
 
-type StepValue = number; //! VOLVER A VER agregar type de step
+type StepValue = number; //! VOLVER A VER agregar type de step, ahora se usa RealStepPayload, deberia concordar con los stepNumber asignados en current-step
 
 type FunnelStore = {
   funnelState: FunnelState;
   setFunnelData: (data: FieldValues) => void;
   setHiddenData: (data: HiddenDataAction) => void;
-  setRealStepIndex: (step?: StepValue) => void;
-  setUserStepIndex: (step?: StepValue) => void;
+  setRealStepIndex: (step?: RealStepPayload) => void;
+  setUserStepIndex: (step?: RealStepPayload) => void;
   resetFunnel: () => void;
 };
 
@@ -150,11 +150,13 @@ const INITIAL_FUNNEL_STATE: FunnelState = {
   affiliate_id: undefined,
 };
 
+export type RealStepPayload = undefined | number | `+${number}` | `-${number}`;
+
 type FunnelAction =
   | {type: "setFunnelData"; payload: FieldValues}
   | {type: "setHiddenData"; payload: HiddenDataAction}
-  | {type: "setRealStepIndex"; payload?: StepValue}
-  | {type: "setUserStepIndex"; payload?: StepValue}
+  | {type: "setRealStepIndex"; payload?: RealStepPayload}
+  | {type: "setUserStepIndex"; payload?: RealStepPayload}
   | {type: "resetFunnel"; payload?: undefined};
 
 function FunnelReducer(state: FunnelState, action: FunnelAction): FunnelState {
@@ -168,35 +170,51 @@ function FunnelReducer(state: FunnelState, action: FunnelAction): FunnelState {
       return {...state, ...payload};
 
     case "setRealStepIndex": {
-      if (state.realStepIndex < STEP_INDEXES.LAST_REAL) {
-        return {
-          ...state,
-          realStepIndex:
-            payload === undefined
-              ? state.realStepIndex + 1
-              : payload >= 0
-                ? payload
-                : state.realStepIndex + payload,
-        };
+      if (state.realStepIndex >= STEP_INDEXES.LAST_REAL) return state;
+
+      let newRealStepIndex: number;
+
+      if (payload === undefined) {
+        newRealStepIndex = state.realStepIndex + 1;
+      } else if (typeof payload === "number") {
+        newRealStepIndex = payload;
+      } else if (typeof payload === "string" && payload.startsWith("+")) {
+        const addValue = Number(payload.slice(1));
+
+        newRealStepIndex = state.realStepIndex + addValue;
+      } else if (typeof payload === "string" && payload.startsWith("-")) {
+        const subtractValue = Number(payload.slice(1));
+
+        newRealStepIndex = state.realStepIndex - subtractValue;
+      } else {
+        newRealStepIndex = state.realStepIndex;
       }
 
-      return state;
+      return {...state, realStepIndex: newRealStepIndex};
     }
 
     case "setUserStepIndex": {
-      if (state.userStepIndex < STEP_INDEXES.LAST_USER) {
-        return {
-          ...state,
-          userStepIndex:
-            payload === undefined
-              ? state.userStepIndex + 1
-              : payload >= 0
-                ? payload
-                : state.userStepIndex + payload,
-        };
+      if (state.userStepIndex >= STEP_INDEXES.LAST_USER) return state;
+
+      let newUserStepIndex: number;
+
+      if (payload === undefined) {
+        newUserStepIndex = state.userStepIndex + 1;
+      } else if (typeof payload === "number") {
+        newUserStepIndex = payload;
+      } else if (typeof payload === "string" && payload.startsWith("+")) {
+        const addValue = Number(payload.slice(1));
+
+        newUserStepIndex = state.userStepIndex + addValue;
+      } else if (typeof payload === "string" && payload.startsWith("-")) {
+        const subtractValue = Number(payload.slice(1));
+
+        newUserStepIndex = state.userStepIndex - subtractValue;
+      } else {
+        newUserStepIndex = state.userStepIndex;
       }
 
-      return state;
+      return {...state, userStepIndex: newUserStepIndex};
     }
 
     case "resetFunnel":
@@ -213,8 +231,10 @@ export function FunnelStoreProvider({children}: {children: ReactNode}) {
   const actions = {
     setFunnelData: (data: FieldValues) => dispatch({type: "setFunnelData", payload: data}),
     setHiddenData: (data: HiddenDataAction) => dispatch({type: "setHiddenData", payload: data}),
-    setRealStepIndex: (step?: StepValue) => dispatch({type: "setRealStepIndex", payload: step}),
-    setUserStepIndex: (step?: StepValue) => dispatch({type: "setUserStepIndex", payload: step}),
+    setRealStepIndex: (step?: RealStepPayload) =>
+      dispatch({type: "setRealStepIndex", payload: step}),
+    setUserStepIndex: (step?: RealStepPayload) =>
+      dispatch({type: "setUserStepIndex", payload: step}),
     resetFunnel: () => dispatch({type: "resetFunnel"}),
   };
 
