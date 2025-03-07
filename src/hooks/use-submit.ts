@@ -187,10 +187,6 @@ export function useSubmit() {
             ...funnelState,
             ...dataUpdated,
             fillTime,
-            userAgent: navigator.userAgent,
-            purple: funnelState.optional === "purple" ? dataUpdated.purple : null,
-            blue: funnelState.optional === "blue" ? dataUpdated.blue : null,
-            green: funnelState.optional === "green" ? dataUpdated.green : null,
           };
 
           console.log(`You took ${fillTime} seconds to complete the funnel`);
