@@ -27,14 +27,16 @@ export function Repeat({onSubmit, disabled, ...rest}: FormStepProps) {
 
   useAnalytics("repeat");
 
+  const isRepeating = repeat === "true";
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
-        In case we need to collect info for other individual we can repeat previous steps{" "}
-        {repeat === "true" ? "*" : ""}
+        In case we need to collect info for other individual we can repeat previous steps
+        {isRepeating ? "*" : ""}
       </Title>
 
-      {repeat === "true" ? (
+      {isRepeating ? (
         <Question>*You've already repeated the first steps</Question>
       ) : (
         <CheckboxesBox
@@ -50,7 +52,7 @@ export function Repeat({onSubmit, disabled, ...rest}: FormStepProps) {
         />
       )}
 
-      <Button disabled={disabled} text="NEXT" />
+      <Button disabled={disabled}>NEXT</Button>
     </Form>
   );
 }

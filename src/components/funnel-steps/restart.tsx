@@ -23,7 +23,7 @@ export function Restart({onSubmit, disabled, ...rest}: FormStepProps) {
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>In this step you can restart the funnel</Title>
 
-      <Button disabled={disabled} text="RESTART" />
+      <Button disabled={disabled}>RESTART</Button>
     </Form>
   );
 }

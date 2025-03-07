@@ -30,8 +30,9 @@ export function Intro({onSubmit, disabled, ...rest}: FormStepProps) {
         <Button
           disabled={disabled}
           href="/?utm_source=THIS-IS-A-SOURCE&affiliate_id=THIS-IS-AN-AFFILIATE-ID"
-          text="ADD QUERY PARAMS"
-        />
+        >
+          ADD QUERY PARAMS
+        </Button>
       </Form>
     );
 
@@ -39,7 +40,7 @@ export function Intro({onSubmit, disabled, ...rest}: FormStepProps) {
     <Form className="fade-in" onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>This is a funnel to show how the steps work</Title>
 
-      <Button disabled={disabled} text="START" />
+      <Button disabled={disabled}>START</Button>
     </Form>
   );
 }

@@ -46,11 +46,12 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
 
   //! VOLVER A VER agregar otro titulo para el caso de que se repita el paso
 
-  const inputName = `name${repeat === "true" ? "_2" : ""}`;
+  const isRepeating = repeat === "true";
+  const inputName = `name${isRepeating ? "_2" : ""}`;
 
   return (
     <Form //! VOLVER A VER agregar tipos
-      onSubmit={handleSubmit((data) => onSubmit(data, repeat === "true" ? "+2" : "+1"))}
+      onSubmit={handleSubmit((data) => onSubmit(data, isRepeating ? "+2" : "+1"))}
       {...rest}
     >
       <Title>
@@ -58,7 +59,7 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
           ? `We can show content based on previous answers ${name}. `
           : ""}
         Please enter your name {back === true ? "again" : ""} to{" "}
-        {repeat === "true" ? "continue" : "start"}
+        {isRepeating ? "continue" : "start"}
       </Title>
 
       <InputBox
@@ -72,14 +73,14 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
         validation={nameValidation}
       />
 
-      {repeat === "true" ? ( //! VOLVER A VER agregar funcionalidad para saltear paso
+      {isRepeating ? ( //! VOLVER A VER agregar funcionalidad para saltear paso
         <p>
           We can jump steps. The next step should be the one with the Back button, we are going to
           jump that step
         </p>
       ) : null}
 
-      <Button disabled={disabled} text="JUMP NEXT STEP" />
+      <Button disabled={disabled}>{isRepeating ? "JUMP NEXT STEP" : "NEXT"}</Button>
     </Form>
   );
 }

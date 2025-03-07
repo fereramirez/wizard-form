@@ -126,7 +126,7 @@ export function Optional({onSubmit, disabled, ...rest}: FormStepProps) {
         </DivAnimatedHeight>
       ) : null}
 
-      <Button disabled={disabled} text="NEXT" />
+      <Button disabled={disabled}>NEXT</Button>
     </Form>
   );
 }

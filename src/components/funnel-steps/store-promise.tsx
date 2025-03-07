@@ -39,7 +39,7 @@ export function StorePromise({onSubmit, disabled, ...rest}: FormStepProps) {
         watch={watch}
       />
 
-      <Button disabled={disabled} text="NEXT" />
+      <Button disabled={disabled}>NEXT</Button>
     </Form>
   );
 }

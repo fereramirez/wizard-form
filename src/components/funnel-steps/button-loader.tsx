@@ -65,7 +65,9 @@ export function ButtonLoader({onSubmit, disabled, isLoading, ...rest}: FormStepP
         watch={watch}
       />
 
-      <Button disabled={disabled} isLoading={isLoading} text="NEXT" />
+      <Button disabled={disabled} isLoading={isLoading}>
+        NEXT
+      </Button>
     </Form>
   );
 }

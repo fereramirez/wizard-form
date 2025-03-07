@@ -1,24 +1,24 @@
-import {type ButtonHTMLAttributes} from "react";
+import {type ReactNode, type ButtonHTMLAttributes} from "react";
 import Link from "next/link";
 
 import {cn} from "@/helpers/cn";
 import Spinner from "@/assets/spinner.svg";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  text: string;
   type?: "button" | "submit" | "reset";
   isLoading?: boolean;
   href?: string;
   className?: string;
+  children?: ReactNode;
 };
 
 export function Button({
-  text,
   type = "submit",
   isLoading = false,
   href,
   className,
   disabled,
+  children,
   ...rest
 }: ButtonProps) {
   if (href) {
@@ -30,7 +30,7 @@ export function Button({
         )}
         href={href}
       >
-        {text}
+        {children}
       </Link>
     );
   }
@@ -50,7 +50,7 @@ export function Button({
       {isLoading ? (
         <Spinner className="h-8 w-auto animate-spin" data-testid="spinner" fill="currentColor" />
       ) : (
-        text
+        children
       )}
     </button>
   );
