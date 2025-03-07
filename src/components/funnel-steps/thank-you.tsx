@@ -12,7 +12,7 @@ import {Button} from "@/components/inputs/button";
 export function ThankYouAds({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
 
-  const {randomValue} = useFunnelStore();
+  const {randomValue, queryParams} = useFunnelStore();
 
   useAnalytics("tyAds");
 
@@ -33,7 +33,7 @@ export function ThankYouAds({onSubmit, disabled, ...rest}: FormStepProps) {
         <Button
           className="gap-2"
           disabled={disabled}
-          href="https://github.com/fereramirez/wizard-form"
+          href={`https://github.com/fereramirez/wizard-form?${queryParams}`}
         >
           <Github fill="currentColor" />
 
@@ -42,6 +42,11 @@ export function ThankYouAds({onSubmit, disabled, ...rest}: FormStepProps) {
 
         <Button disabled={disabled}>NEXT</Button>
       </div>
+
+      <p>
+        If you hover over the repository link you can see the URL query params appended to it, this
+        is helpful to track the user
+      </p>
     </Form>
   );
 }
