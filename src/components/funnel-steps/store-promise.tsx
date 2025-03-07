@@ -22,9 +22,9 @@ export function StorePromise({onSubmit, disabled, ...rest}: FormStepProps) {
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
-        In this step we will fetch some data (a random number between 0 and 10) that takes 30
-        seconds to be ready, we will use this data in the last step. Doing this we can avoid the
-        user to wait for it
+        In this step we will fetch some data (a random number between 0 and 10) that takes one
+        minute to be ready, we will use this data in the last step. Doing this we can avoid the user
+        to wait for it
       </Title>
 
       <CheckboxesBox
