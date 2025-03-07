@@ -2,9 +2,12 @@ import {useEffect} from "react";
 import {useSearchParams} from "next/navigation";
 
 import {useFunnelStore} from "@/contexts/use-funnel-store";
+import {getSearchParamsString} from "@/helpers/url-params";
 
 export function useHiddenData() {
   const searchParams = useSearchParams();
+
+  const queryParams = getSearchParamsString(searchParams);
 
   const affiliateId = searchParams.get("affiliate_id") || null;
   const utmSource = searchParams.get("utm_source") || null;
@@ -16,6 +19,7 @@ export function useHiddenData() {
       userAgent: navigator.userAgent,
       affiliateId,
       utmSource,
+      queryParams,
     });
 
     setFunnelData({
@@ -23,5 +27,15 @@ export function useHiddenData() {
       blue: optional === "blue" ? blue : null,
       green: optional === "green" ? green : null,
     });
-  }, [setHiddenData, setFunnelData, optional, purple, blue, green, affiliateId, utmSource]);
+  }, [
+    setHiddenData,
+    setFunnelData,
+    optional,
+    purple,
+    blue,
+    green,
+    affiliateId,
+    utmSource,
+    queryParams,
+  ]);
 }
