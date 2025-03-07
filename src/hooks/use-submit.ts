@@ -9,6 +9,7 @@ import {fakeApi, type RandomValueResponse} from "@/helpers/fake-api";
 import {type RealStepPayload, useFunnelStore} from "@/contexts/use-funnel-store";
 import {STEP_INDEXES} from "@/components/funnel/current-step";
 import {useAnimationStore} from "@/contexts/use-animation-store";
+import {COUNT_DOWN_TIME} from "@/components/funnel-steps/wait";
 
 export function useSubmit() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -196,7 +197,7 @@ export function useSubmit() {
 
         console.log(dataToDispatch);
 
-        await fakeApi.getFakeApiData(10 * 1000);
+        await fakeApi.getFakeApiData(COUNT_DOWN_TIME * 1000);
       } finally {
         triggerInOutAnimation(() => {
           if (randomValue > 5) setRealStepIndex(STEP_INDEXES.TYADS);

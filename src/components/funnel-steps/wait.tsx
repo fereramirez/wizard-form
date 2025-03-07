@@ -21,6 +21,8 @@ export function WaitForPromise() {
   );
 }
 
+export const COUNT_DOWN_TIME = 10;
+
 export function WaitStep() {
   return (
     <InOutAnimationWrapper>
@@ -31,7 +33,7 @@ export function WaitStep() {
           steps before.
         </Title>
 
-        <Countdown initialTime={10} />
+        <Countdown initialTime={COUNT_DOWN_TIME - 1} />
 
         <span className="flex max-h-72 w-full max-w-72 grow items-center justify-center">
           <Spinner className="size-full grow animate-spin" fill="currentColor" />
