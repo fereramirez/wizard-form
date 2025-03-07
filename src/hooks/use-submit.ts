@@ -6,7 +6,7 @@ import {useTimer} from "./use-timer";
 import {useFunctionGate} from "./use-function-gate";
 
 import {fakeApi, type RandomValueResponse} from "@/helpers/fake-api";
-import {useFunnelStore} from "@/contexts/use-funnel-store";
+import {type RealStepPayload, useFunnelStore} from "@/contexts/use-funnel-store";
 import {STEP_INDEXES} from "@/components/funnel/current-step";
 import {useAnimationStore} from "@/contexts/use-animation-store";
 
@@ -30,8 +30,8 @@ export function useSubmit() {
   const {oneTimePass, allowNextPass, notAllowedToPass} = useFunctionGate();
 
   const handleNextStep = useCallback(
-    (toStep?: number | "next", showLoading?: boolean) => {
-      if (toStep === undefined || toStep === "next") {
+    (toStep?: RealStepPayload, showLoading?: boolean) => {
+      if (toStep === undefined) {
         setRealStepIndex();
         setUserStepIndex();
       } else {
@@ -59,7 +59,7 @@ export function useSubmit() {
   async function handleSubmit(
     callback: () => Promise<void> | void,
     showLoading?: boolean,
-    toStep?: number | "next",
+    toStep?: RealStepPayload,
     skipAnimation?: boolean,
   ) {
     if (!oneTimePass()) return;
@@ -79,12 +79,19 @@ export function useSubmit() {
   }
 
   function submitQuestion(dataUpdated: FieldValues) {
-    handleSubmit(() => setFunnelData(dataUpdated));
+    handleSubmit(() => setFunnelData(dataUpdated), false);
+  }
+
+  function submitJump(dataUpdated: FieldValues, toStep?: number) {
+    console.log("dataUpdated", dataUpdated);
+    console.log("toStep", toStep);
+
+    handleSubmit(() => setFunnelData(dataUpdated), false, toStep);
   }
 
   function submitBack() {
     //! VOLVER A VER setFunnelData no es type safe, se puede pasar cualquier cosa
-    handleSubmit(() => setFunnelData({back: true}), false, -1);
+    handleSubmit(() => setFunnelData({back: true}), false, "-1");
   }
 
   function submitRepeat(dataUpdated: FieldValues) {
@@ -101,7 +108,7 @@ export function useSubmit() {
       try {
         setFunnelData(dataUpdated);
 
-        const promise = fakeApi.getRandomValue(30 * 1000);
+        const promise = fakeApi.getRandomValue(60 * 1000);
 
         setRandomValuePromise(promise);
       } catch (error) {
@@ -189,6 +196,7 @@ export function useSubmit() {
     notAllowedToPass,
     inOutAnimation,
     submitQuestion,
+    submitJump,
     submitBack,
     submitFetchAndWait,
     submitRepeat,

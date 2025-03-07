@@ -24,6 +24,7 @@ export function CurrentStep() {
     isLoading,
     notAllowedToPass,
     submitQuestion,
+    submitJump,
     submitBack,
     submitFetchAndWait,
     submitRepeat,
@@ -37,7 +38,7 @@ export function CurrentStep() {
 
   const stepsArray = [
     <Intro key="0" disabled={notAllowedToPass} onSubmit={(data) => submitQuestion(data)} />,
-    <Name key="1" disabled={notAllowedToPass} onChange={startTimer} onSubmit={submitQuestion} />,
+    <Name key="1" disabled={notAllowedToPass} onChange={startTimer} onSubmit={submitJump} />,
     <Back
       key="2"
       disabled={notAllowedToPass}
