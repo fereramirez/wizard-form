@@ -117,12 +117,28 @@ export function useSubmit() {
     });
   }
 
-  function submitFetchAndWait(dataUpdated: FieldValues) {
+  function submitWaitFakeRequest(dataUpdated: FieldValues) {
     handleSubmit(async () => {
       try {
         setFunnelData(dataUpdated);
 
-        const {data} = await fakeApi.getFakeApiData(3 * 1000);
+        await fakeApi.getFakeApiData(2 * 1000);
+      } catch (error) {
+        console.log(error);
+
+        setHiddenData({fakeApiData: []});
+      }
+    }, true);
+  }
+
+  function submitFetchWaitData(dataUpdated: FieldValues) {
+    handleSubmit(async () => {
+      try {
+        setFunnelData(dataUpdated);
+
+        const {data} = await fakeApi.getFakeApiData(2 * 1000);
+
+        console.log("data", data);
 
         setHiddenData({fakeApiData: data});
       } catch (error) {
@@ -198,7 +214,8 @@ export function useSubmit() {
     submitQuestion,
     submitJump,
     submitBack,
-    submitFetchAndWait,
+    submitWaitFakeRequest,
+    submitFetchWaitData,
     submitRepeat,
     submitStorePromise,
     submitWaitForPromise,

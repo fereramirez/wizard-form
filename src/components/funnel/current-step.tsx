@@ -26,7 +26,8 @@ export function CurrentStep() {
     submitQuestion,
     submitJump,
     submitBack,
-    submitFetchAndWait,
+    submitWaitFakeRequest,
+    submitFetchWaitData,
     submitRepeat,
     submitStorePromise,
     submitWaitForPromise,
@@ -52,13 +53,13 @@ export function CurrentStep() {
       key="6"
       disabled={notAllowedToPass}
       isLoading={isLoading}
-      onSubmit={submitFetchAndWait}
+      onSubmit={submitWaitFakeRequest}
     />,
     <Autosubmit key="7" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <AutosubmitFetchAndWait
       key="8"
       disabled={notAllowedToPass || isLoading}
-      onSubmit={submitFetchAndWait}
+      onSubmit={submitFetchWaitData}
     />,
     <AutosubmitShowFetchedData
       key="9"
@@ -78,12 +79,12 @@ export function CurrentStep() {
       key="6"
       disabled={notAllowedToPass}
       isLoading={isLoading}
-      onSubmit={submitFetchAndWait}
+      onSubmit={submitWaitFakeRequest}
     />,
     <AutosubmitFetchAndWait
       key="8"
       disabled={notAllowedToPass || isLoading}
-      onSubmit={submitFetchAndWait}
+      onSubmit={submitFetchWaitData}
     />,
     <AutosubmitShowFetchedData
       key="9"
@@ -129,7 +130,7 @@ export function CurrentStepV2() {
     startTimer,
     isLoading,
     submitQuestion,
-    submitFetchAndWait,
+    submitFetchWaitData,
     submitRepeat,
     submitStorePromise,
     submitWaitForPromise,
@@ -153,7 +154,7 @@ export function CurrentStepV2() {
       return <Autosubmit isLoading={isLoading} onSubmit={submitQuestion} />;
 
     case STEPS.Step5:
-      return <AutosubmitFetchAndWait isLoading={isLoading} onSubmit={submitFetchAndWait} />;
+      return <AutosubmitFetchAndWait isLoading={isLoading} onSubmit={submitFetchWaitData} />;
 
     case STEPS.Step6:
       return <AutosubmitShowFetchedData isLoading={isLoading} onSubmit={submitWaitForPromise} />;
