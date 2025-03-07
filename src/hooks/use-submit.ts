@@ -87,9 +87,6 @@ export function useSubmit() {
   }
 
   function submitJump(dataUpdated: FieldValues, toStep?: number) {
-    console.log("dataUpdated", dataUpdated);
-    console.log("toStep", toStep);
-
     handleSubmit(null, () => setFunnelData(dataUpdated), false, toStep);
   }
 
@@ -141,8 +138,6 @@ export function useSubmit() {
       async () => {
         try {
           const {data} = await fakeApi.getFakeApiData(2 * 1000);
-
-          console.log("data", data);
 
           setHiddenData({fakeApiData: data});
         } catch (error) {
@@ -201,7 +196,7 @@ export function useSubmit() {
       } finally {
         triggerInOutAnimation(() => {
           if (randomValue > 5) setRealStepIndex(STEP_INDEXES.TYADS);
-          else setRealStepIndex(STEP_INDEXES.LAST_REAL);
+          else setRealStepIndex(STEP_INDEXES.TY);
           setIsLoading(false);
         });
       }
