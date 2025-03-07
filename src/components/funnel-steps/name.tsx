@@ -50,10 +50,7 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
   const inputName = `name${isRepeating ? "_2" : ""}`;
 
   return (
-    <Form //! VOLVER A VER agregar tipos
-      onSubmit={handleSubmit((data) => onSubmit(data, isRepeating ? "+2" : "+1"))}
-      {...rest}
-    >
+    <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
         {back === true && repeat === "false"
           ? `We can show content based on previous answers ${name}. `
