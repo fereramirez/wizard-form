@@ -8,6 +8,7 @@ import {Back} from "@/components/funnel-steps/back";
 import {Optional} from "@/components/funnel-steps/optional";
 import {Repeat} from "@/components/funnel-steps/repeat";
 import {StorePromise} from "@/components/funnel-steps/store-promise";
+import {ButtonLoader} from "@/components/funnel-steps/button-loader";
 import {Autosubmit} from "@/components/funnel-steps/autosubmit";
 import {AutosubmitFetchAndWait} from "@/components/funnel-steps/autosubmit-fetch";
 import {AutosubmitShowFetchedData} from "@/components/funnel-steps/autosubmit-show";
@@ -35,7 +36,7 @@ export function CurrentStep() {
   //! VOLVER A VER agregar steps adicionales
 
   const stepsArray = [
-    <Intro key="0" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <Intro key="0" disabled={notAllowedToPass} onSubmit={(data) => submitQuestion(data)} />,
     <Name key="1" disabled={notAllowedToPass} onChange={startTimer} onSubmit={submitQuestion} />,
     <Back
       key="2"
@@ -46,23 +47,24 @@ export function CurrentStep() {
     <Optional key="3" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <Repeat key="4" disabled={notAllowedToPass} onSubmit={submitRepeat} />,
     <StorePromise key="5" disabled={notAllowedToPass} onSubmit={submitStorePromise} />,
-    <Autosubmit key="6" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <ButtonLoader key="6" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <Autosubmit key="7" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <AutosubmitFetchAndWait
-      key="7"
+      key="8"
       disabled={notAllowedToPass || isLoading}
       onSubmit={submitFetchAndWait}
     />,
     <AutosubmitShowFetchedData
-      key="8"
+      key="9"
       disabled={notAllowedToPass}
       onSubmit={submitWaitForPromise}
     />,
-    <WaitForPromise key="9" />,
-    <Name key="10" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />,
-    <WaitStep key="11" />,
-    <ThankYouAds key="12" />,
-    <ThankYou key="13" />,
-    <Restart key="14" disabled={notAllowedToPass} onSubmit={submitRestart} />,
+    <WaitForPromise key="10" />,
+    <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />,
+    <WaitStep key="12" />,
+    <ThankYouAds key="13" />,
+    <ThankYou key="14" />,
+    <Restart key="15" disabled={notAllowedToPass} onSubmit={submitRestart} />,
   ];
 
   const stepsArrayTest = [
