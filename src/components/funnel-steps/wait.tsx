@@ -21,7 +21,7 @@ export function WaitForPromise() {
   );
 }
 
-export const COUNT_DOWN_TIME = 10;
+export const COUNT_DOWN_TIME = 3; //! VOLVER A VER cambiar a 10
 
 export function WaitStep() {
   return (
