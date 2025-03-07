@@ -17,13 +17,15 @@ export function Restart({onSubmit, disabled, ...rest}: FormStepProps) {
 
   useAnalytics("restart");
 
-  //! VOLVER A VER mostar data collected
+  //! VOLVER A VER mostar data collected, eliminar data no relevante para el usuario
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
-      <Title>In this step you can restart the funnel</Title>
+      <Title>This is all the data collected from the user</Title>
 
-      <Button disabled={disabled}>RESTART</Button>
+      <pre>{JSON.stringify(funnelState, null, 2)}</pre>
+
+      <Button disabled={disabled}>RESTART FUNNEL</Button>
     </Form>
   );
 }
