@@ -1,5 +1,13 @@
 import {type CheckboxData} from "@/components/inputs/checkbox";
 
+function fakeRequest(delay: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, delay);
+  });
+}
+
 const mockedData: CheckboxData[] = [
   {value: "data", label: "Data"},
   {value: "received", label: "Received"},
@@ -27,7 +35,4 @@ function getRandomValue(delay: number): Promise<RandomValueResponse> {
   });
 }
 
-export const fakeApi = {
-  getFakeApiData,
-  getRandomValue,
-};
+export const fakeApi = {fakeRequest, getFakeApiData, getRandomValue};
