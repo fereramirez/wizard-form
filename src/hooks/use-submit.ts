@@ -122,7 +122,7 @@ export function useSubmit() {
       try {
         setFunnelData(dataUpdated);
 
-        const {data} = await fakeApi.getFakeApiData(2 * 1000);
+        const {data} = await fakeApi.getFakeApiData(3 * 1000);
 
         setHiddenData({fakeApiData: data});
       } catch (error) {
