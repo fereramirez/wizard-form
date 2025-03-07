@@ -110,7 +110,7 @@ export function useSubmit() {
     handleSubmit(
       () => {
         try {
-          const promise = fakeApi.getRandomValue(60 * 1000);
+          const promise = fakeApi.getRandomValue(1 * 1000);
 
           setRandomValuePromise(promise);
         } catch (error) {
@@ -175,11 +175,10 @@ export function useSubmit() {
     })();
   }
 
-  function submitLastQuestion(dataUpdated: FieldValues) {
+  async function submitLastQuestion(dataUpdated: FieldValues) {
     handleSubmit(null, () => setFunnelData(dataUpdated));
 
-    (async () => {
-      //! VOLVER A VER si esto se puede poner dentro de un handleSubmit
+    await handleSubmit(async () => {
       try {
         const fillTime = stopAndGetElapsedTime();
 
@@ -197,7 +196,7 @@ export function useSubmit() {
 
         console.log(dataToDispatch);
 
-        await fakeApi.getFakeApiData(7 * 1000);
+        await fakeApi.getFakeApiData(10 * 1000);
       } finally {
         triggerInOutAnimation(() => {
           if (randomValue > 5) setRealStepIndex(STEP_INDEXES.TYADS);
@@ -205,7 +204,7 @@ export function useSubmit() {
           setIsLoading(false);
         });
       }
-    })();
+    });
   }
 
   function submitRestart() {
