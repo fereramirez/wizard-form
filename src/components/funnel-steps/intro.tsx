@@ -18,8 +18,6 @@ export function Intro({onSubmit, disabled, ...rest}: FormStepProps) {
   const utmSource = searchParams.get("utm_source");
   const affiliateId = searchParams.get("affiliate_id");
 
-  //! VOLVER A VER mas adelante appendear los params a un link externo y que se abra en una nueva pestaña, explicar que asi se puede trackear el source
-
   if (!utmSource || !affiliateId)
     return (
       <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
