@@ -3,29 +3,12 @@ import {useCallback, useState} from "react";
 import {type FieldValues} from "react-hook-form";
 
 import {useTimer} from "./use-timer";
+import {useFunctionGate} from "./use-function-gate";
 
 import {fakeApi, type RandomValueResponse} from "@/helpers/fake-api";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {STEP_INDEXES} from "@/components/funnel/current-step";
 import {useAnimationStore} from "@/contexts/use-animation-store";
-
-function useFunctionGate() {
-  const [allowedToPass, setAllowedToPass] = useState<boolean>(true);
-
-  const oneTimePass = useCallback(() => {
-    if (!allowedToPass) return false;
-
-    setAllowedToPass(false);
-
-    return true;
-  }, [allowedToPass]);
-
-  const allowNextPass = useCallback(() => {
-    setAllowedToPass(true);
-  }, []);
-
-  return {oneTimePass, allowNextPass, notAllowedToPass: !allowedToPass};
-}
 
 export function useSubmit() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
