@@ -48,7 +48,7 @@ export function CurrentStep() {
     <Optional key="3" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <Repeat key="4" disabled={notAllowedToPass} onSubmit={submitRepeat} />,
     <StorePromise key="5" disabled={notAllowedToPass} onSubmit={submitStorePromise} />,
-    <ButtonLoader key="6" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <ButtonLoader key="6" disabled={notAllowedToPass} onSubmit={submitFetchAndWait} />,
     <Autosubmit key="7" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <AutosubmitFetchAndWait
       key="8"
