@@ -9,12 +9,12 @@ import {useFunnelStore} from "@/contexts/use-funnel-store";
 import Github from "@/assets/github.svg";
 import {Button} from "@/components/inputs/button";
 
-export function ThankYouAds({onSubmit, disabled, ...rest}: FormStepProps) {
+export function ShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
 
   const {randomValue, queryParams} = useFunnelStore();
 
-  useTriggerEvent("tyAds");
+  useTriggerEvent("showRepo");
 
   //! VOLVER A VER agregar ghost variant para el link de github
   //! VOLVER A VER arreglar el hover de github
@@ -51,12 +51,12 @@ export function ThankYouAds({onSubmit, disabled, ...rest}: FormStepProps) {
   );
 }
 
-export function ThankYou({onSubmit, disabled, ...rest}: FormStepProps) {
+export function DontShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
 
   const {randomValue} = useFunnelStore();
 
-  useTriggerEvent("ty");
+  useTriggerEvent("dontShowRepo");
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>

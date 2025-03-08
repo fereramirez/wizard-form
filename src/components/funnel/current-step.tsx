@@ -13,7 +13,7 @@ import {Autosubmit} from "@/components/funnel-steps/autosubmit";
 import {AutosubmitFetchAndWait} from "@/components/funnel-steps/autosubmit-fetch";
 import {AutosubmitShowFetchedData} from "@/components/funnel-steps/autosubmit-show";
 import {WaitForPromise, WaitStep} from "@/components/funnel-steps/wait";
-import {ThankYouAds, ThankYou} from "@/components/funnel-steps/thank-you";
+import {ShowRepo, DontShowRepo} from "@/components/funnel-steps/show-repo";
 import {Restart} from "@/components/funnel-steps/restart";
 
 export function CurrentStep() {
@@ -81,24 +81,16 @@ export function CurrentStep() {
     <WaitForPromise key="10" />,
     <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />, //! VOLVER A VER cambiar este step
     <WaitStep key="12" />,
-    <ThankYouAds
-      key="13"
-      disabled={notAllowedToPass}
-      onSubmit={(data) => submitJump(data, "+2")}
-    />,
-    <ThankYou key="14" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <ShowRepo key="13" disabled={notAllowedToPass} onSubmit={(data) => submitJump(data, "+2")} />,
+    <DontShowRepo key="14" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <Restart key="15" disabled={notAllowedToPass} onSubmit={submitRestart} />,
   ];
 
   const stepsArrayTest = [
     <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />, //! VOLVER A VER cambiar este step
     <WaitStep key="12" />,
-    <ThankYouAds
-      key="13"
-      disabled={notAllowedToPass}
-      onSubmit={(data) => submitJump(data, "+2")}
-    />,
-    <ThankYou key="14" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <ShowRepo key="13" disabled={notAllowedToPass} onSubmit={(data) => submitJump(data, "+2")} />,
+    <DontShowRepo key="14" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <Restart key="15" disabled={notAllowedToPass} onSubmit={submitRestart} />,
   ];
 
@@ -137,7 +129,6 @@ export function CurrentStepV2() {
   };
 
   const {
-    startTimer,
     isLoading,
     submitQuestion,
     submitFetchWaitData,
@@ -149,7 +140,7 @@ export function CurrentStepV2() {
 
   switch (realStepIndex) {
     case STEPS.Step0:
-      return <Name isLoading={isLoading} onChange={startTimer} onSubmit={submitQuestion} />;
+      return <Name isLoading={isLoading} onSubmit={submitQuestion} />;
 
     case STEPS.Step1:
       return <Optional isLoading={isLoading} onSubmit={submitQuestion} />;
@@ -179,13 +170,13 @@ export function CurrentStepV2() {
       return <WaitStep />;
 
     case STEPS.Step10:
-      return <ThankYouAds />;
+      return <ShowRepo />;
 
     case STEPS.Step11:
-      return <ThankYou />;
+      return <DontShowRepo />;
 
     default: {
-      const _exhaustiveCheck: never = userStepIndex;
+      const _exhaustiveCheck: never = realStepIndex;
 
       return _exhaustiveCheck;
     }
