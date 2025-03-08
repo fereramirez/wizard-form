@@ -13,8 +13,6 @@ export function Restart({onSubmit, disabled, ...rest}: FormStepProps) {
 
   const {funnelState, fillTime} = useFunnelStore();
 
-  console.log(funnelState);
-
   useAnalytics("restart");
 
   //! VOLVER A VER mostar data collected, eliminar data no relevante para el usuario
