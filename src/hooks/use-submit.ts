@@ -82,6 +82,8 @@ export function useSubmit() {
 
       allowNextPass();
 
+      window.scrollTo({top: 0, behavior: "smooth"});
+
       if (callbackAfterAnimation) await callbackAfterAnimation();
     });
   }
