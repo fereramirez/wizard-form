@@ -7,6 +7,7 @@ import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
 import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
+import {DataCollected} from "@/components/messages/data-collected";
 
 export function FunnelData({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
@@ -19,41 +20,17 @@ export function FunnelData({onSubmit, disabled, ...rest}: FormStepProps) {
     <Form className="overflow-hidden" onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title className="shrink-0">This is the raw data collected from the funnel</Title>
 
-      <section className="grow overflow-y-auto">
-        {/*  <pre>{JSON.stringify(funnelState, null, 2)}</pre> */}
-        <pre className="p-2">
-          {JSON.stringify(
-            {
-              realStepIndex: 0,
-              userStepIndex: 0,
-              name: null,
-              name_2: null,
-              back: false,
-              optional: null,
-              purple: null,
-              blue: null,
-              green: null,
-              optional_2: null,
-              purple_2: null,
-              blue_2: null,
-              green_2: null,
-              repeat: "false",
-              storePromise: null,
-              autosubmit: null,
-              autosubmitFetch: null,
-              autosubmitShow: null,
-              fakeApiData: [],
-              randomValue: 0,
-              userAgent: null,
-              queryParams: "",
-              utmSource: null,
-              affiliateId: null,
-            },
-            null,
-            2,
-          )}
-        </pre>
-      </section>
+      <DataCollected>
+        {Object.entries(funnelState).map(([key, value]) => (
+          <div
+            key={key}
+            className="border-primary-3 grid auto-rows-fr grid-cols-2 gap-2 border-b py-1"
+          >
+            <p>{key}:</p>
+            <p className="break-words">{JSON.stringify(value)}</p>
+          </div>
+        ))}
+      </DataCollected>
 
       <Button className="shrink-0" disabled={disabled}>
         NEXT

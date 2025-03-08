@@ -7,6 +7,7 @@ import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
 import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {useEventsStore} from "@/contexts/use-events-store";
+import {DataCollected} from "@/components/messages/data-collected";
 
 export function Events({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
@@ -18,13 +19,13 @@ export function Events({onSubmit, disabled, ...rest}: FormStepProps) {
   const events = getEventsWithElapsedTime();
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
-      <Title>
+    <Form className="overflow-hidden" onSubmit={handleSubmit(onSubmit)} {...rest}>
+      <Title className="shrink-0">
         We also collect the time you took to complete the funnel. These are the events of each step
         with the elapsed time in seconds
       </Title>
 
-      <div className="flex flex-col">
+      <DataCollected>
         {events.map((event) => (
           <div
             key={event.timestamp}
@@ -34,9 +35,11 @@ export function Events({onSubmit, disabled, ...rest}: FormStepProps) {
             <p> {event.elapsedTime / 1000} s</p>
           </div>
         ))}
-      </div>
+      </DataCollected>
 
-      <Button disabled={disabled}>NEXT</Button>
+      <Button className="shrink-0" disabled={disabled}>
+        NEXT
+      </Button>
     </Form>
   );
 }
