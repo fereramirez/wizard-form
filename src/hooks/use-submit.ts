@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import {useCallback, useState} from "react";
+import {useState} from "react";
 import {type FieldValues} from "react-hook-form";
 
 import {useFunctionGate} from "./use-function-gate";
@@ -30,39 +30,13 @@ export function useSubmit() {
   const {triggerInOutAnimation, inOutAnimation} = useAnimationStore();
   const {oneTimePass, allowNextPass, notAllowedToPass} = useFunctionGate();
 
-  const handleNextStep = useCallback(
-    (toStep?: StepPayload, showLoading?: boolean) => {
-      if (toStep === undefined) {
-        setRealStepIndex();
-        setUserStepIndex();
-      } else {
-        setRealStepIndex(toStep);
-        setUserStepIndex(toStep);
-      }
-
-      if (showLoading) setIsLoading(false);
-
-      allowNextPass();
-    },
-    [allowNextPass, setRealStepIndex, setUserStepIndex],
-  );
-
-  const handleRealStepOnly = useCallback(
-    (toStep?: StepPayload) => {
-      return () => {
-        if (toStep !== undefined) setRealStepIndex(toStep);
-        else setRealStepIndex();
-      };
-    },
-    [setRealStepIndex],
-  );
-
   async function handleSubmit(
     callbackBeforeAnimation: (() => Promise<void> | void) | null,
     callbackAfterAnimation?: (() => Promise<void> | void) | null,
     showLoading?: boolean,
-    toStep?: StepPayload,
+    toRealStep?: StepPayload,
     notUserStep?: boolean,
+    toUserStep?: StepPayload,
   ) {
     if (!oneTimePass()) return;
     if (showLoading) setIsLoading(true);
@@ -70,19 +44,19 @@ export function useSubmit() {
     if (callbackBeforeAnimation) await callbackBeforeAnimation();
 
     triggerInOutAnimation(async () => {
-      if (toStep === undefined) {
+      window.scrollTo({top: 0, behavior: "smooth"});
+
+      if (toRealStep === undefined) {
         setRealStepIndex();
         if (!notUserStep) setUserStepIndex();
       } else {
-        setRealStepIndex(toStep);
-        if (!notUserStep) setUserStepIndex(toStep);
+        setRealStepIndex(toRealStep);
+        if (!notUserStep) setUserStepIndex(toUserStep !== undefined ? toUserStep : toRealStep);
       }
 
       if (showLoading) setIsLoading(false);
 
       allowNextPass();
-
-      window.scrollTo({top: 0, behavior: "smooth"});
 
       if (callbackAfterAnimation) await callbackAfterAnimation();
     });
@@ -92,8 +66,12 @@ export function useSubmit() {
     handleSubmit(null, () => setFunnelData(dataUpdated));
   }
 
-  function submitJump(dataUpdated: FieldValues, toStep?: StepPayload) {
-    handleSubmit(null, () => setFunnelData(dataUpdated), false, toStep);
+  function submitJump(
+    dataUpdated: FieldValues,
+    toRealStep?: StepPayload,
+    toUserStep?: StepPayload,
+  ) {
+    handleSubmit(null, () => setFunnelData(dataUpdated), false, toRealStep, false, toUserStep);
   }
 
   function submitBack() {

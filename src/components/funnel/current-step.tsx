@@ -83,7 +83,11 @@ export function CurrentStep() {
     <WaitForPromise key="10" />,
     <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />, //! VOLVER A VER cambiar este step
     <WaitStep key="12" />,
-    <ShowRepo key="13" disabled={notAllowedToPass} onSubmit={(data) => submitJump(data, "+2")} />,
+    <ShowRepo
+      key="13"
+      disabled={notAllowedToPass}
+      onSubmit={(data) => submitJump(data, "+2", "+1")}
+    />,
     <DontShowRepo key="14" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <FunnelData key="15" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <Events key="16" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
@@ -105,7 +109,7 @@ export const STEP_INDEXES = {
   NAME: 11,
   SHOW_REPO: 13,
   DONT_SHOW_REPO: 14,
-  LAST_USER: 15,
+  LAST_USER: 14,
   LAST_REAL: 17,
 } as const;
 
