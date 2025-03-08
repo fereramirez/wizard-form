@@ -9,14 +9,15 @@ import {type StepPayload, useFunnelStore} from "@/contexts/use-funnel-store";
 import {STEP_INDEXES} from "@/components/funnel/current-step";
 import {useAnimationStore} from "@/contexts/use-animation-store";
 import {COUNT_DOWN_TIME} from "@/components/funnel-steps/wait";
+import {useEventsStore} from "@/contexts/use-events-store";
 
 export function useSubmit() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [randomValuePromise, setRandomValuePromise] = useState<Promise<RandomValueResponse> | null>(
     null,
   );
+
   const {
-    funnelState,
     setFunnelData,
     setHiddenData,
     setRealStepIndex,
@@ -24,6 +25,7 @@ export function useSubmit() {
     randomValue,
     resetFunnel,
   } = useFunnelStore();
+  const {resetEvents} = useEventsStore();
 
   const {triggerInOutAnimation, inOutAnimation} = useAnimationStore();
   const {oneTimePass, allowNextPass, notAllowedToPass} = useFunctionGate();
@@ -192,7 +194,10 @@ export function useSubmit() {
   }
 
   function submitRestart() {
-    handleSubmit(null, () => resetFunnel());
+    handleSubmit(null, () => {
+      resetFunnel();
+      resetEvents();
+    });
   }
 
   return {
