@@ -27,6 +27,13 @@ export const COUNT_DOWN_TIME = 3; //! VOLVER A VER cambiar a 10
 export function WaitStep() {
   useHiddenData();
 
+  //! VOLVER A VER agregar al step anterior a este
+  /*
+    <p>
+      The next step only shows a waiting animation, as it is not a <strong>real</strong> step it won't affect the funnel progress bar
+    </p>
+  */
+
   return (
     <InOutAnimationWrapper>
       <div className="flex grow flex-col items-center justify-evenly gap-8">
