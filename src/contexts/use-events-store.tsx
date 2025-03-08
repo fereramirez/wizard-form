@@ -26,8 +26,6 @@ export function EventsProvider({children}: {children: ReactNode}) {
   const trackEvent = useCallback((eventName: string) => {
     const currentTime = Date.now();
 
-    console.log("trackEvent", {eventName, currentTime});
-
     setEvents((prevEvents) => [...prevEvents, {name: eventName, timestamp: currentTime}]);
   }, []);
 
