@@ -45,13 +45,15 @@ export function Optional({onSubmit, disabled, ...rest}: FormStepProps) {
 
   const {repeat} = useFunnelStore();
 
-  useTriggerEvent(`optional${repeat === "true" ? "_II" : ""}`);
+  const isRepeating = repeat === "true";
+
+  useTriggerEvent(`optional${isRepeating ? "_II" : ""}`);
 
   const fieldNames = {
-    optional: `optional${repeat === "true" ? "_II" : ""}`,
-    purple: `purple${repeat === "true" ? "_II" : ""}`,
-    blue: `blue${repeat === "true" ? "_II" : ""}`,
-    green: `green${repeat === "true" ? "_II" : ""}`,
+    optional: `optional${isRepeating ? "_II" : ""}`,
+    purple: `purple${isRepeating ? "_II" : ""}`,
+    blue: `blue${isRepeating ? "_II" : ""}`,
+    green: `green${isRepeating ? "_II" : ""}`,
   };
 
   const optionalValue = watch(fieldNames.optional) as string;
@@ -69,7 +71,7 @@ export function Optional({onSubmit, disabled, ...rest}: FormStepProps) {
         error={errors.optional?.message}
         name={fieldNames.optional}
         options={optionalOptions}
-        question={`Please select a ${repeat === "true" ? "second" : ""} color`}
+        question={`Please select a ${isRepeating ? "second" : ""} color`}
         register={register}
         type="radio"
         watch={watch}

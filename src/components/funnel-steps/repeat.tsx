@@ -25,9 +25,9 @@ export function Repeat({onSubmit, disabled, ...rest}: FormStepProps) {
 
   const {repeat} = useFunnelStore();
 
-  useTriggerEvent("repeat");
-
   const isRepeating = repeat === "true";
+
+  useTriggerEvent(`repeat${isRepeating ? "_II" : ""}`);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>

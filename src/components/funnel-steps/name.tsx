@@ -41,12 +41,13 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
 
   const {name, repeat, back} = useFunnelStore();
 
+  const isRepeating = repeat === "true";
+
   useFocus(setFocus, "name", ANIMATION_TIMES.DELAY + ANIMATION_TIMES.DURATION);
-  useTriggerEvent("name");
+  useTriggerEvent(`name${isRepeating ? "_II" : ""}`);
 
   //! VOLVER A VER agregar otro titulo para el caso de que se repita el paso, como por ejemplo: selecciona un segundo color, selecciona un segundo nombre, etc.
 
-  const isRepeating = repeat === "true";
   const inputName = `name${isRepeating ? "_2" : ""}`;
 
   return (
@@ -60,7 +61,7 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
       </Title>
 
       <InputBox
-        aria-label="Name"
+        aria-label={`Name ${isRepeating ? "2" : ""}`}
         disabled={disabled}
         error={errors[inputName]?.message}
         name={inputName}
