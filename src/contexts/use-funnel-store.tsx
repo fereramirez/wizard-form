@@ -15,7 +15,6 @@ type HiddenDataAction = Prettify<
   | {queryParams: string}
   | SourceParams
   | {randomValue: number}
-  | {fillTime: number}
   | {fakeApiData: CheckboxData[]}
 >;
 
@@ -129,7 +128,6 @@ const INITIAL_FUNNEL_STATE: FunnelState = {
   // Hidden data
   fakeApiData: [],
   randomValue: 0,
-  fillTime: 0,
   userAgent: null,
 
   // Query params
