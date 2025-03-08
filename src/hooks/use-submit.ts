@@ -186,7 +186,7 @@ export function useSubmit() {
       },
       null,
       false,
-      randomValue >= 3 ? STEP_INDEXES.TYADS : STEP_INDEXES.TY,
+      randomValue >= 3 ? STEP_INDEXES.SHOW_REPO : STEP_INDEXES.DONT_SHOW_REPO,
       true,
     );
   }

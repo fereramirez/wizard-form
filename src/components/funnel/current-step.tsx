@@ -14,6 +14,7 @@ import {AutosubmitFetchAndWait} from "@/components/funnel-steps/autosubmit-fetch
 import {AutosubmitShowFetchedData} from "@/components/funnel-steps/autosubmit-show";
 import {WaitForPromise, WaitStep} from "@/components/funnel-steps/wait";
 import {ShowRepo, DontShowRepo} from "@/components/funnel-steps/show-repo";
+import {Events} from "@/components/funnel-steps/events";
 import {Restart} from "@/components/funnel-steps/restart";
 
 export function CurrentStep() {
@@ -83,7 +84,8 @@ export function CurrentStep() {
     <WaitStep key="12" />,
     <ShowRepo key="13" disabled={notAllowedToPass} onSubmit={(data) => submitJump(data, "+2")} />,
     <DontShowRepo key="14" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
-    <Restart key="15" disabled={notAllowedToPass} onSubmit={submitRestart} />,
+    <Events key="15" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <Restart key="16" disabled={notAllowedToPass} onSubmit={submitRestart} />,
   ];
 
   const stepsArrayTest = [
@@ -99,10 +101,10 @@ export function CurrentStep() {
 
 export const STEP_INDEXES = {
   NAME: 11,
-  LAST_USER: 12,
-  TYADS: 13,
-  TY: 14,
-  LAST_REAL: 15,
+  LAST_USER: 13,
+  SHOW_REPO: 13,
+  DONT_SHOW_REPO: 14,
+  LAST_REAL: 16,
 } as const;
 
 const STEPS = {
