@@ -192,7 +192,7 @@ export function useSubmit() {
       },
       null,
       false,
-      randomValue > 5 ? STEP_INDEXES.TYADS : STEP_INDEXES.TY,
+      randomValue >= 3 ? STEP_INDEXES.TYADS : STEP_INDEXES.TY,
       true,
     );
   }
