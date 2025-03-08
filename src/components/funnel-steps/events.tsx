@@ -20,16 +20,19 @@ export function Events({onSubmit, disabled, ...rest}: FormStepProps) {
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>
-        We also collect the time you took to complete the funnel. These are the events with the
-        elapsed time in seconds
+        We also collect the time you took to complete the funnel. These are the events of each step
+        with the elapsed time in seconds
       </Title>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="flex flex-col">
         {events.map((event) => (
-          <>
+          <div
+            key={event.timestamp}
+            className="border-primary-3 grid auto-rows-fr grid-cols-2 gap-2 border-b py-1"
+          >
             <p key={event.name}>{event.name}:</p>
             <p> {event.elapsedTime / 1000} s</p>
-          </>
+          </div>
         ))}
       </div>
 
