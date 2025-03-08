@@ -27,7 +27,7 @@ export function ShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
         API, based on that number the repository link is shown
       </Title>
 
-      <p>If you go through the funnel again probably you won't see it (50% of the time)</p>
+      <p>If you go through the funnel again probably you won't see it (20% of the time)</p>
 
       <div className="flex gap-10">
         <Button
@@ -65,7 +65,7 @@ export function DontShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
         API, based on that number the repository link is not shown
       </Title>
 
-      <p>If you go through the funnel again probably you will see it (50% of the time)</p>
+      <p>If you go through the funnel again probably you will see it (80% of the time)</p>
 
       <Button disabled={disabled}>NEXT</Button>
     </Form>
