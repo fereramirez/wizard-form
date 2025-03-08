@@ -43,7 +43,7 @@ export function Button({
       {...rest}
       aria-disabled={disabled}
       className={cn(
-        "hover:bg-color-primary flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xs border-none bg-white py-2 text-base font-bold text-black transition-all duration-200 ease-linear outline-none hover:bg-black hover:text-white focus-visible:bg-black focus-visible:text-white motion-reduce:transition-none sm:min-h-14 sm:text-2xl",
+        "flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xs border-none bg-white py-2 text-base font-bold text-black transition-all duration-200 ease-linear outline-none hover:bg-black hover:text-white focus-visible:bg-black focus-visible:text-white motion-reduce:transition-none sm:min-h-14 sm:text-2xl",
         className,
         disabled ? "pointer-events-none opacity-50" : "",
       )}
