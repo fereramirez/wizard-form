@@ -6,22 +6,15 @@ import {Title} from "@/components/messages/title";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
 import {useTriggerEvent} from "@/hooks/use-trigger-event";
-import {useFunnelStore} from "@/contexts/use-funnel-store";
 
 export function Restart({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
 
-  const {funnelState} = useFunnelStore();
-
   useTriggerEvent("restart");
-
-  //! VOLVER A VER mostar data collected, eliminar data no relevante para el usuario
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
-      <Title>You took seconds to complete the funnel. This is all the data collected</Title>
-
-      <pre>{JSON.stringify(funnelState, null, 2)}</pre>
+      <Title>Thank you for completing the funnel</Title>
 
       <Button disabled={disabled}>RESTART FUNNEL</Button>
     </Form>
