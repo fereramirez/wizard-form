@@ -20,7 +20,6 @@ export function CurrentStep() {
   const {realStepIndex, repeat} = useFunnelStore();
 
   const {
-    startTimer,
     isLoading,
     notAllowedToPass,
     submitQuestion,
@@ -37,9 +36,17 @@ export function CurrentStep() {
 
   const isRepeating = repeat === "true";
 
-  //! VOLVER A VER cambiar starTimer para que funcione
+  /*
+  ! funciona pero tira error ts
+    <Repeat
+      key="4"
+      disabled={notAllowedToPass}
+      onSubmit={(data) => submitJump(data, data?.repeat === "true" ? 1 : "+1")}
+    />,
+  */
+
   const stepsArray = [
-    <Intro key="0" disabled={notAllowedToPass} onChange={startTimer} onSubmit={submitQuestion} />,
+    <Intro key="0" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
     <Name
       key="1"
       disabled={notAllowedToPass}
@@ -84,6 +91,8 @@ export function CurrentStep() {
   ];
 
   const stepsArrayTest = [
+    <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />, //! VOLVER A VER cambiar este step
+    <WaitStep key="12" />,
     <ThankYouAds
       key="13"
       disabled={notAllowedToPass}
@@ -93,7 +102,7 @@ export function CurrentStep() {
     <Restart key="15" disabled={notAllowedToPass} onSubmit={submitRestart} />,
   ];
 
-  return stepsArrayTest[realStepIndex];
+  return stepsArray[realStepIndex];
 }
 
 export const STEP_INDEXES = {

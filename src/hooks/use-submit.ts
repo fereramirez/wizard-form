@@ -2,7 +2,6 @@
 import {useCallback, useState} from "react";
 import {type FieldValues} from "react-hook-form";
 
-import {useTimer} from "./use-timer";
 import {useFunctionGate} from "./use-function-gate";
 
 import {fakeApi, type RandomValueResponse} from "@/helpers/fake-api";
@@ -26,7 +25,6 @@ export function useSubmit() {
     resetFunnel,
   } = useFunnelStore();
 
-  const {startTimer, stopAndGetElapsedTime} = useTimer();
   const {triggerInOutAnimation, inOutAnimation} = useAnimationStore();
   const {oneTimePass, allowNextPass, notAllowedToPass} = useFunctionGate();
 
@@ -181,10 +179,6 @@ export function useSubmit() {
     await handleSubmit(
       async () => {
         try {
-          const fillTime = stopAndGetElapsedTime();
-
-          setHiddenData({fillTime});
-
           await fakeApi.getFakeApiData(COUNT_DOWN_TIME * 1000);
         } catch (error) {
           console.log(error);
@@ -202,7 +196,6 @@ export function useSubmit() {
   }
 
   return {
-    startTimer,
     isLoading,
     notAllowedToPass,
     inOutAnimation,
