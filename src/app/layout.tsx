@@ -20,8 +20,8 @@ export const metadata: Metadata = {
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
-      <body className={`${unna.className} flex min-h-screen flex-col antialiased`}>
-        <header className="bg-white text-xl leading-[4rem] font-bold text-green-950">
+      <body className={`${unna.className} flex max-h-screen min-h-screen flex-col antialiased`}>
+        <header className="text-primary-3 bg-white text-xl leading-[4rem] font-bold">
           <Link className="text-2xl font-bold tracking-tighter" href="/">
             Wizard Form
           </Link>
@@ -29,7 +29,9 @@ export default async function RootLayout({children}: {children: React.ReactNode}
 
         {children}
 
-        <footer className="text-center leading-[4rem] text-white opacity-70">wizard-form</footer>
+        <footer className="shrink-0 text-center leading-[4rem] text-white opacity-70">
+          wizard-form
+        </footer>
       </body>
     </html>
   );

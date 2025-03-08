@@ -18,11 +18,8 @@ type FormProps = FormHTMLAttributes<HTMLFormElement> & {
 
 export function Form({children, className, ...rest}: FormProps) {
   return (
-    <InOutAnimationWrapper>
-      <form
-        className={cn("flex min-h-full w-full grow flex-col justify-around gap-10", className)}
-        {...rest}
-      >
+    <InOutAnimationWrapper className="overflow-hidden">
+      <form className={cn("flex flex-col justify-around gap-10", className)} {...rest}>
         {children}
       </form>
     </InOutAnimationWrapper>

@@ -18,7 +18,7 @@ export function InOutAnimationWrapper({children, className}: InOutAnimationWrapp
   return (
     <section
       className={cn(
-        "flex size-full grow flex-col",
+        "flex size-full grow flex-col justify-center",
         "transition-transform",
         className,
         inOutAnimation === IN_OUT_ANIMATION_STATE.ENTERING
