@@ -3,7 +3,7 @@
 import {useForm} from "react-hook-form";
 
 import {Form, type FormStepProps} from "@/components/funnel/form";
-import {useAnalytics} from "@/hooks/use-analytics";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {Title} from "@/components/messages/title";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import Github from "@/assets/github.svg";
@@ -14,7 +14,7 @@ export function ThankYouAds({onSubmit, disabled, ...rest}: FormStepProps) {
 
   const {randomValue, queryParams} = useFunnelStore();
 
-  useAnalytics("tyAds");
+  useTriggerEvent("tyAds");
 
   //! VOLVER A VER agregar ghost variant para el link de github
   //! VOLVER A VER arreglar el hover de github
@@ -56,7 +56,7 @@ export function ThankYou({onSubmit, disabled, ...rest}: FormStepProps) {
 
   const {randomValue} = useFunnelStore();
 
-  useAnalytics("ty");
+  useTriggerEvent("ty");
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>

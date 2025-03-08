@@ -3,8 +3,9 @@
 import {ProgressBar} from "./progress-bar";
 import {CurrentStep, STEP_INDEXES} from "./current-step";
 
-import {FunnelStoreProvider} from "@/contexts/use-funnel-store";
 import {AnimationProvider} from "@/contexts/use-animation-store";
+import {EventsProvider} from "@/contexts/use-events-store";
+import {FunnelStoreProvider} from "@/contexts/use-funnel-store";
 
 export function FunnelCard() {
   return (
@@ -13,11 +14,13 @@ export function FunnelCard() {
       id="funnel-card-container"
     >
       <AnimationProvider>
-        <FunnelStoreProvider>
-          <ProgressBar lastStepIndex={STEP_INDEXES.LAST_USER} />
+        <EventsProvider>
+          <FunnelStoreProvider>
+            <ProgressBar lastStepIndex={STEP_INDEXES.LAST_USER} />
 
-          <CurrentStep />
-        </FunnelStoreProvider>
+            <CurrentStep />
+          </FunnelStoreProvider>
+        </EventsProvider>
       </AnimationProvider>
     </main>
   );

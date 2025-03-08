@@ -5,7 +5,7 @@ import {useForm} from "react-hook-form";
 import {type CheckboxData, CheckboxesBox} from "@/components/inputs/checkbox";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
-import {useAnalytics} from "@/hooks/use-analytics";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {Title} from "@/components/messages/title";
 
 const storePromiseOptions: CheckboxData[] = [
@@ -17,7 +17,7 @@ const storePromiseOptions: CheckboxData[] = [
 export function StorePromise({onSubmit, disabled, ...rest}: FormStepProps) {
   const {register, handleSubmit, watch} = useForm();
 
-  useAnalytics("storePromise");
+  useTriggerEvent("storePromise");
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>

@@ -6,10 +6,10 @@ import {Title} from "@/components/messages/title";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {InputBox, type Validation} from "@/components/inputs/input";
 import {Button} from "@/components/inputs/button";
-import {useAnalytics} from "@/hooks/use-analytics";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {useFocus} from "@/hooks/use-focus";
 import {ANIMATION_TIMES} from "@/contexts/use-animation-store";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 
 const nameValidation: Validation = {
   required: {
@@ -42,7 +42,7 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
   const {name, repeat, back} = useFunnelStore();
 
   useFocus(setFocus, "name", ANIMATION_TIMES.DELAY + ANIMATION_TIMES.DURATION);
-  useAnalytics("name");
+  useTriggerEvent("name");
 
   //! VOLVER A VER agregar otro titulo para el caso de que se repita el paso, como por ejemplo: selecciona un segundo color, selecciona un segundo nombre, etc.
 

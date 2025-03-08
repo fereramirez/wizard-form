@@ -5,7 +5,7 @@ import {useForm} from "react-hook-form";
 import {type CheckboxData, CheckboxesBox} from "@/components/inputs/checkbox";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {useAutosubmit} from "@/hooks/use-auto-submit";
-import {useAnalytics} from "@/hooks/use-analytics";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {Title} from "@/components/messages/title";
 
 const autosubmitFetchOptions: CheckboxData[] = [
@@ -18,7 +18,7 @@ const autosubmitFetchOptions: CheckboxData[] = [
 export function AutosubmitFetchAndWait({onSubmit, disabled, ...rest}: FormStepProps) {
   const {register, handleSubmit, watch} = useForm();
 
-  useAnalytics("autosubmitFetch");
+  useTriggerEvent("autosubmitFetch");
   useAutosubmit(watch, () => handleSubmit(onSubmit));
 
   return (

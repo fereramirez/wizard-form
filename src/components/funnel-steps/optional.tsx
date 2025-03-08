@@ -7,7 +7,7 @@ import {Title} from "@/components/messages/title";
 import {type CheckboxData, CheckboxesBox} from "@/components/inputs/checkbox";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
-import {useAnalytics} from "@/hooks/use-analytics";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 
 const optionalOptions: CheckboxData[] = [
@@ -45,7 +45,7 @@ export function Optional({onSubmit, disabled, ...rest}: FormStepProps) {
 
   const {repeat} = useFunnelStore();
 
-  useAnalytics(`optional${repeat === "true" ? "_II" : ""}`);
+  useTriggerEvent(`optional${repeat === "true" ? "_II" : ""}`);
 
   const fieldNames = {
     optional: `optional${repeat === "true" ? "_II" : ""}`,

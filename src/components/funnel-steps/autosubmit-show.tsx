@@ -6,7 +6,7 @@ import {CheckboxesBox} from "@/components/inputs/checkbox";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {useAutosubmit} from "@/hooks/use-auto-submit";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
-import {useAnalytics} from "@/hooks/use-analytics";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {Title} from "@/components/messages/title";
 
 export function AutosubmitShowFetchedData({onSubmit, disabled, ...rest}: FormStepProps) {
@@ -14,7 +14,7 @@ export function AutosubmitShowFetchedData({onSubmit, disabled, ...rest}: FormSte
 
   const {fakeApiData} = useFunnelStore();
 
-  useAnalytics("autosubmitShow");
+  useTriggerEvent("autosubmitShow");
   useAutosubmit(watch, () => handleSubmit(onSubmit));
 
   return (

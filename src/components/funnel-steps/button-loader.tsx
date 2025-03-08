@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form";
 
 import {type CheckboxData, CheckboxesBox} from "@/components/inputs/checkbox";
 import {Form, type FormStepProps} from "@/components/funnel/form";
-import {useAnalytics} from "@/hooks/use-analytics";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {Title} from "@/components/messages/title";
 import {Button} from "@/components/inputs/button";
 
@@ -30,7 +30,7 @@ export function ButtonLoader({onSubmit, disabled, isLoading, ...rest}: FormStepP
     formState: {errors},
   } = useForm();
 
-  useAnalytics("buttonLoader");
+  useTriggerEvent("buttonLoader");
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>

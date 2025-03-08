@@ -7,8 +7,8 @@ import {type CheckboxData, CheckboxesBox} from "@/components/inputs/checkbox";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
 import {Question} from "@/components/messages/question";
-import {useAnalytics} from "@/hooks/use-analytics";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 
 const autosubmitOptions: CheckboxData[] = [
   {value: "true", label: "Yes"},
@@ -25,7 +25,7 @@ export function Repeat({onSubmit, disabled, ...rest}: FormStepProps) {
 
   const {repeat} = useFunnelStore();
 
-  useAnalytics("repeat");
+  useTriggerEvent("repeat");
 
   const isRepeating = repeat === "true";
 

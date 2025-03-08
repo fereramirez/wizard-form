@@ -5,7 +5,7 @@ import {useForm} from "react-hook-form";
 import {Title} from "@/components/messages/title";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
-import {useAnalytics} from "@/hooks/use-analytics";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 
 export function Restart({onSubmit, disabled, ...rest}: FormStepProps) {
@@ -13,7 +13,7 @@ export function Restart({onSubmit, disabled, ...rest}: FormStepProps) {
 
   const {funnelState, fillTime} = useFunnelStore();
 
-  useAnalytics("restart");
+  useTriggerEvent("restart");
 
   //! VOLVER A VER mostar data collected, eliminar data no relevante para el usuario
 

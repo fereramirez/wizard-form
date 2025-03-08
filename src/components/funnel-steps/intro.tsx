@@ -6,14 +6,14 @@ import {useSearchParams} from "next/navigation";
 import {Title} from "@/components/messages/title";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
-import {useAnalytics} from "@/hooks/use-analytics";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 
 export function Intro({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
 
   const searchParams = useSearchParams();
 
-  useAnalytics("intro");
+  useTriggerEvent("intro");
 
   const utmSource = searchParams.get("utm_source");
   const affiliateId = searchParams.get("affiliate_id");

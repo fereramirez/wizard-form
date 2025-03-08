@@ -5,8 +5,8 @@ import {useForm} from "react-hook-form";
 import {type CheckboxData, CheckboxesBox} from "@/components/inputs/checkbox";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {useAutosubmit} from "@/hooks/use-auto-submit";
-import {useAnalytics} from "@/hooks/use-analytics";
 import {Title} from "@/components/messages/title";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
 
 const autosubmitOptions: CheckboxData[] = [
   {value: "option1", label: "Option 1"},
@@ -18,7 +18,7 @@ const autosubmitOptions: CheckboxData[] = [
 export function Autosubmit({onSubmit, disabled, ...rest}: FormStepProps) {
   const {register, handleSubmit, watch} = useForm();
 
-  useAnalytics("autosubmit");
+  useTriggerEvent("autosubmit");
   useAutosubmit(watch, () => handleSubmit(onSubmit));
 
   return (
