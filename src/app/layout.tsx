@@ -21,8 +21,11 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   return (
     <html lang="en">
       <body className={`${unna.className} flex max-h-screen min-h-screen flex-col antialiased`}>
-        <header className="text-primary-3 bg-white px-4 text-xl leading-[4rem] font-bold sm:px-8">
-          <Link className="text-2xl font-bold tracking-tighter" href="/">
+        <header className="bg-white px-4 text-xl leading-[4rem] font-bold sm:px-8">
+          <Link
+            className="hover:text-primary-1 text-primary-3 text-2xl font-bold tracking-tighter transition-colors duration-200"
+            href="/"
+          >
             Wizard Form
           </Link>
         </header>
