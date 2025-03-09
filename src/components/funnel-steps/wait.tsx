@@ -4,6 +4,7 @@ import {Countdown} from "@/components/messages/countdown";
 import Spinner from "@/assets/spinner.svg";
 import {InOutAnimationWrapper} from "@/components/wrappers/in-out-animation-wrapper";
 import {useHiddenData} from "@/hooks/use-hidden-data";
+import {Note} from "@/components/messages/note";
 
 export function WaitForPromise() {
   return (
@@ -29,9 +30,9 @@ export function WaitStep() {
 
   //! VOLVER A VER agregar al step anterior a este
   /*
-    <p>
+    <Note>
       The next step only shows a waiting animation, as it is not a <strong>real</strong> step it won't affect the funnel progress bar
-    </p>
+    </Note>
   */
 
   return (
@@ -43,11 +44,11 @@ export function WaitStep() {
           steps before.
         </Title>
 
-        <p>
+        <Note>
           We are also collecting some data from the user, like the{" "}
           <strong className="text-primary-1">user agent</strong> from the browser and the{" "}
           <strong className="text-primary-1">affiliate id</strong> from the query params
-        </p>
+        </Note>
 
         <Countdown initialTime={COUNT_DOWN_TIME - 1} />
 

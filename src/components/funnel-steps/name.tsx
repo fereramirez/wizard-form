@@ -10,6 +10,7 @@ import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {useFocus} from "@/hooks/use-focus";
 import {ANIMATION_TIMES} from "@/contexts/use-animation-store";
 import {useTriggerEvent} from "@/hooks/use-trigger-event";
+import {Note} from "@/components/messages/note";
 
 const nameValidation: Validation = {
   required: {
@@ -72,10 +73,10 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
       />
 
       {isRepeating ? (
-        <p>
+        <Note>
           We can jump steps. The next step should be the one with the Back button, we are going to
           jump that step
-        </p>
+        </Note>
       ) : null}
 
       <Button disabled={disabled}>{isRepeating ? "JUMP NEXT STEP" : "NEXT"}</Button>

@@ -8,6 +8,7 @@ import {Title} from "@/components/messages/title";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import Github from "@/assets/github.svg";
 import {Button} from "@/components/inputs/button";
+import {Note} from "@/components/messages/note";
 
 export function ShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
@@ -27,7 +28,7 @@ export function ShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
         API, based on that number the repository link is shown
       </Title>
 
-      <p>If you go through the funnel again probably you won't see it (20% of the time)</p>
+      <Note>If you go through the funnel again probably you won't see it (20% of the time)</Note>
 
       <div className="flex gap-10">
         <Button
@@ -43,10 +44,10 @@ export function ShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
         <Button disabled={disabled}>NEXT</Button>
       </div>
 
-      <p>
+      <Note>
         If you hover over the repository link you can see the URL query params appended to it, this
         is helpful to track the user
-      </p>
+      </Note>
     </Form>
   );
 }
@@ -65,7 +66,7 @@ export function DontShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
         API, based on that number the repository link is not shown
       </Title>
 
-      <p>If you go through the funnel again probably you will see it (80% of the time)</p>
+      <Note>If you go through the funnel again probably you will see it (80% of the time)</Note>
 
       <Button disabled={disabled}>NEXT</Button>
     </Form>
