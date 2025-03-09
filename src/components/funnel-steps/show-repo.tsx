@@ -1,14 +1,16 @@
 "use client";
 
 import {useForm} from "react-hook-form";
+import Link from "next/link";
 
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {Title} from "@/components/messages/title";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import Github from "@/assets/github.svg";
-import {Button} from "@/components/inputs/button";
+import {Button, buttonVariants} from "@/components/inputs/button";
 import {Note} from "@/components/messages/note";
+import {cn} from "@/helpers/cn";
 
 export function ShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
@@ -16,10 +18,6 @@ export function ShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
   const {randomValue, queryParams} = useFunnelStore();
 
   useTriggerEvent("showRepo");
-
-  //! VOLVER A VER agregar ghost variant para el link de github
-  //! VOLVER A VER arreglar el hover de github
-  //! VOLVER A VER el repositorio debe abrirse en otra pestaña
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
@@ -30,16 +28,18 @@ export function ShowRepo({onSubmit, disabled, ...rest}: FormStepProps) {
 
       <Note>If you go through the funnel again probably you won't see it (20% of the time)</Note>
 
-      <div className="flex gap-10">
-        <Button
-          className="gap-2"
-          disabled={disabled}
-          href={`https://github.com/fereramirez/wizard-form?${queryParams}`}
+      <div className="flex gap-5 sm:gap-10">
+        <Link
+          className={cn(buttonVariants({variant: "outline"}), {
+            "pointer-events-none opacity-50": disabled,
+          })}
+          href={`https://github.com/fereramirez/wizard-form${queryParams ? `?${queryParams}` : ""}`}
+          target="_blank"
         >
-          <Github fill="currentColor" />
+          <Github fill="white" />
 
           <span>REPOSITORY</span>
-        </Button>
+        </Link>
 
         <Button disabled={disabled}>NEXT</Button>
       </div>

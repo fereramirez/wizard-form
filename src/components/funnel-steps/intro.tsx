@@ -2,11 +2,13 @@
 
 import {useForm} from "react-hook-form";
 import {useSearchParams} from "next/navigation";
+import Link from "next/link";
 
 import {Title} from "@/components/messages/title";
 import {Form, type FormStepProps} from "@/components/funnel/form";
-import {Button} from "@/components/inputs/button";
+import {Button, buttonVariants} from "@/components/inputs/button";
 import {useTriggerEvent} from "@/hooks/use-trigger-event";
+import {cn} from "@/helpers/cn";
 
 export function Intro({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
@@ -25,12 +27,14 @@ export function Intro({onSubmit, disabled, ...rest}: FormStepProps) {
           Before starting let's add some query params to the url, we will use them later
         </Title>
 
-        <Button
-          disabled={disabled}
+        <Link
+          className={cn(buttonVariants({variant: "default"}), {
+            "pointer-events-none opacity-50": disabled,
+          })}
           href="/?utm_source=THIS-IS-A-SOURCE&affiliate_id=THIS-IS-AN-AFFILIATE-ID"
         >
           ADD QUERY PARAMS
-        </Button>
+        </Link>
       </Form>
     );
 
