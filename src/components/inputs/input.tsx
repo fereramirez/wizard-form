@@ -52,7 +52,7 @@ export function Input({
       {...register(name, validation)}
       autoComplete="off"
       className={cn(
-        "w-full px-0 py-2 text-base text-white placeholder:text-white/50 focus:outline-none motion-reduce:transition-none sm:text-3xl",
+        "w-full px-0 py-2 text-xl text-white placeholder:text-white/50 focus:outline-none motion-reduce:transition-none sm:text-3xl",
         "bottom-shadow",
         className,
         disabled ? "pointer-events-none opacity-50" : "",

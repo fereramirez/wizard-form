@@ -13,7 +13,7 @@ export function Question({children, className, id, asLabel = false, htmlFor}: Qu
     return (
       <label
         className={cn(
-          "w-full text-left text-base font-semibold text-balance supports-moz-none:font-medium sm:text-xl",
+          "w-full text-left text-xl font-semibold text-balance supports-moz-none:font-medium sm:text-2xl",
           className,
         )}
         htmlFor={htmlFor}
@@ -27,7 +27,7 @@ export function Question({children, className, id, asLabel = false, htmlFor}: Qu
   return (
     <legend
       className={cn(
-        "w-full text-left text-base font-semibold text-balance supports-moz-none:font-medium sm:text-xl",
+        "w-full text-left text-xl font-semibold text-balance supports-moz-none:font-medium sm:text-xl",
         className,
       )}
       id={id}
