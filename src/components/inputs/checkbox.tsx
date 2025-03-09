@@ -50,6 +50,7 @@ export function Checkbox({
   className,
 }: CheckboxProps) {
   //! VOLVER A VER cambiar a controlled?
+  //! VOLVER A VER ajustar styles, quitar border
   const checkedRadio = type === "radio" && watch(name) === value;
 
   const checkedCheckbox =
