@@ -27,7 +27,7 @@ export function useSubmit() {
   } = useFunnelStore();
   const {resetEvents} = useEventsStore();
 
-  const {triggerExitEnterAnimation, inOutAnimation} = useAnimationStore();
+  const {triggerExitEnterAnimation} = useAnimationStore();
   const {oneTimePass, allowNextPass, notAllowedToPass} = useFunctionGate();
 
   async function handleSubmit(
@@ -183,7 +183,6 @@ export function useSubmit() {
   return {
     isLoading,
     notAllowedToPass,
-    inOutAnimation,
     submitQuestion,
     submitJump,
     submitBack,
