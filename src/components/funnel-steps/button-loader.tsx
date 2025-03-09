@@ -32,8 +32,6 @@ export function ButtonLoader({onSubmit, disabled, isLoading, ...rest}: FormStepP
 
   useTriggerEvent("buttonLoader");
 
-  //! VOLVER A VER hay mucho contenido y no se ve bien  en mobile
-
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>

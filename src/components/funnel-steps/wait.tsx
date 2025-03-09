@@ -35,8 +35,6 @@ export function WaitStep() {
     </Note>
   */
 
-  //! VOLVER A VER hay mucho contenido y no se ve bien  en mobile
-
   return (
     <InOutAnimationWrapper>
       <div className="flex grow flex-col items-center justify-evenly gap-8">
