@@ -58,7 +58,7 @@ export function EventsProvider({children}: {children: ReactNode}) {
 export const useEventsStore = (): EventsStore => {
   const context = useContext(EventsContext);
 
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useEventsStore must be used within an EventsProvider");
   }
 
