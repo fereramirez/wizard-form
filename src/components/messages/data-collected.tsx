@@ -20,7 +20,7 @@ export function DataCollected({children, className, keyName, value}: DataCollect
     <section
       className={cn(
         fragmentMono.className,
-        "grow overflow-x-hidden overflow-y-auto rounded-xs bg-white text-black [&_p]:px-2",
+        "grow overflow-x-hidden rounded-xs bg-white text-black [&_p]:px-2",
         className,
       )}
     >

@@ -9,7 +9,7 @@ import {FunnelStoreProvider} from "@/contexts/use-funnel-store";
 
 export function FunnelCard() {
   return (
-    <main className="flex size-full min-h-80 max-w-3xl grow flex-col items-center justify-between overflow-hidden px-2 py-5 transition-all duration-200 ease-linear motion-reduce:transition-none sm:px-4 sm:py-10">
+    <main className="flex size-full min-h-80 max-w-3xl grow flex-col items-center justify-between px-2 py-5 transition-all duration-200 ease-linear motion-reduce:transition-none sm:px-4 sm:py-10">
       <AnimationProvider>
         <EventsProvider>
           <FunnelStoreProvider>
