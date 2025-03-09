@@ -25,7 +25,7 @@ export function AutosubmitShowFetchedData({onSubmit, disabled, ...rest}: FormSte
 
       <CheckboxesBox
         checkBoxesClassName="p-2"
-        className="grid-cols-4 sm:grid-cols-2"
+        className="grid-cols-2 sm:grid-cols-4"
         disabled={disabled}
         error={undefined}
         name="autosubmitShow"
