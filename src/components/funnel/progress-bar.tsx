@@ -23,7 +23,7 @@ export function ProgressBar({lastStepIndex}: ProgressBarProps) {
   }, [userStepIndex, lastStepIndex]);
 
   return (
-    <div className="bg-primary-3 absolute top-0 left-0 h-[5px] w-full overflow-hidden">
+    <div className="bg-primary-3 absolute top-0 left-0 z-10 h-[5px] w-full overflow-hidden">
       <div
         ref={progressRef}
         aria-valuemax={lastStepIndex}
