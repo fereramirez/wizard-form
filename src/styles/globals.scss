@@ -1,7 +1,6 @@
 .checkbox {
   background-color: white;
   color: black;
-  border-color: black;
 
   &:hover {
     background-color: var(--color-primary-1);
@@ -23,24 +22,19 @@
 .checkbox-checked {
   background-color: var(--color-primary-3);
   color: white;
-  border-color: white;
 
   &:hover {
     background-color: var(--color-primary-1);
     color: black;
-    border-color: black;
   }
 
   &:has(:focus-visible) {
     background-color: var(--color-primary-1);
     color: black;
-    border-color: black;
-
 
     &:hover {
       background-color: var(--color-primary-1);
       color: black;
-      border-color: black;
     }
   }
 }
@@ -49,18 +43,15 @@
   &:hover {
     background-color: var(--color-primary-3);
     color: white;
-    border-color: white;
   }
 
   &:has(:focus-visible) {
     background-color: var(--color-primary-3);
     color: white;
-    border-color: white;
 
     &:hover {
       background-color: var(--color-primary-3);
       color: white;
-      border-color: white;
     }
   }
 }

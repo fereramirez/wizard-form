@@ -50,7 +50,7 @@ export function Checkbox({
   className,
 }: CheckboxProps) {
   //! VOLVER A VER cambiar a controlled?
-  //! VOLVER A VER ajustar styles, quitar border
+  //! VOLVER A VER ajustar styles, agregar ring en focus
   const checkedRadio = type === "radio" && watch(name) === value;
 
   const checkedCheckbox =
@@ -66,7 +66,7 @@ export function Checkbox({
     <label
       aria-disabled={disabled ? "true" : undefined}
       className={cn(
-        "balance flex cursor-pointer items-center justify-center rounded-xs border-2 text-center text-base font-bold transition-all duration-200 ease-linear select-none sm:text-lg",
+        "balance flex cursor-pointer items-center justify-center rounded-xs text-center text-base font-bold transition-all duration-200 ease-linear select-none sm:text-lg",
         "checkbox",
         className,
         {
