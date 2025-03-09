@@ -27,7 +27,7 @@ export function useSubmit() {
   } = useFunnelStore();
   const {resetEvents} = useEventsStore();
 
-  const {triggerInOutAnimation, inOutAnimation} = useAnimationStore();
+  const {triggerExitEnterAnimation, inOutAnimation} = useAnimationStore();
   const {oneTimePass, allowNextPass, notAllowedToPass} = useFunctionGate();
 
   async function handleSubmit(
@@ -43,7 +43,7 @@ export function useSubmit() {
 
     if (callbackBeforeAnimation) await callbackBeforeAnimation();
 
-    triggerInOutAnimation(async () => {
+    triggerExitEnterAnimation(async () => {
       window.scrollTo({top: 0, behavior: "smooth"});
 
       if (toRealStep === undefined) {
@@ -146,11 +146,11 @@ export function useSubmit() {
 
         if (promiseResolved?.data) setHiddenData({randomValue: promiseResolved.data});
 
-        triggerInOutAnimation(() => setRealStepIndex());
+        triggerExitEnterAnimation(() => setRealStepIndex());
       } catch (error) {
         console.log(error);
 
-        triggerInOutAnimation(() => setRealStepIndex(STEP_INDEXES.NAME));
+        triggerExitEnterAnimation(() => setRealStepIndex(STEP_INDEXES.NAME));
       }
     })();
   }

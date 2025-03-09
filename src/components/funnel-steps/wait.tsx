@@ -2,13 +2,13 @@ import {Title} from "../messages/title";
 
 import {Countdown} from "@/components/messages/countdown";
 import Spinner from "@/assets/spinner.svg";
-import {InOutAnimationWrapper} from "@/components/wrappers/in-out-animation-wrapper";
+import {ExitEnterAnimationWrapper} from "@/components/wrappers/exit-enter-animation-wrapper";
 import {useHiddenData} from "@/hooks/use-hidden-data";
 import {Note} from "@/components/messages/note";
 
 export function WaitForPromise() {
   return (
-    <InOutAnimationWrapper>
+    <ExitEnterAnimationWrapper>
       <div className="flex grow flex-col items-center justify-evenly gap-8">
         <Title>
           Remember for the data we would use in the last step? If you see this step, it means that
@@ -19,7 +19,7 @@ export function WaitForPromise() {
           <Spinner className="size-full grow animate-spin" fill="currentColor" />
         </span>
       </div>
-    </InOutAnimationWrapper>
+    </ExitEnterAnimationWrapper>
   );
 }
 
@@ -36,7 +36,7 @@ export function WaitStep() {
   */
 
   return (
-    <InOutAnimationWrapper>
+    <ExitEnterAnimationWrapper>
       <div className="flex grow flex-col items-center justify-evenly gap-8">
         <Title>
           We can render different steps based on the data collected, the next step will be chosen
@@ -56,6 +56,6 @@ export function WaitStep() {
           <Spinner className="size-full grow animate-spin" fill="currentColor" />
         </span>
       </div>
-    </InOutAnimationWrapper>
+    </ExitEnterAnimationWrapper>
   );
 }
