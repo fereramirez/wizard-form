@@ -1,10 +1,9 @@
-import {Title} from "../messages/title";
-
-import {Countdown} from "@/components/messages/countdown";
-import Spinner from "@/assets/spinner.svg";
-import {ExitEnterAnimationWrapper} from "@/components/wrappers/exit-enter-animation-wrapper";
 import {useHiddenData} from "@/hooks/use-hidden-data";
+import {ExitEnterAnimationWrapper} from "@/components/wrappers/exit-enter-animation-wrapper";
+import {Title} from "@/components/messages/title";
+import {Countdown} from "@/components/messages/countdown";
 import {Note} from "@/components/messages/note";
+import Spinner from "@/assets/spinner.svg";
 
 export function WaitForPromise() {
   return (
