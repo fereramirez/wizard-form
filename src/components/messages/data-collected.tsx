@@ -11,17 +11,26 @@ const fragmentMono = Fragment_Mono({
 type DataCollectedProps = {
   children: React.ReactNode;
   className?: string;
+  keyName?: string;
+  value?: string;
 };
 
-export function DataCollected({children, className}: DataCollectedProps) {
+export function DataCollected({children, className, keyName, value}: DataCollectedProps) {
   return (
     <section
       className={cn(
         fragmentMono.className,
-        "grow overflow-x-hidden overflow-y-auto p-2",
+        "grow overflow-x-hidden overflow-y-auto rounded-xs bg-white text-black [&_p]:px-2",
         className,
       )}
     >
+      {keyName && value ? (
+        <div className="border-primary-3 sticky top-0 grid auto-rows-fr grid-cols-2 gap-2 border-b bg-black py-1 text-white">
+          <p>{keyName}</p>
+          <p>{value}</p>
+        </div>
+      ) : null}
+
       {children}
     </section>
   );

@@ -8,6 +8,7 @@ import {Button} from "@/components/inputs/button";
 import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {useEventsStore} from "@/contexts/use-events-store";
 import {DataCollected} from "@/components/messages/data-collected";
+import {cn} from "@/helpers/cn";
 
 export function Events({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
@@ -25,13 +26,16 @@ export function Events({onSubmit, disabled, ...rest}: FormStepProps) {
         with the elapsed time in seconds
       </Title>
 
-      <DataCollected>
+      <DataCollected keyName="Event" value="Elapsed Time">
         {events.map((event) => (
           <div
             key={event.timestamp}
-            className="border-primary-3 grid auto-rows-fr grid-cols-2 gap-2 border-b py-1"
+            className={cn(
+              "border-primary-3 grid auto-rows-fr grid-cols-2 gap-2 border-b py-1",
+              "last:border-b-0",
+            )}
           >
-            <p key={event.name}>{event.name}:</p>
+            <p key={event.name}>{event.name}</p>
             <p> {event.elapsedTime / 1000} s</p>
           </div>
         ))}

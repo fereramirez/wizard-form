@@ -8,6 +8,7 @@ import {Button} from "@/components/inputs/button";
 import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {DataCollected} from "@/components/messages/data-collected";
+import {cn} from "@/helpers/cn";
 
 export function FunnelData({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
@@ -20,13 +21,16 @@ export function FunnelData({onSubmit, disabled, ...rest}: FormStepProps) {
     <Form className="overflow-hidden" onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title className="shrink-0">This is the raw data collected from the funnel</Title>
 
-      <DataCollected>
+      <DataCollected keyName="Field" value="Value">
         {Object.entries(funnelState).map(([key, value]) => (
           <div
             key={key}
-            className="border-primary-3 grid auto-rows-fr grid-cols-2 gap-2 border-b py-1"
+            className={cn(
+              "border-primary-3 grid auto-rows-fr grid-cols-2 gap-2 border-b py-1",
+              "last:border-b-0",
+            )}
           >
-            <p>{key}:</p>
+            <p>{key}</p>
             <p className="break-words">{JSON.stringify(value)}</p>
           </div>
         ))}
