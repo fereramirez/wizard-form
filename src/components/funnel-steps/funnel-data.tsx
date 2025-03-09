@@ -9,6 +9,7 @@ import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
 import {DataCollected} from "@/components/messages/data-collected";
 import {cn} from "@/helpers/cn";
+import {useBodyClass} from "@/hooks/use-body-class";
 
 export function FunnelData({onSubmit, disabled, ...rest}: FormStepProps) {
   const {handleSubmit} = useForm();
@@ -16,6 +17,7 @@ export function FunnelData({onSubmit, disabled, ...rest}: FormStepProps) {
   const {funnelState} = useFunnelStore();
 
   useTriggerEvent("funnelData");
+  useBodyClass("max-h-screen");
 
   return (
     <Form className="overflow-hidden" onSubmit={handleSubmit(onSubmit)} {...rest}>

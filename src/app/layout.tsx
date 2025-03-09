@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
-      <body className={`${unna.className} flex max-h-screen min-h-screen flex-col antialiased`}>
+      <body className={`${unna.className} flex min-h-screen flex-col antialiased`}>
         <header className="sticky top-0 z-10 bg-white px-4 text-xl leading-[3rem] font-bold sm:px-8 sm:leading-[4rem]">
           <Link
             className="hover:text-primary-1 text-primary-3 text-2xl font-bold tracking-tighter transition-colors duration-200"

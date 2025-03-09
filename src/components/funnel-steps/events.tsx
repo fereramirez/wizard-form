@@ -2,12 +2,13 @@
 
 import {useForm} from "react-hook-form";
 
-import {Title} from "@/components/messages/title";
-import {Form, type FormStepProps} from "@/components/funnel/form";
-import {Button} from "@/components/inputs/button";
-import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {useEventsStore} from "@/contexts/use-events-store";
+import {useTriggerEvent} from "@/hooks/use-trigger-event";
+import {useBodyClass} from "@/hooks/use-body-class";
+import {Form, type FormStepProps} from "@/components/funnel/form";
+import {Title} from "@/components/messages/title";
 import {DataCollected} from "@/components/messages/data-collected";
+import {Button} from "@/components/inputs/button";
 import {cn} from "@/helpers/cn";
 
 export function Events({onSubmit, disabled, ...rest}: FormStepProps) {
@@ -16,6 +17,7 @@ export function Events({onSubmit, disabled, ...rest}: FormStepProps) {
   const {getEventsWithElapsedTime} = useEventsStore();
 
   useTriggerEvent("events");
+  useBodyClass("max-h-screen");
 
   const events = getEventsWithElapsedTime();
 
