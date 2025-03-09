@@ -12,8 +12,6 @@ export function Back({onSubmit, secondaryOnSubmit, disabled, ...rest}: FormStepP
 
   useTriggerEvent("back");
 
-  //! VOLVER A VER agregar animacion para back, que en lugar de moverse hacia arriba se mueva hacia abajo
-
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>In this step you can go back to the previous step</Title>
