@@ -7,7 +7,7 @@ import {useFunctionGate} from "./use-function-gate";
 import {fakeApi, type RandomValueResponse} from "@/helpers/fake-api";
 import {type StepPayload, useFunnelStore} from "@/contexts/use-funnel-store";
 import {STEP_INDEXES} from "@/components/funnel/current-step";
-import {useAnimationStore} from "@/contexts/use-animation-store";
+import {type AnimationDirection, useAnimationStore} from "@/contexts/use-animation-store";
 import {COUNT_DOWN_TIME} from "@/components/funnel-steps/wait";
 import {useEventsStore} from "@/contexts/use-events-store";
 
@@ -31,12 +31,13 @@ export function useSubmit() {
   const {oneTimePass, allowNextPass, notAllowedToPass} = useFunctionGate();
 
   async function handleSubmit(
-    callbackBeforeAnimation: (() => Promise<void> | void) | null,
+    callbackBeforeAnimation?: (() => Promise<void> | void) | null,
     callbackAfterAnimation?: (() => Promise<void> | void) | null,
     showLoading?: boolean,
     toRealStep?: StepPayload,
     notUserStep?: boolean,
     toUserStep?: StepPayload,
+    animationDirection?: AnimationDirection,
   ) {
     if (!oneTimePass()) return;
     if (showLoading) setIsLoading(true);
@@ -59,32 +60,57 @@ export function useSubmit() {
       allowNextPass();
 
       if (callbackAfterAnimation) await callbackAfterAnimation();
-    });
+    }, animationDirection);
   }
 
   function submitQuestion(dataUpdated: FieldValues) {
-    handleSubmit(null, () => setFunnelData(dataUpdated));
+    handleSubmit(undefined, () => setFunnelData(dataUpdated));
   }
 
   function submitJump(
     dataUpdated: FieldValues,
     toRealStep?: StepPayload,
     toUserStep?: StepPayload,
+    animationDirection?: AnimationDirection,
   ) {
-    handleSubmit(null, () => setFunnelData(dataUpdated), false, toRealStep, false, toUserStep);
+    handleSubmit(
+      undefined,
+      () => setFunnelData(dataUpdated),
+      undefined,
+      toRealStep,
+      undefined,
+      toUserStep,
+      animationDirection,
+    );
   }
 
   function submitBack() {
     //! VOLVER A VER setFunnelData no es type safe, se puede pasar cualquier cosa
-    handleSubmit(null, () => setFunnelData({back: true}), false, "-1");
+    handleSubmit(
+      undefined,
+      () => setFunnelData({back: true}),
+      undefined,
+      "-1",
+      undefined,
+      undefined,
+      "down",
+    );
   }
 
   function submitRepeat(dataUpdated: FieldValues) {
     //! VOLVER A VER dataUpdated no es type safe
     if (dataUpdated?.repeat === "true") {
-      handleSubmit(null, () => setFunnelData(dataUpdated), false, 1);
+      handleSubmit(
+        undefined,
+        () => setFunnelData(dataUpdated),
+        undefined,
+        1,
+        undefined,
+        undefined,
+        "down",
+      );
     } else {
-      handleSubmit(null, () => setFunnelData(dataUpdated));
+      handleSubmit(undefined, () => setFunnelData(dataUpdated));
     }
   }
 
@@ -136,7 +162,7 @@ export function useSubmit() {
   }
 
   function submitWaitForPromise(dataUpdated: FieldValues) {
-    handleSubmit(null, () => setFunnelData(dataUpdated));
+    handleSubmit(undefined, () => setFunnelData(dataUpdated));
 
     (async () => {
       try {
@@ -156,7 +182,7 @@ export function useSubmit() {
   }
 
   async function submitLastQuestion(dataUpdated: FieldValues) {
-    handleSubmit(null, () => setFunnelData(dataUpdated));
+    handleSubmit(undefined, () => setFunnelData(dataUpdated));
 
     await handleSubmit(
       async () => {
@@ -166,15 +192,15 @@ export function useSubmit() {
           console.log(error);
         }
       },
-      null,
-      false,
+      undefined,
+      undefined,
       randomValue >= 3 ? STEP_INDEXES.SHOW_REPO : STEP_INDEXES.DONT_SHOW_REPO,
       true,
     );
   }
 
   function submitRestart() {
-    handleSubmit(null, () => {
+    handleSubmit(undefined, () => {
       resetFunnel();
       resetEvents();
     });

@@ -3,6 +3,7 @@ import {
   TOTAL_EXIT_ENTER_ANIMATION_TIME,
   EXIT_ENTER_ANIMATION_STATE,
   useAnimationStore,
+  ANIMATION_DIRECTION,
 } from "@/contexts/use-animation-store";
 
 type ExitEnterAnimationWrapperProps = {
@@ -11,9 +12,10 @@ type ExitEnterAnimationWrapperProps = {
 };
 
 export function ExitEnterAnimationWrapper({children, className}: ExitEnterAnimationWrapperProps) {
-  const {exitEnterAnimation} = useAnimationStore();
+  const {exitEnterAnimation, animationDirection} = useAnimationStore();
 
   const transitionDuration = `${TOTAL_EXIT_ENTER_ANIMATION_TIME}ms`;
+  const isUpDirection = animationDirection === ANIMATION_DIRECTION.UP;
 
   return (
     <section
@@ -22,10 +24,14 @@ export function ExitEnterAnimationWrapper({children, className}: ExitEnterAnimat
         "transition-transform",
         className,
         exitEnterAnimation === EXIT_ENTER_ANIMATION_STATE.ENTERING
-          ? "translate-y-full" // opacity-0"
+          ? isUpDirection
+            ? "translate-y-full" // Entering from bottom to center (default)
+            : "-translate-y-full" // Entering from top to center (inverted)
           : exitEnterAnimation === EXIT_ENTER_ANIMATION_STATE.EXITING
-            ? "-translate-y-full" // opacity-0"
-            : "translate-y-0", // opacity-100
+            ? isUpDirection
+              ? "-translate-y-full" // Exiting from center to top (default)
+              : "translate-y-full" // Exiting from center to bottom (inverted)
+            : "translate-y-0", // Normal state (centered)
       )}
       style={{transitionDuration}}
     >
