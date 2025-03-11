@@ -13,14 +13,14 @@ const ConditionalGroupContext = createContext<ConditionalGroupStore | undefined>
 
 export function ConditionalGroupProvider({children}: {children: ReactNode}) {
   const [openRecord, setOpenRecord] = useState<Record<string, boolean>>({});
-  const lastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  /* const lastTimeoutRef = useRef<NodeJS.Timeout | null>(null); */
 
   const triggerConditionalGroupAnimation = useCallback(
     (callback: () => void) => {
-      if (lastTimeoutRef.current) {
+      /* if (lastTimeoutRef.current) {
         clearTimeout(lastTimeoutRef.current);
         lastTimeoutRef.current = null;
-      }
+      } */
 
       const delay = Object.values(openRecord).some((value) => value === true)
         ? ANIMATION_DURATION
@@ -35,9 +35,9 @@ export function ConditionalGroupProvider({children}: {children: ReactNode}) {
 
       console.log("delay", delay);
 
-      lastTimeoutRef.current = setTimeout(() => {
+      /* lastTimeoutRef.current =  */ setTimeout(() => {
         callback();
-        lastTimeoutRef.current = null;
+        /* lastTimeoutRef.current = null; */
       }, delay);
 
       /* setLastTimeout(currentTimeout); */
