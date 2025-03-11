@@ -2,13 +2,14 @@
 
 import {useForm} from "react-hook-form";
 
-import {DivAnimatedHeight} from "@/components/wrappers/div-animated-height";
+import {HeightAutoGroup} from "@/components/wrappers/height-auto";
 import {Title} from "@/components/messages/title";
 import {type CheckboxData, CheckboxesBox} from "@/components/inputs/checkbox";
 import {Form, type FormStepProps} from "@/components/funnel/form";
 import {Button} from "@/components/inputs/button";
 import {useTriggerEvent} from "@/hooks/use-trigger-event";
 import {useFunnelStore} from "@/contexts/use-funnel-store";
+import {ConditionalGroupProvider} from "@/contexts/use-conditional-group-store";
 
 const optionalOptions: CheckboxData[] = [
   {value: "purple", label: "Purple"},
@@ -64,69 +65,67 @@ export function Optional({onSubmit, disabled, ...rest}: FormStepProps) {
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>Based on the option you chose you can see additional questions</Title>
 
-      <CheckboxesBox
-        checkBoxesClassName="p-2"
-        className="grid-cols-2 sm:grid-cols-4"
-        disabled={disabled}
-        error={errors.optional?.message}
-        name={fieldNames.optional}
-        options={optionalOptions}
-        question={`Please select a ${isRepeating ? "second" : ""} color`}
-        register={register}
-        type="radio"
-        watch={watch}
-      />
+      <span>
+        <CheckboxesBox
+          checkBoxesClassName="p-2"
+          className="grid-cols-2 sm:grid-cols-4"
+          disabled={disabled}
+          error={errors.optional?.message}
+          name={fieldNames.optional}
+          options={optionalOptions}
+          question={`Please select a ${isRepeating ? "second" : ""} color`}
+          register={register}
+          type="radio"
+          watch={watch}
+        />
 
-      {optionalValue === "purple" ? (
-        <DivAnimatedHeight isOpen={optionalValue === "purple"}>
-          <CheckboxesBox
-            checkBoxesClassName="p-2"
-            className="grid-cols-2 sm:grid-cols-4"
-            disabled={disabled}
-            error={errors.purple?.message}
-            name={fieldNames.purple}
-            options={purpleOptions}
-            question="You've selected purple. Please select your favorite purple color, you can select multiple"
-            register={register}
-            type="checkbox"
-            watch={watch}
-          />
-        </DivAnimatedHeight>
-      ) : null}
+        <ConditionalGroupProvider>
+          <HeightAutoGroup id="purple" isOpen={optionalValue === "purple"}>
+            <CheckboxesBox
+              checkBoxesClassName="p-2"
+              className="grid-cols-2 sm:grid-cols-4"
+              disabled={disabled}
+              error={errors.purple?.message}
+              name={fieldNames.purple}
+              options={purpleOptions}
+              question="You've selected purple. Please select your favorite purple color, you can select multiple"
+              register={register}
+              type="checkbox"
+              watch={watch}
+            />
+          </HeightAutoGroup>
 
-      {optionalValue === "blue" ? (
-        <DivAnimatedHeight isOpen={optionalValue === "blue"}>
-          <CheckboxesBox
-            checkBoxesClassName="p-2"
-            className="grid-cols-1 sm:grid-cols-3"
-            disabled={disabled}
-            error={errors.blue?.message}
-            name={fieldNames.blue}
-            options={blueOptions}
-            question="You've selected blue. Please select your favorite blue color, you can select multiple"
-            register={register}
-            type="checkbox"
-            watch={watch}
-          />
-        </DivAnimatedHeight>
-      ) : null}
+          <HeightAutoGroup id="blue" isOpen={optionalValue === "blue"}>
+            <CheckboxesBox
+              checkBoxesClassName="p-2"
+              className="grid-cols-1 sm:grid-cols-3"
+              disabled={disabled}
+              error={errors.blue?.message}
+              name={fieldNames.blue}
+              options={blueOptions}
+              question="You've selected blue. Please select your favorite blue color, you can select multiple"
+              register={register}
+              type="checkbox"
+              watch={watch}
+            />
+          </HeightAutoGroup>
 
-      {optionalValue === "green" ? (
-        <DivAnimatedHeight isOpen={optionalValue === "green"}>
-          <CheckboxesBox
-            checkBoxesClassName="p-2"
-            className="grid-cols-2"
-            disabled={disabled}
-            error={errors.green?.message}
-            name={fieldNames.green}
-            options={greenOptions}
-            question="You've selected green. Please select your favorite green color, you can select multiple"
-            register={register}
-            type="checkbox"
-            watch={watch}
-          />
-        </DivAnimatedHeight>
-      ) : null}
+          <HeightAutoGroup id="green" isOpen={optionalValue === "green"}>
+            <CheckboxesBox
+              checkBoxesClassName="p-2"
+              className="grid-cols-2"
+              disabled={disabled}
+              error={errors.green?.message}
+              name={fieldNames.green}
+              options={greenOptions}
+              question="You've selected green. Please select your favorite green color, you can select multiple"
+              register={register}
+              type="checkbox"
+              watch={watch}
+            />
+          </HeightAutoGroup>
+        </ConditionalGroupProvider>
+      </span>
 
       <Button disabled={disabled}>NEXT</Button>
     </Form>

@@ -6,6 +6,8 @@ type BoxWrapperProps = {
   className?: string;
 };
 
+//! VOLVER A VER agregar mt-8 para que haya una separacion entre el titulo y el boton de submit, habria que meter todos los inputs dentro de un wrapper y ponerle el margin a ese wrapper
+
 export function BoxWrapper({fieldset = false, children, className}: BoxWrapperProps) {
   if (fieldset)
     return (

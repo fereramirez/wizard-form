@@ -1,0 +1,61 @@
+import {useRef, useState, useEffect, useCallback} from "react";
+
+import {ANIMATION_DURATION, useConditionalGroupStore} from "@/contexts/use-conditional-group-store";
+
+export const useAnimateConditionalGroup = (id: string, isOpen: boolean) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState<string>("0px");
+  const [shouldRender, setShouldRender] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  const {triggerConditionalGroupAnimation, registerRecord} = useConditionalGroupStore();
+
+  const handleIsOpen = useCallback(() => {
+    if (isOpen) {
+      console.log(id.toUpperCase(), "open-------------------");
+      setShouldRender(true);
+
+      setIsMounted(true);
+    } else {
+      console.log(id.toUpperCase(), "not open-------------------");
+      setIsMounted(false);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isMounted) {
+      if (!ref.current) return;
+
+      const contentHeight = ref.current.scrollHeight;
+
+      triggerConditionalGroupAnimation(() => {
+        registerRecord(id, true);
+        setHeight(`${contentHeight.toString()}px`);
+        console.log(id.toUpperCase(), "mounted-------------------");
+      });
+    } else {
+      setHeight("0px");
+
+      triggerConditionalGroupAnimation(() => {
+        registerRecord(id, false);
+        setShouldRender(false);
+        console.log(id.toUpperCase(), "not mounted-------------------");
+      });
+    }
+  }, [isMounted]);
+
+  useEffect(() => {
+    handleIsOpen();
+    window.addEventListener("resize", handleIsOpen);
+
+    return () => window.removeEventListener("resize", handleIsOpen);
+  }, [handleIsOpen]);
+
+  const style = {
+    height,
+    overflow: "hidden",
+    transition: `height ${ANIMATION_DURATION.toString()}ms ease-in-out`,
+  };
+
+  return {ref, style, shouldRender};
+};
