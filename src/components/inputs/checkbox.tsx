@@ -50,7 +50,6 @@ export function Checkbox({
   className,
 }: CheckboxProps) {
   //! VOLVER A VER cambiar a controlled?
-  //! VOLVER A VER ajustar styles, agregar ring en focus
   const checkedRadio = type === "radio" && watch(name) === value;
 
   const checkedCheckbox =
@@ -66,14 +65,15 @@ export function Checkbox({
     <label
       aria-disabled={disabled ? "true" : undefined}
       className={cn(
-        "balance flex cursor-pointer items-center justify-center rounded-xs px-2 py-4 text-center text-base font-bold transition-all duration-200 ease-linear select-none sm:text-lg",
-        "checkbox",
+        "balance flex cursor-pointer items-center justify-center rounded-xs border-2 p-2 !py-1 text-center text-base font-bold transition-all duration-200 ease-linear select-none sm:text-lg",
+        "hover:bg-primary-1 hover:border-primary-1 has-focus-visible:border-primary-1 has-focus-visible:text-primary-1 border-white bg-white text-black hover:text-white has-focus-visible:hover:text-white",
         className,
         {
-          "checkbox-checked": checked,
+          "border-primary-3 bg-primary-3 text-white has-focus-visible:border-white has-focus-visible:text-white":
+            checked,
         },
         {
-          "radio-checked cursor-default": checked && type === "radio",
+          "hover:bg-primary-3 hover:border-primary-3 cursor-default": checked && type === "radio",
         },
         {
           "pointer-events-none opacity-50": disabled,
