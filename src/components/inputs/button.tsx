@@ -5,7 +5,7 @@ import Spinner from "@/assets/spinner.svg";
 import {cn} from "@/helpers/cn";
 
 export const buttonVariants = cva(
-  "flex min-h-12 w-full cursor-pointer items-center justify-center gap-4 rounded-xs border-2 p-2 text-xl font-bold whitespace-nowrap transition-colors duration-200 outline-none disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none sm:min-h-14 sm:text-2xl",
+  "flex min-h-12 w-full cursor-pointer items-center justify-center gap-4 rounded-xs border-2 p-2 text-xl font-bold whitespace-nowrap transition-all duration-200 ease-linear outline-none disabled:pointer-events-none disabled:opacity-50 sm:min-h-14 sm:text-2xl",
   {
     variants: {
       variant: {
