@@ -7,7 +7,8 @@
 }
 
 @theme {
-  --color-primary-1: #7ebf7e;
+  --color-primary-0: #7ebf7e;
+  --color-primary-1: #4f924f;
   --color-primary-2: #004300;
   --color-primary-3: #002000;
   --color-grey: #848484;
