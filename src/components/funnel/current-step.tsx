@@ -95,14 +95,31 @@ export function CurrentStep() {
   ];
 
   const stepsArrayTest = [
-    <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />, //! VOLVER A VER cambiar este step
+    <Optional key="3" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <ShowRepo
+      key="13"
+      disabled={notAllowedToPass}
+      onSubmit={(data) => submitJump(data, "+2", "+1")}
+    />,
+    <Back
+      key="2"
+      disabled={notAllowedToPass}
+      secondaryOnSubmit={submitBack}
+      onSubmit={submitQuestion}
+    />,
+    <FunnelData key="15" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+    <FunnelData key="15" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
+
+    <ButtonLoader
+      key="6"
+      disabled={notAllowedToPass}
+      isLoading={isLoading}
+      onSubmit={submitWaitFakeRequest}
+    />,
     <WaitStep key="12" />,
-    <ShowRepo key="13" disabled={notAllowedToPass} onSubmit={(data) => submitJump(data, "+2")} />,
-    <DontShowRepo key="14" disabled={notAllowedToPass} onSubmit={submitQuestion} />,
-    <Restart key="15" disabled={notAllowedToPass} onSubmit={submitRestart} />,
   ];
 
-  return stepsArray[realStepIndex];
+  return stepsArrayTest[realStepIndex];
 }
 
 export const STEP_INDEXES = {
@@ -126,62 +143,119 @@ const STEPS = {
   Step9: 9,
   Step10: 10,
   Step11: 11,
+  Step12: 12,
+  Step13: 13,
+  Step14: 14,
+  Step15: 15,
+  Step16: 16,
+  Step17: 17,
 } as const;
 
 type StepValue = (typeof STEPS)[keyof typeof STEPS];
 type StepKey = keyof typeof STEPS;
 
 export function CurrentStepV2() {
-  const {realStepIndex} = useFunnelStore() as {
+  const {realStepIndex, repeat} = useFunnelStore(); /* as {
     realStepIndex: StepValue;
-  };
+  }; */
 
   const {
     isLoading,
+    notAllowedToPass,
     submitQuestion,
+    submitJump,
+    submitBack,
+    submitWaitFakeRequest,
     submitFetchWaitData,
     submitRepeat,
     submitStorePromise,
     submitWaitForPromise,
     submitLastQuestion,
+    submitRestart,
   } = useSubmit();
+
+  const isRepeating = repeat === "true";
 
   switch (realStepIndex) {
     case STEPS.Step0:
-      return <Name isLoading={isLoading} onSubmit={submitQuestion} />;
+      return <Intro disabled={notAllowedToPass} onSubmit={submitQuestion} />;
 
     case STEPS.Step1:
-      return <Optional isLoading={isLoading} onSubmit={submitQuestion} />;
+      return (
+        <Name
+          disabled={notAllowedToPass}
+          onSubmit={(data) => submitJump(data, isRepeating ? "+2" : "+1")}
+        />
+      );
 
     case STEPS.Step2:
-      return <Repeat isLoading={isLoading} onSubmit={submitRepeat} />;
+      return (
+        <Back
+          disabled={notAllowedToPass}
+          secondaryOnSubmit={submitBack}
+          onSubmit={submitQuestion}
+        />
+      );
 
     case STEPS.Step3:
-      return <StorePromise isLoading={isLoading} onSubmit={submitStorePromise} />;
+      return <Optional disabled={notAllowedToPass} onSubmit={submitQuestion} />;
 
     case STEPS.Step4:
-      return <Autosubmit isLoading={isLoading} onSubmit={submitQuestion} />;
+      return <Repeat disabled={notAllowedToPass} onSubmit={submitRepeat} />;
 
     case STEPS.Step5:
-      return <AutosubmitFetchAndWait isLoading={isLoading} onSubmit={submitFetchWaitData} />;
+      return <StorePromise disabled={notAllowedToPass} onSubmit={submitStorePromise} />;
 
     case STEPS.Step6:
-      return <AutosubmitShowFetchedData isLoading={isLoading} onSubmit={submitWaitForPromise} />;
+      return (
+        <ButtonLoader
+          disabled={notAllowedToPass}
+          isLoading={isLoading}
+          onSubmit={submitWaitFakeRequest}
+        />
+      );
 
     case STEPS.Step7:
-      return <WaitForPromise />;
+      return <Autosubmit disabled={notAllowedToPass} onSubmit={submitQuestion} />;
 
     case STEPS.Step8:
-      return <Name isLoading={isLoading} onSubmit={submitLastQuestion} />;
+      return (
+        <AutosubmitFetchAndWait
+          disabled={notAllowedToPass || isLoading}
+          onSubmit={submitFetchWaitData}
+        />
+      );
 
     case STEPS.Step9:
-      return <WaitStep />;
+      return (
+        <AutosubmitShowFetchedData disabled={notAllowedToPass} onSubmit={submitWaitForPromise} />
+      );
 
     case STEPS.Step10:
-      return <ShowRepo />;
+      return <WaitForPromise />;
 
     case STEPS.Step11:
-      return <DontShowRepo />;
+      return <Name disabled={notAllowedToPass} onSubmit={submitLastQuestion} />; //! VOLVER A VER cambiar este step
+
+    case STEPS.Step12:
+      return <WaitStep />;
+
+    case STEPS.Step13:
+      return (
+        <ShowRepo disabled={notAllowedToPass} onSubmit={(data) => submitJump(data, "+2", "+1")} />
+      );
+
+    case STEPS.Step14:
+      return <DontShowRepo disabled={notAllowedToPass} onSubmit={submitQuestion} />;
+
+    case STEPS.Step15:
+      return <FunnelData disabled={notAllowedToPass} onSubmit={submitQuestion} />;
+
+    case STEPS.Step16:
+      return <Events disabled={notAllowedToPass} onSubmit={submitQuestion} />;
+
+    case STEPS.Step17:
+      return <Restart disabled={notAllowedToPass} onSubmit={submitRestart} />;
 
     default: {
       const _exhaustiveCheck: never = realStepIndex;
