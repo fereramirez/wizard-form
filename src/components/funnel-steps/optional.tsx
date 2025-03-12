@@ -59,8 +59,6 @@ export function Optional({onSubmit, disabled, ...rest}: FormStepProps) {
 
   const optionalValue = watch(fieldNames.optional) as string;
 
-  //! VOLVER A VER al desmontar step opcional mostrar animacion, se podria agregar un wrapper que reciba el condicional option = value que se encargue de la animacion de desmonte?
-
   return (
     <Form onSubmit={handleSubmit(onSubmit)} {...rest}>
       <Title>Based on the option you chose you can see additional questions</Title>
