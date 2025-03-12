@@ -1,6 +1,4 @@
-"use client";
-
-import {createContext, useCallback, useContext, useRef, useState, type ReactNode} from "react";
+import {createContext, useCallback, useContext, useState, type ReactNode} from "react";
 
 export const ANIMATION_DURATION = 250;
 
@@ -13,34 +11,16 @@ const ConditionalGroupContext = createContext<ConditionalGroupStore | undefined>
 
 export function ConditionalGroupProvider({children}: {children: ReactNode}) {
   const [openRecord, setOpenRecord] = useState<Record<string, boolean>>({});
-  /* const lastTimeoutRef = useRef<NodeJS.Timeout | null>(null); */
 
   const triggerConditionalGroupAnimation = useCallback(
     (callback: () => void) => {
-      /* if (lastTimeoutRef.current) {
-        clearTimeout(lastTimeoutRef.current);
-        lastTimeoutRef.current = null;
-      } */
-
       const delay = Object.values(openRecord).some((value) => value === true)
         ? ANIMATION_DURATION
         : 0;
 
-      console.log("animation", openRecord);
-
-      console.log(
-        "some?",
-        Object.values(openRecord).some((value) => value === true),
-      );
-
-      console.log("delay", delay);
-
-      /* lastTimeoutRef.current =  */ setTimeout(() => {
+      setTimeout(() => {
         callback();
-        /* lastTimeoutRef.current = null; */
       }, delay);
-
-      /* setLastTimeout(currentTimeout); */
     },
     [openRecord],
   );

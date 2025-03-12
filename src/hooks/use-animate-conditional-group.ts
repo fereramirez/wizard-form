@@ -12,12 +12,11 @@ export const useAnimateConditionalGroup = (id: string, isOpen: boolean) => {
 
   const handleIsOpen = useCallback(() => {
     if (isOpen) {
-      console.log(id.toUpperCase(), "open-------------------");
+      // console.log(id.toUpperCase(), "-----render");
       setShouldRender(true);
 
       setIsMounted(true);
     } else {
-      console.log(id.toUpperCase(), "not open-------------------");
       setIsMounted(false);
     }
   }, [isOpen]);
@@ -28,18 +27,23 @@ export const useAnimateConditionalGroup = (id: string, isOpen: boolean) => {
 
       const contentHeight = ref.current.scrollHeight;
 
-      triggerConditionalGroupAnimation(() => {
-        registerRecord(id, true);
-        setHeight(`${contentHeight.toString()}px`);
-        console.log(id.toUpperCase(), "mounted-------------------");
-      });
-    } else {
-      setHeight("0px");
+      registerRecord(id, true);
 
       triggerConditionalGroupAnimation(() => {
-        registerRecord(id, false);
+        // console.log(id.toUpperCase(), "-----height", contentHeight);
+        setHeight(`${contentHeight.toString()}px`);
+        setShouldRender(true);
+      });
+    } else {
+      // console.log(id.toUpperCase(), "-----height", 0);
+      setHeight("0px");
+
+      registerRecord(id, false);
+
+      triggerConditionalGroupAnimation(() => {
+        // console.log(id.toUpperCase(), "-----not render");
+        setHeight("0px");
         setShouldRender(false);
-        console.log(id.toUpperCase(), "not mounted-------------------");
       });
     }
   }, [isMounted]);
