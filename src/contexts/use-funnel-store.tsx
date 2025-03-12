@@ -20,12 +20,14 @@ type HiddenDataAction = Prettify<
 
 type HiddenData = Prettify<UnionToIntersection<HiddenDataAction>>;
 
+type StepValue = number; //! VOLVER A VER agregar type de step, ahora se usa StepPayload, deberia concordar con los stepNumber asignados en current-step
+
 type FunnelForms = {
   //! VOLVER A VER actualizar el type de FunnelState
 
   // Steps
-  realStepIndex: number;
-  userStepIndex: number;
+  realStepIndex: StepValue;
+  userStepIndex: StepValue;
 
   // step 0
   // intro
@@ -67,8 +69,6 @@ type FunnelForms = {
 };
 
 type FunnelState = FunnelForms & HiddenData;
-
-type StepValue = number; //! VOLVER A VER agregar type de step, ahora se usa StepPayload, deberia concordar con los stepNumber asignados en current-step
 
 type FunnelStore = {
   funnelState: FunnelState;
@@ -156,8 +156,6 @@ function FunnelReducer(state: FunnelState, action: FunnelAction): FunnelState {
       return {...state, ...payload};
 
     case "setRealStepIndex": {
-      if (state.realStepIndex >= STEP_INDEXES.LAST_REAL) return state;
-
       let newRealStepIndex: number;
 
       if (payload === undefined) {
@@ -176,12 +174,20 @@ function FunnelReducer(state: FunnelState, action: FunnelAction): FunnelState {
         newRealStepIndex = state.realStepIndex;
       }
 
+      if (newRealStepIndex > STEP_INDEXES.LAST_REAL || newRealStepIndex < 0) {
+        console.log(
+          "realStepIndex error:",
+          "newRealStepIndex > STEP_INDEXES.LAST_REAL || newRealStepIndex < 0 =",
+          newRealStepIndex > STEP_INDEXES.LAST_REAL || newRealStepIndex < 0,
+        );
+
+        return state;
+      }
+
       return {...state, realStepIndex: newRealStepIndex};
     }
 
     case "setUserStepIndex": {
-      if (state.userStepIndex >= STEP_INDEXES.LAST_USER) return state;
-
       let newUserStepIndex: number;
 
       if (payload === undefined) {
@@ -198,6 +204,16 @@ function FunnelReducer(state: FunnelState, action: FunnelAction): FunnelState {
         newUserStepIndex = state.userStepIndex - subtractValue;
       } else {
         newUserStepIndex = state.userStepIndex;
+      }
+
+      if (newUserStepIndex > STEP_INDEXES.LAST_USER || newUserStepIndex < 0) {
+        console.log(
+          "newUserStepIndex error:",
+          "newUserStepIndex > STEP_INDEXES.LAST_USER || newUserStepIndex < 0 =",
+          newUserStepIndex > STEP_INDEXES.LAST_USER || newUserStepIndex < 0,
+        );
+
+        return state;
       }
 
       return {...state, userStepIndex: newUserStepIndex};
