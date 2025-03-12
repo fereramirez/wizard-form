@@ -1,7 +1,7 @@
 "use client";
 
 import {ProgressBar} from "./progress-bar";
-import {CurrentStep, STEP_INDEXES} from "./current-step";
+import {CurrentStepV2, STEP_INDEXES} from "./current-step";
 
 import {AnimationProvider} from "@/contexts/use-animation-store";
 import {EventsProvider} from "@/contexts/use-events-store";
@@ -15,7 +15,7 @@ export function FunnelCard() {
           <FunnelStoreProvider>
             <ProgressBar lastStepIndex={STEP_INDEXES.LAST_USER} />
 
-            <CurrentStep />
+            <CurrentStepV2 />
           </FunnelStoreProvider>
         </EventsProvider>
       </AnimationProvider>

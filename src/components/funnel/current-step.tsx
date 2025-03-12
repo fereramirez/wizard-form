@@ -1,6 +1,6 @@
 "use client";
 
-import {useFunnelStore} from "@/contexts/use-funnel-store";
+import {type FunnelForms, useFunnelStore} from "@/contexts/use-funnel-store";
 import {useSubmit} from "@/hooks/use-submit";
 import {Intro} from "@/components/funnel-steps/intro";
 import {Name} from "@/components/funnel-steps/name";
@@ -119,7 +119,7 @@ export function CurrentStep() {
     <WaitStep key="12" />,
   ];
 
-  return stepsArrayTest[realStepIndex];
+  return stepsArray[realStepIndex];
 }
 
 export const STEP_INDEXES = {
@@ -148,16 +148,15 @@ const STEPS = {
   Step14: 14,
   Step15: 15,
   Step16: 16,
-  Step17: 17,
+  LAST: 17,
 } as const;
 
-type StepValue = (typeof STEPS)[keyof typeof STEPS];
-type StepKey = keyof typeof STEPS;
+export type StepValue = (typeof STEPS)[keyof typeof STEPS];
 
 export function CurrentStepV2() {
-  const {realStepIndex, repeat} = useFunnelStore(); /* as {
+  const {realStepIndex, repeat} = useFunnelStore() as FunnelForms & {
     realStepIndex: StepValue;
-  }; */
+  };
 
   const {
     isLoading,
@@ -177,6 +176,12 @@ export function CurrentStepV2() {
   const isRepeating = repeat === "true";
 
   switch (realStepIndex) {
+    default: {
+      const _exhaustiveCheck: never = realStepIndex;
+
+      return _exhaustiveCheck;
+    }
+
     case STEPS.Step0:
       return <Intro disabled={notAllowedToPass} onSubmit={submitQuestion} />;
 
@@ -254,13 +259,7 @@ export function CurrentStepV2() {
     case STEPS.Step16:
       return <Events disabled={notAllowedToPass} onSubmit={submitQuestion} />;
 
-    case STEPS.Step17:
+    case STEPS.LAST:
       return <Restart disabled={notAllowedToPass} onSubmit={submitRestart} />;
-
-    default: {
-      const _exhaustiveCheck: never = realStepIndex;
-
-      return _exhaustiveCheck;
-    }
   }
 }

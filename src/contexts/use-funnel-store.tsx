@@ -22,7 +22,7 @@ type HiddenData = Prettify<UnionToIntersection<HiddenDataAction>>;
 
 type StepValue = number; //! VOLVER A VER agregar type de step, ahora se usa StepPayload, deberia concordar con los stepNumber asignados en current-step
 
-type FunnelForms = {
+export type FunnelForms = {
   //! VOLVER A VER actualizar el type de FunnelState
 
   // Steps
