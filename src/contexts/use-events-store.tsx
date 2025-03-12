@@ -1,7 +1,3 @@
-"use client";
-
-import type React from "react";
-
 import {createContext, useContext, useState, useCallback, type ReactNode} from "react";
 
 import {type Prettify} from "@/types/utilility-types";

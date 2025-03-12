@@ -1,5 +1,3 @@
-"use client";
-
 import {createContext, useCallback, useContext, useState, type ReactNode} from "react";
 
 export const EXIT_ENTER_ANIMATION_STATE = {
