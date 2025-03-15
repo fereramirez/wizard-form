@@ -10,7 +10,7 @@ export const useAnimateConditionalGroup = (id: string, isOpen: boolean) => {
 
   const {triggerConditionalGroupAnimation, registerRecord} = useConditionalGroupStore();
 
-  const handleIsOpen = useCallback(() => {
+  useEffect(() => {
     if (isOpen) {
       // console.log(id.toUpperCase(), "-----render");
       setShouldRender(true);
@@ -20,6 +20,23 @@ export const useAnimateConditionalGroup = (id: string, isOpen: boolean) => {
       setIsMounted(false);
     }
   }, [isOpen]);
+
+  /* const calculateHeight = useCallback(() => {
+    if (!ref.current) return;
+
+    if (shouldRender) {
+      const contentHeight = ref.current.scrollHeight;
+
+      setHeight(`${contentHeight.toString()}px`);
+    }
+  }, [shouldRender]);
+
+  useEffect(() => {
+    calculateHeight();
+    window.addEventListener("resize", calculateHeight);
+
+    return () => window.removeEventListener("resize", calculateHeight);
+  }, [calculateHeight]); */
 
   useEffect(() => {
     if (isMounted) {
@@ -47,13 +64,6 @@ export const useAnimateConditionalGroup = (id: string, isOpen: boolean) => {
       });
     }
   }, [isMounted]);
-
-  useEffect(() => {
-    handleIsOpen();
-    window.addEventListener("resize", handleIsOpen);
-
-    return () => window.removeEventListener("resize", handleIsOpen);
-  }, [handleIsOpen]);
 
   const style = {
     height,
