@@ -65,7 +65,7 @@ export function Checkbox({
     <label
       aria-disabled={disabled ? "true" : undefined}
       className={cn(
-        "balance flex cursor-pointer items-center justify-center rounded-xs border-2 p-2 !py-1 text-center text-base font-bold transition-all duration-200 ease-linear select-none sm:text-lg",
+        "balance flex cursor-pointer items-center justify-center rounded-xs border-2 p-2 !py-1 text-center text-lg font-bold transition-all duration-200 ease-linear select-none sm:text-xl",
         "hover:bg-primary-1 hover:border-primary-1 has-focus-visible:border-primary-1 has-focus-visible:text-primary-1 border-white bg-white text-black hover:text-white has-focus-visible:hover:text-white",
         className,
         {
