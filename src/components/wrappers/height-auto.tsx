@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import {useAnimateConditionalGroup} from "@/hooks/use-animate-conditional-group";
+import {useAnimateConditionalGroup} from "@/contexts/use-conditional-group-store";
 
 type HeightAutoGroupProps = {
   id: string;
