@@ -9,6 +9,8 @@ export const EXIT_ENTER_ANIMATION_STATE = {
 export const ANIMATION_DIRECTION = {
   UP: "up",
   DOWN: "down",
+  LEFT: "left",
+  RIGHT: "right",
 } as const;
 
 const ANIMATION_TIMES = {

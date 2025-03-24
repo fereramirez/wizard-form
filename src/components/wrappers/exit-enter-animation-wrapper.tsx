@@ -15,7 +15,47 @@ export function ExitEnterAnimationWrapper({children, className}: ExitEnterAnimat
   const {exitEnterAnimation, animationDirection} = useAnimationStore();
 
   const transitionDuration = `${TOTAL_EXIT_ENTER_ANIMATION_TIME}ms`;
-  const isUpDirection = animationDirection === ANIMATION_DIRECTION.UP;
+
+  const getTransformClass = () => {
+    if (exitEnterAnimation === EXIT_ENTER_ANIMATION_STATE.NORMAL) {
+      return "translate-x-0 translate-y-0";
+    }
+
+    // Y axis
+    if (
+      animationDirection === ANIMATION_DIRECTION.UP ||
+      animationDirection === ANIMATION_DIRECTION.DOWN
+    ) {
+      const isUpDirection = animationDirection === ANIMATION_DIRECTION.UP;
+
+      if (exitEnterAnimation === EXIT_ENTER_ANIMATION_STATE.ENTERING) {
+        return isUpDirection
+          ? "translate-y-5/4" // Entering from bottom to center (UP)
+          : "-translate-y-5/4"; // Entering from top to center (DOWN)
+      } else {
+        // EXITING
+        return isUpDirection
+          ? "-translate-y-5/4" // Exiting from center to top (UP)
+          : "translate-y-5/4"; // Exiting from center to bottom (DOWN)
+      }
+    }
+
+    // X axis
+    else {
+      const isLeftDirection = animationDirection === ANIMATION_DIRECTION.LEFT;
+
+      if (exitEnterAnimation === EXIT_ENTER_ANIMATION_STATE.ENTERING) {
+        return isLeftDirection
+          ? "translate-x-5/4" // Entering from right to center (LEFT)
+          : "-translate-x-5/4"; // Entering from left to center (RIGHT)
+      } else {
+        // EXITING
+        return isLeftDirection
+          ? "-translate-x-5/4" // Exiting from center to left (LEFT)
+          : "translate-x-5/4"; // Exiting from center to right (RIGHT)
+      }
+    }
+  };
 
   return (
     <section
@@ -23,15 +63,7 @@ export function ExitEnterAnimationWrapper({children, className}: ExitEnterAnimat
         "flex size-full grow flex-col justify-center",
         "transition-transform",
         className,
-        exitEnterAnimation === EXIT_ENTER_ANIMATION_STATE.ENTERING
-          ? isUpDirection
-            ? "translate-y-full" // Entering from bottom to center (default)
-            : "-translate-y-full" // Entering from top to center (inverted)
-          : exitEnterAnimation === EXIT_ENTER_ANIMATION_STATE.EXITING
-            ? isUpDirection
-              ? "-translate-y-full" // Exiting from center to top (default)
-              : "translate-y-full" // Exiting from center to bottom (inverted)
-            : "translate-y-0", // Normal state (centered)
+        getTransformClass(),
       )}
       style={{transitionDuration}}
     >
