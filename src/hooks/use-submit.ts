@@ -107,7 +107,7 @@ export function useSubmit() {
         1,
         undefined,
         undefined,
-        "down",
+        "left",
       );
     } else {
       handleSubmit(undefined, () => setFunnelData(dataUpdated));
@@ -200,10 +200,18 @@ export function useSubmit() {
   }
 
   function submitRestart() {
-    handleSubmit(undefined, () => {
-      resetFunnel();
-      resetEvents();
-    });
+    handleSubmit(
+      undefined,
+      () => {
+        resetFunnel();
+        resetEvents();
+      },
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      "left",
+    );
   }
 
   return {
