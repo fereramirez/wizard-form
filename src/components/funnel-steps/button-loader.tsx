@@ -42,8 +42,8 @@ export function ButtonLoader({onSubmit, disabled, isLoading, ...rest}: FormStepP
         checkBoxesClassName="p-2"
         className="grid-cols-2"
         disabled={disabled}
-        error={errors[`buttonLoader-green`]?.message}
-        name="buttonLoader-green" //! VOLVER A VER cambiar name
+        error={errors.buttonLoaderGreen?.message}
+        name="buttonLoaderGreen"
         options={greenOptions}
         question="Please select an option"
         register={register}
@@ -55,8 +55,8 @@ export function ButtonLoader({onSubmit, disabled, isLoading, ...rest}: FormStepP
         checkBoxesClassName="p-2"
         className="grid-cols-2 sm:grid-cols-4"
         disabled={disabled}
-        error={errors[`buttonLoader-purple`]?.message}
-        name="buttonLoader-purple" //! VOLVER A VER cambiar name
+        error={errors.buttonLoaderPurple?.message}
+        name="buttonLoaderPurple"
         options={purpleOptions}
         question="Please select an option, select all that apply"
         register={register}
