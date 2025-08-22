@@ -22,17 +22,10 @@ export function WaitForPromise() {
   );
 }
 
-export const COUNT_DOWN_TIME = 3; //! VOLVER A VER cambiar a 10
+export const COUNT_DOWN_TIME = 10;
 
 export function WaitStep() {
   useHiddenData();
-
-  //! VOLVER A VER agregar al step anterior a este
-  /*
-    <Note>
-      The next step only shows a waiting animation, as it is not a <strong>real</strong> step it won't affect the funnel progress bar
-    </Note>
-  */
 
   return (
     <ExitEnterAnimationWrapper>
