@@ -118,7 +118,7 @@ export function useSubmit() {
     handleSubmit(
       () => {
         try {
-          const promise = fakeApi.getRandomValue(1 * 1000); //! VOLVER A VER cambiar a 60*1000
+          const promise = fakeApi.getRandomValue(60 * 1000);
 
           setRandomValuePromise(promise);
         } catch (error) {
