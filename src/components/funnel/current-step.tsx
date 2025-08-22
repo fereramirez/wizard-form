@@ -17,6 +17,7 @@ import {ShowRepo, DontShowRepo} from "@/components/funnel-steps/show-repo";
 import {FunnelData} from "@/components/funnel-steps/funnel-data";
 import {Events} from "@/components/funnel-steps/events";
 import {Restart} from "@/components/funnel-steps/restart";
+import {LastName} from "@/components/funnel-steps/lastname";
 
 export function CurrentStep() {
   const {realStepIndex, repeat} = useFunnelStore();
@@ -81,7 +82,7 @@ export function CurrentStep() {
       onSubmit={submitWaitForPromise}
     />,
     <WaitForPromise key="10" />,
-    <Name key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />, //! VOLVER A VER cambiar este step
+    <LastName key="11" disabled={notAllowedToPass} onSubmit={submitLastQuestion} />,
     <WaitStep key="12" />,
     <ShowRepo
       key="13"
@@ -240,7 +241,7 @@ export function CurrentStepV2() {
       return <WaitForPromise />;
 
     case STEPS.Step11:
-      return <Name disabled={notAllowedToPass} onSubmit={submitLastQuestion} />; //! VOLVER A VER cambiar este step
+      return <LastName disabled={notAllowedToPass} onSubmit={submitLastQuestion} />;
 
     case STEPS.Step12:
       return <WaitStep />;
