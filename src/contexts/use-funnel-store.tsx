@@ -56,16 +56,23 @@ export type FunnelForms = {
   storePromise: string | null;
 
   // step 6
-  autosubmit: [string] | null;
+  buttonLoaderGreen: string | null;
+  buttonLoaderPurple: string | null;
 
   // step 7
-  autosubmitFetch: [string] | null;
+  autosubmit: [string] | null;
 
   // step 8
-  autosubmitShow: [string] | null;
+  autosubmitFetch: [string] | null;
 
   // step 9
+  autosubmitShow: [string] | null;
+
+  // step 10
   // wait for promise,
+
+  // step 11
+  lastname: string | null;
 };
 
 type FunnelState = FunnelForms & HiddenData;
@@ -114,16 +121,23 @@ const INITIAL_FUNNEL_STATE: FunnelState = {
   storePromise: null,
 
   // step 6
-  autosubmit: null,
+  buttonLoaderGreen: null,
+  buttonLoaderPurple: null,
 
   // step 7
-  autosubmitFetch: null,
+  autosubmit: null,
 
   // step 8
-  autosubmitShow: null,
+  autosubmitFetch: null,
 
   // step 9
+  autosubmitShow: null,
+
+  // step 10
   // wait for promise,
+
+  // step 11
+  lastname: null,
 
   // Hidden data
   fakeApiData: [],
