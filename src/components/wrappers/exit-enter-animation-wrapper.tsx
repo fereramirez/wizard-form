@@ -30,13 +30,13 @@ export function ExitEnterAnimationWrapper({children, className}: ExitEnterAnimat
 
       if (exitEnterAnimation === EXIT_ENTER_ANIMATION_STATE.ENTERING) {
         return isUpDirection
-          ? "translate-y-5/4" // Entering from bottom to center (UP)
-          : "-translate-y-5/4"; // Entering from top to center (DOWN)
+          ? "translate-y-full" // Entering from bottom to center (UP)
+          : "-translate-y-full"; // Entering from top to center (DOWN)
       } else {
         // EXITING
         return isUpDirection
-          ? "-translate-y-5/4" // Exiting from center to top (UP)
-          : "translate-y-5/4"; // Exiting from center to bottom (DOWN)
+          ? "-translate-y-full" // Exiting from center to top (UP)
+          : "translate-y-full"; // Exiting from center to bottom (DOWN)
       }
     }
 
@@ -46,13 +46,13 @@ export function ExitEnterAnimationWrapper({children, className}: ExitEnterAnimat
 
       if (exitEnterAnimation === EXIT_ENTER_ANIMATION_STATE.ENTERING) {
         return isLeftDirection
-          ? "translate-x-5/4" // Entering from right to center (LEFT)
-          : "-translate-x-5/4"; // Entering from left to center (RIGHT)
+          ? "translate-x-2/1" // Entering from right to center (LEFT)
+          : "-translate-x-2/1"; // Entering from left to center (RIGHT)
       } else {
         // EXITING
         return isLeftDirection
-          ? "-translate-x-5/4" // Exiting from center to left (LEFT)
-          : "translate-x-5/4"; // Exiting from center to right (RIGHT)
+          ? "-translate-x-2/1" // Exiting from center to left (LEFT)
+          : "translate-x-2/1"; // Exiting from center to right (RIGHT)
       }
     }
   };
