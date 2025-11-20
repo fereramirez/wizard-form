@@ -66,7 +66,7 @@ export function Name({onSubmit, disabled, ...rest}: FormStepProps) {
         disabled={disabled}
         error={errors[inputName]?.message}
         name={inputName}
-        placeholder="Fernando"
+        placeholder={name || "Fernando"}
         question="Name"
         register={register}
         validation={nameValidation}
