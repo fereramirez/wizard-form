@@ -21,14 +21,22 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   return (
     <html lang="en">
       <body className={`${unna.className} flex min-h-screen flex-col antialiased`}>
-        <header className="sticky top-0 z-20 bg-white px-4 text-xl leading-[3rem] font-bold sm:px-8 sm:leading-[4rem]">
+        <header className="absolute top-2 z-20 px-4 text-xl leading-[3rem] font-bold sm:px-8 sm:leading-[4rem]">
+          <Link
+            className="text-stroke text-2xl font-bold tracking-tighter text-white/80 outline-0 transition-all ease-linear hover:text-white"
+            href="/"
+          >
+            Wizard Form
+          </Link>
+        </header>
+        {/* <header className="sticky top-0 z-20 bg-white px-4 text-xl leading-[3rem] font-bold sm:px-8 sm:leading-[4rem]">
           <Link
             className="hover:text-primary-1 text-stroke text-primary-3 text-2xl font-bold tracking-tighter outline-0 transition-all ease-linear"
             href="/"
           >
             Wizard Form
           </Link>
-        </header>
+        </header> */}
 
         <div className="noise" />
         {children}

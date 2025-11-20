@@ -33,7 +33,7 @@ export function ProgressBar({lastStepIndex}: ProgressBarProps) {
         role="progressbar"
       >
         <div
-          className="bg-primary-1 absolute top-0 left-0 h-full transition-all duration-300 ease-in-out"
+          className="absolute top-0 left-0 h-full bg-white/90 transition-all duration-300 ease-in-out"
           style={{width: "var(--progress-width, 0%)"}}
         />
       </div>
