@@ -1,9 +1,17 @@
 .bottom-shadow {
   transition: box-shadow 0.1s ease-out;
-  box-shadow: rgba(251, 241, 223, 0.3) 0px 1px;
+  box-shadow: #fbf1df4d 0px 1px;
 
   &:focus-visible {
-    box-shadow: rgb(251, 241, 223) 0px 2px
+    box-shadow: #fbf1df 0px 2px
+  }
+}
+
+.bottom-shadow-destructive {
+  box-shadow: #9a191b95 0px 2px;
+
+  &:focus-visible {
+    box-shadow: #9a191b 0px 2px
   }
 }
 

@@ -43,6 +43,7 @@ export function Input({
   validation,
   className,
   disabled,
+  error,
   ...rest
 }: InputProps) {
   return (
@@ -56,6 +57,7 @@ export function Input({
         "bottom-shadow",
         className,
         disabled ? "pointer-events-none opacity-50" : "",
+        error ? "bottom-shadow-destructive" : "",
       )}
       type="text"
       onPaste={(e) => e.preventDefault()}
@@ -76,18 +78,20 @@ export function InputBox({question, register, name, validation, error, ...rest}:
         </Question>
       ) : null}
 
-      <Input
-        {...rest}
-        aria-describedby={errorId}
-        aria-invalid={error ? "true" : "false"}
-        aria-labelledby={questionId}
-        id={inputId}
-        name={name}
-        register={register}
-        validation={validation}
-      />
-
-      <InputError error={error} id={errorId} />
+      <div>
+        <Input
+          {...rest}
+          aria-describedby={errorId}
+          aria-invalid={error ? "true" : "false"}
+          aria-labelledby={questionId}
+          error={error}
+          id={inputId}
+          name={name}
+          register={register}
+          validation={validation}
+        />
+        <InputError error={error} id={errorId} />
+      </div>
     </BoxWrapper>
   );
 }
